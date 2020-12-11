@@ -5,8 +5,8 @@ import java.io.FileReader;
 import java.util.List;
 
 public class AdresseMAC implements IOffset {
-	boolean source;
-	List<String> valHex;
+	private boolean source;
+	private List<String> valHex;
 	
 	public AdresseMAC(List<String> valHex, boolean source) {
 		this.source = source;
