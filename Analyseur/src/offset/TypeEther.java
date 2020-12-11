@@ -20,7 +20,7 @@ public class TypeEther implements IOffset {
 		return false;
 	}
 	
-	public void setType() {
+	private void setType() {
 		int n0 = Integer.parseInt(valHex.get(0),16);
 		int n1 = Integer.parseInt(valHex.get(1),16);
 		if(n0 == 8 && n1 == 0) {

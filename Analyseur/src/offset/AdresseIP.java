@@ -15,8 +15,26 @@ public class AdresseIP implements IOffset {
 
 	@Override
 	public boolean checkSize() {
-
+		if(valHex.size() == 4) return true;
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		String s = "Destination";
+		if(source)
+			s = "Source";
+		s = "adresse IP "+s+": ";
+		
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i< valHex.size()-1; i++) {
+			sb.append(Integer.parseInt(valHex.get(i),16));
+			sb.append(".");
+		}
+		sb.append(Integer.parseInt(valHex.get(valHex.size()-1),16));
+		s = s + sb.toString();
+		
+		return s;
 	}
 
 }

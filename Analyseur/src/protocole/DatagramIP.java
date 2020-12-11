@@ -5,15 +5,18 @@ import java.util.List;
 import offset.IOffset;
 
 public class DatagramIP implements ITrame {
-
-	public DatagramIP() {
-		// TODO Auto-generated constructor stub
+	private List<IOffset> listEther;
+	private List<String> listOctet;
+	private int sizeOption;
+	
+	public DatagramIP(List<String> listOctet) {
+		
 	}
 
 	@Override
 	public List<IOffset> getListOffset() {
 		// TODO Auto-generated method stub
-		return null;
+		return listEther;
 	}
 
 }
