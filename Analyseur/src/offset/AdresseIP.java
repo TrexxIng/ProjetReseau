@@ -3,22 +3,19 @@ package offset;
 import java.util.List;
 
 public class AdresseIP implements IOffset {
-
-	public AdresseIP() {
-		// TODO Auto-generated constructor stub
+	private boolean source;
+	private List<String> valHex;
+	
+	public AdresseIP(List<String> valHex, boolean source) {
+		this.source = source;
+		this.valHex = valHex;
 	}
 
 
-
-	@Override
-	public List<String> getOctets() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean checkSize() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 

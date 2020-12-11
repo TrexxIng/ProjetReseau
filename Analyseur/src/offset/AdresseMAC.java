@@ -1,7 +1,6 @@
 package offset;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+
 import java.util.List;
 
 public class AdresseMAC implements IOffset {
@@ -31,10 +30,7 @@ public class AdresseMAC implements IOffset {
 		return s;
 	}
 
-	@Override
-	public List<String> getOctets() {	
-		return valHex;
-	}
+
 
 	@Override
 	public boolean checkSize() {

@@ -14,12 +14,7 @@ public class VersionIP implements IOffset {
 		this.version = Integer.parseInt(quartet,16);
 	}
 
-	@Override
-	public List<String> getOctets() {
-		List<String> quartList = new ArrayList<>();
-		quartList.add(quartet);
-		return quartList;
-	}
+
 
 	@Override
 	public boolean checkSize() {

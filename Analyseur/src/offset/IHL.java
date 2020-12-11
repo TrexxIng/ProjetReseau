@@ -19,12 +19,7 @@ public class IHL implements IOffset {
 		return false;
 	}
 
-	@Override
-	public List<String> getOctets() {
-		List<String> quartList = new ArrayList<>();
-		quartList.add(quartet);
-		return quartList;
-	}
+
 	
 	@Override
 	public String toString() {

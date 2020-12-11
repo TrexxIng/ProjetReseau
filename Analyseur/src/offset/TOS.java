@@ -9,10 +9,6 @@ public class TOS implements IOffset {
 		this.valHex = valHex;
 	}
 
-	@Override
-	public List<String> getOctets() {
-		return valHex;
-	}
 
 	@Override
 	public boolean checkSize() {

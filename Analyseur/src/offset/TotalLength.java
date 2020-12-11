@@ -11,10 +11,7 @@ public class TotalLength implements IOffset {
 		this.longueur = Integer.parseInt( valHex.get(0)+valHex.get(1),16);
 	}
 
-	@Override
-	public List<String> getOctets() {
-		return valHex;
-	}
+
 
 	@Override
 	public boolean checkSize() {

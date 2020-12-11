@@ -12,10 +12,7 @@ public class TypeEther implements IOffset {
 		this.setType();
 	}
 
-	@Override
-	public List<String> getOctets() {
-		return valHex;
-	}
+
 
 	@Override
 	public boolean checkSize() {
