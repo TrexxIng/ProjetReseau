@@ -12,6 +12,7 @@ public class TrameDisplay {
 		Trame trame = new Trame("data/ExempleARP.txt");
 		String suite = trame.addEthernet();
 		System.out.println(trame);
+		
 	}
 
 
