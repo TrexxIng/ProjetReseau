@@ -9,6 +9,7 @@ import java.util.List;
 
 import segment.Ethernet;
 import segment.HeaderDatagramIP;
+import segment.ICMP;
 import segment.ITrame;
 import segment.TCP;
 import segment.UDP;
@@ -46,7 +47,7 @@ public class Trame {
 	
 	/**
 	 * ajout de la trame ethernet
-	 * @param liste d'octets de l'ensemble de la trame
+	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 */
 	public List<String> addEthernet(List<String> data) {
@@ -57,8 +58,8 @@ public class Trame {
 	
 	
 	/**
-	 * ajout l'entete du datagramme IP
-	 * @param data liste d'octets de l'ensemble du datagramme
+	 * ajoute l'entete du datagramme IP
+	 * @param data: liste d'octets de l'ensemble du datagramme
 	 * @return la liste des octets en données
 	 */
 	public List<String> addHeaderIP(List<String> data) {
@@ -68,8 +69,8 @@ public class Trame {
 	}
 	
 	/**
-	 * ajout l'entete de l'UDP
-	 * @param data liste d'octets de l'ensemble de la trame
+	 * ajoute l'entete de l'UDP
+	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 */
 	public List<String> addUDP(List<String> data) {
@@ -80,8 +81,8 @@ public class Trame {
 	}	
 	
 	/**
-	 * ajout l'entete du TCP
-	 * @param data liste d'octets de l'ensemble de la trame
+	 * ajoute l'entete du TCP
+	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 */
 	public List<String> addTCPHeader(List<String> data) {
@@ -90,6 +91,18 @@ public class Trame {
 		return udp.getData();
 		
 	}
+
+	/**
+	 * ajoute le message ICMP
+	 * @param data: liste d'octets du message ICMP
+	 * @return la liste des octets en données
+	 */
+	public List<String> addICMP(List<String> data){
+		ICMP icmp = new ICMP(data);
+		listTrame.add(icmp);
+		return icmp.getData();
+	}
+	
 	
 	
 	/**
@@ -107,6 +120,7 @@ public class Trame {
 		return "pas de segment";
 	}
 	
+	
 	/**
 	 * determine la taille des options d'une couche
 	 * @param i: position dans la liste de segments
@@ -118,6 +132,10 @@ public class Trame {
 		return listTrame.get(i).getTailleOptions();
 	}
 	
+	/**
+	 * retourne la liste des octets de la trame
+	 * @return liste des octets (string)
+	 */
 	public List<String> getOctets(){
 		return listOctets;
 	}
@@ -132,6 +150,11 @@ public class Trame {
 		return s;
 	}
 	
+	/**
+	 * donne un string permettant d'afficher la trame avec la tabulation
+	 * @param tab tabulation initiale
+	 * @return message pour affichage
+	 */
 	public String formatDisplay(int tab) {
 		String stab ="";
 		if(tab > 0) {
