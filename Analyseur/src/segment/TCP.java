@@ -50,8 +50,20 @@ public class TCP implements ITrame {
 		/** ajout de la taille de l'entete TCP */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
+		listData.remove(0);
 		listTCP.add(new HeadLengthQuartet(list,"TCP"));
 		
+		/** ajout des flags */
+		list.add(listData.get(0));
+		listData.remove(0);
+		listTCP.add(new Flags(list, "TCP"));
+		
+		/** ajout de Windows */
+		list= new ArrayList<>(); 
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
 		
 	}
 

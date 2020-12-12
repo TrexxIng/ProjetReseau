@@ -51,7 +51,7 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
-		listIP.add(new Flags(list));
+		listIP.add(new Flags(list,"IP"));
 		
 		/** ajout de TTL */
 		list= new ArrayList<>(); 
