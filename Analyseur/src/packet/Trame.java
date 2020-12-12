@@ -10,6 +10,7 @@ import java.util.List;
 import segment.Ethernet;
 import segment.HeaderDatagramIP;
 import segment.ITrame;
+import segment.UDP;
 
 
 public class Trame {
@@ -21,6 +22,12 @@ public class Trame {
 		this.listOctets = readFile(fileName);
 	}
 	
+	/**
+	 * lit le fichier et retourne les octets
+	 * @param file: nom du ficheir
+	 * @return liste de String, chacun correspondant à un octet
+	 * @throws IOException fichier non trouvé
+	 */
 	public List<String> readFile(String file) throws IOException{
 		List<String> hex = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
@@ -38,37 +45,62 @@ public class Trame {
 	
 	/**
 	 * ajout de la trame ethernet
-	 * @return le nom du type ethernet
+	 * @return la liste des octets en données
 	 */
-	public String addEthernet() {
-		List<String> listEther = new ArrayList<>();
-		for(int i=0; i< 14; i++) {
-			listEther.add(listOctets.get(i));
-		}
-		Ethernet ether = new Ethernet(listEther);
+	public List<String> addEthernet(List<String> data) {
+		Ethernet ether = new Ethernet(data);
 		listTrame.add(ether);
-		return ether.dataType();
+		return ether.getData();
 	}
 	
 	
 	/**
 	 * ajout l'entete du datagramme IP
-	 * @return la taille des options
+	 * @return la liste des octets en données
 	 */
-	public int addHeaderIP() {
-		List<String> listHIP = new ArrayList<>();
-		for(int i = 14; i<34; i++) {
-			listHIP.add(listOctets.get(i));
-		}
-		HeaderDatagramIP hip = new HeaderDatagramIP(listHIP);
+	public List<String> addHeaderIP(List<String> data) {
+		HeaderDatagramIP hip = new HeaderDatagramIP(data);
 		listTrame.add(hip);
-		return hip.getTailleIP();
+		return hip.getData();
 	}
 	
-	public String getProtocol() {
+	public List<String> addUDP(List<String> data) {
+		UDP udp = new UDP(data);
+		listTrame.add(udp);
+		return udp.getData();
+		
+	}	
+	
+	
+	/**
+	 * determine le segment suivant
+	 * @param seg: numero de la trame
+	 * @return le nom du segment suivant, "pas de segment" si ce n'est pas le cas
+	 */
+	public String getNextSegment(int seg) {
+		if(listTrame.size()-1 - seg < 0) 
+			return "pas de segment";
+		if(listTrame.get(seg) instanceof Ethernet)
+			return ((Ethernet)listTrame.get(seg)).getDataType();
+		if(listTrame.get(seg) instanceof HeaderDatagramIP)
+			return ((HeaderDatagramIP)listTrame.get(seg)).getProtocol();
+		return "pas de segment";
+	}
+	
+	/**
+	 * determine la taille des options du datagramme IP
+	 * @return la taille des options, -1 si ce n'est pas un datagramme IP
+	 */
+	public int getTailleOptions() {
+		if(listTrame.size() < 2) 
+			return -1;
 		if(listTrame.get(1) instanceof HeaderDatagramIP)
-			return ((HeaderDatagramIP)listTrame.get(1)).getProtocol();
-		return "pas de protocole";
+			return ((HeaderDatagramIP)listTrame.get(1)).getTailleOptions();
+		return -1;
+	}
+	
+	public List<String> getOctets(){
+		return listOctets;
 	}
 
 	
@@ -77,6 +109,20 @@ public class Trame {
 		String s = "Trame: "+listOctets.size()+" octets";
 		for(int i = 0; i< listTrame.size(); i++) {
 			s = s + "\n" + listTrame.get(i).toString();
+		}
+		return s;
+	}
+	
+	public String formatDisplay(int tab) {
+		String stab ="";
+		if(tab > 0) {
+			for (int i = 0; i<tab; i++) {
+				stab += "\t";
+			}
+		}
+		String s =stab+ "Trame: "+listOctets.size()+" octets";
+		for(int i = 0; i< listTrame.size(); i++) {
+			s = s + "\n" + listTrame.get(i).formatDisplay(tab+1);
 		}
 		return s;
 	}

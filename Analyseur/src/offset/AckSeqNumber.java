@@ -34,4 +34,15 @@ public class AckSeqNumber implements IOffset {
 					valHex.get(0)+valHex.get(1)+valHex.get(2)+valHex.get(3)+")";
 	}
 
+	@Override
+	public String formatDisplay(int tab) {
+		String s ="";
+		if(tab > 0) {
+			for (int i = 0; i<tab; i++) {
+				s += "\t";
+			}
+		}
+		return s+this.toString();
+	}
+
 }

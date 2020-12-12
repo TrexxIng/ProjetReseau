@@ -38,6 +38,17 @@ public class AdresseMAC implements IOffset {
 		return false;
 	}
 	
+	@Override
+	public String formatDisplay(int tab) {
+		String s ="";
+		if(tab > 0) {
+			for (int i = 0; i<tab; i++) {
+				s += "\t";
+			}
+		}
+		return s+this.toString();
+	}
+	
 	
 
 }

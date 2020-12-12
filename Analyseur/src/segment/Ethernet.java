@@ -9,31 +9,37 @@ import offset.TypeEther;
 
 public class Ethernet implements ITrame {
 	private List<IOffset> listEther;
-	private List<String> listOctet;
+	private List<String> listData;
+	private int sizeEther;
 	
 	
 	public Ethernet(List<String> listOctet) {
-		this.listOctet = listOctet;
+		this.sizeEther = listOctet.size();
+		this.listData = listOctet;
 		this.listEther = new ArrayList<>();
 		List<String> list= new ArrayList<>(); 
 		
 		/** ajout adresseMac destination */
 		for(int i = 0; i < 6; i++) {
-			list.add(listOctet.get(i));
+			list.add(listData.get(0));
+			listData.remove(0);
 		}		
 		listEther.add(new AdresseMAC(list,false));
 		
 		/** ajout adresseMac source */
 		list = new ArrayList<>(); 
-		for(int i = 6; i < 12; i++) {
-			list.add(listOctet.get(i));
+		for(int i = 0; i < 6; i++) {
+			list.add(listData.get(0));
+			listData.remove(0);
 		}
 		listEther.add(new AdresseMAC(list,true));
 		
 		/** ajout Type Ethernet */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(12));
-		list.add(listOctet.get(13));
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
 		listEther.add(new TypeEther(list));
 	}
 
@@ -42,14 +48,14 @@ public class Ethernet implements ITrame {
 		return listEther;
 	}
 	
-	public String dataType() {
+	public String getDataType() {
 		return ((TypeEther)listEther.get(2)).getType();
 		
 	}
 	
 	@Override
 	public String toString() {
-		String s = "Trame Ethernet: "+listOctet.size()+" octets";
+		String s = "Trame Ethernet: "+sizeEther+" octets";
 		for(int i = 0; i<listEther.size(); i++) {
 			s +="\n\t"+listEther.get(i).toString();
 		}
@@ -58,8 +64,29 @@ public class Ethernet implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if(listOctet.size() == 14) return true;
+		if((sizeEther - listData.size() == 14) 
+				&& (listEther.size() == 3)) return true;
 		return false;
+	}
+
+	@Override
+	public List<String> getData() {
+		return listData;
+	}
+
+	@Override
+	public String formatDisplay(int tab) {
+		String stab ="";
+		if(tab > 0) {
+			for (int i = 0; i<tab; i++) {
+				stab += "\t";
+			}
+		}
+		String s = stab+"Trame Ethernet: "+sizeEther+" octets";
+		for(int i = 0; i<listEther.size(); i++) {
+			s +="\n"+listEther.get(i).formatDisplay(tab+1);
+		}
+		return s;
 	}
 	
 

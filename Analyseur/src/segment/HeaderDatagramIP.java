@@ -7,73 +7,93 @@ import offset.*;
 
 public class HeaderDatagramIP implements ITrame {
 	private List<IOffset> listIP;
-	private List<String> listOctet;
+	private List<String> listData;
 	private int sizeOptions;
+	private int sizeIPtotal;
 	
 	public HeaderDatagramIP(List<String> listOctet) {
-		this.listOctet = listOctet;
+		this.sizeIPtotal = listOctet.size();
+		this.listData = listOctet;
 		this.listIP = new ArrayList<>();
 		
 		/** ajout de version et IHL */
 		List<String> list= new ArrayList<>(); 
-		list.add(listOctet.get(0));
+		list.add(listData.get(0));
 		listIP.add(new VersionIP(list));
-		listIP.add(new IHL(list));
+		listIP.add(new HeadLengthQuartet(list,"IP"));
+		listData.remove(0);
 		
 		/** ajout de TOS */
 		list.remove(0);
-		list.add(listOctet.get(1));
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new TOS(list));
 		
 		/** ajout de la taille totale */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(2));
-		list.add(listOctet.get(3));
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new TotalLength(list));
 		
 		/** ajout de l' Identification */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(4));
-		list.add(listOctet.get(5));
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new Identification(list));
 		
 		/** ajout des Flags */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(6));
-		list.add(listOctet.get(7));
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new Flags(list));
 		
 		/** ajout de TTL */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(8));
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new TimeToLive(list));
 		
 		/** ajout de Protocol */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(9));
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new Protocol(list));
 		
 		/** ajout du checksum */
 		list= new ArrayList<>(); 
-		list.add(listOctet.get(10));
-		list.add(listOctet.get(11));
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
 		listIP.add(new Checksum(list));
 		
 		
 		/** ajout de l'adresse IP source */
 		list= new ArrayList<>(); 
-		for(int i = 12; i<16;i++)
-			list.add(listOctet.get(i));
+		for(int i = 0; i<4;i++) {
+			list.add(listData.get(0));
+			listData.remove(0);
+		}
 		listIP.add(new AdresseIP(list,true));
 		
 		/** ajout de l'adresse IP destination */
 		list= new ArrayList<>(); 
-		for(int i = 17; i<20;i++)
-			list.add(listOctet.get(i));
+		for(int i = 0; i<4;i++) {
+			list.add(listData.get(0));
+			listData.remove(0);
+		}
 		listIP.add(new AdresseIP(list,false));
 		
 		/** calcul de la taille des options */
-		setTailleOptions();
+		this.sizeOptions = ((HeadLengthQuartet)listIP.get(1)).getTailleIP() - 20;
+		
+		
 		
 	}
 
@@ -84,17 +104,12 @@ public class HeaderDatagramIP implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if(listIP.size() == 20) return true;
+		if((sizeIPtotal - listData.size() == 20) && 
+				listIP.size() == 11) return true;
 		return false;
 	}
 	
-	/**
-	 * donne la taille du header IP
-	 * @return la taille en octets
-	 */
-	public int getTailleIP() {
-		return ((IHL)listIP.get(1)).getTailleIP();
-	}
+	
 	
 	/**
 	 * donne le protocole se trouvant dans les data de IP
@@ -112,18 +127,33 @@ public class HeaderDatagramIP implements ITrame {
 		return sizeOptions;
 	}
 	
-	/**
-	 * determine la taille des options
-	 */
-	private void setTailleOptions() {
-		this.sizeOptions = getTailleIP() - listOctet.size(); 
-	}
+	
 	
 	@Override
 	public String toString() {
-		String s = "Entete du Datagramme IP: "+listOctet.size()+" octets";
+		String s = "Entete du Datagramme IP: "+sizeIPtotal+" octets";
 		for(int i = 0; i<listIP.size(); i++) {
 			s +="\n\t"+listIP.get(i).toString();
+		}
+		return s;
+	}
+
+	@Override
+	public List<String> getData() {
+		return listData;
+	}
+
+	@Override
+	public String formatDisplay(int tab) {
+		String stab ="";
+		if(tab > 0) {
+			for (int i = 0; i<tab; i++) {
+				stab += "\t";
+			}
+		}
+		String s = stab+"Entete du Datagramme IP: "+sizeIPtotal+" octets";
+		for(int i = 0; i<listIP.size(); i++) {
+			s +="\n"+listIP.get(i).formatDisplay(tab+1);
 		}
 		return s;
 	}
