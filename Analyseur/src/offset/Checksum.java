@@ -19,5 +19,10 @@ public class Checksum implements IOffset {
 	public boolean compareCheckSum(String hex) {
 		return hex == valHex; 
 	}
+	
+	@Override
+	public String toString() {
+		return "Checksum: 0x"+valHex;
+	}
 
 }

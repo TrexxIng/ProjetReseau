@@ -93,7 +93,7 @@ public class HeaderDatagramIP implements ITrame {
 	 * @return la taille en octets
 	 */
 	public int getTailleIP() {
-		return ((IHL)listIP.get(2)).getTailleIP();
+		return ((IHL)listIP.get(1)).getTailleIP();
 	}
 	
 	/**
@@ -101,7 +101,7 @@ public class HeaderDatagramIP implements ITrame {
 	 * @return le protocole en type String
 	 */
 	public String getProtocol() {
-		return ((Protocol)listIP.get(8)).getProtocol();
+		return ((Protocol)listIP.get(7)).getProtocol();
 	}
 	
 	/**
@@ -121,9 +121,9 @@ public class HeaderDatagramIP implements ITrame {
 	
 	@Override
 	public String toString() {
-		String s = "\nEntete du Datagram IP: "+listOctet.size()+" octets";
+		String s = "Entete du Datagramme IP: "+listOctet.size()+" octets";
 		for(int i = 0; i<listIP.size(); i++) {
-			s +="\t"+listIP.get(i).toString();
+			s +="\n\t"+listIP.get(i).toString();
 		}
 		return s;
 	}

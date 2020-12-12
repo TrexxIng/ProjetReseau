@@ -9,11 +9,17 @@ import java.util.List;
 public class TrameDisplay {
 
 	public static void main(String[] args) throws IOException {
-		Trame trame = new Trame("data/ExempleARP.txt");
-		String suite = trame.addEthernet();
+		String suite;
+		int options;
+		Trame trame = new Trame("data/ExempleTCP.txt");
+		suite = trame.addEthernet();
+		if(suite == "Datagramme IP")
+			options = trame.addHeaderIP();
 		System.out.println(trame);
 		
 	}
+	
+	
 
 
 

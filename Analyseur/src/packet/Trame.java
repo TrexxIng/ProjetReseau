@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import protocole.Ethernet;
+import protocole.HeaderDatagramIP;
 import protocole.ITrame;
 
 
@@ -35,6 +36,10 @@ public class Trame {
 		return hex;
 	}
 	
+	/**
+	 * ajout de la trame ethernet
+	 * @return le nom du type ethernet
+	 */
 	public String addEthernet() {
 		List<String> listEther = new ArrayList<>();
 		for(int i=0; i< 14; i++) {
@@ -44,6 +49,17 @@ public class Trame {
 		listTrame.add(ether);
 		return ether.dataType();
 	}
+	
+	public int addHeaderIP() {
+		List<String> listHIP = new ArrayList<>();
+		for(int i = 14; i<34; i++) {
+			listHIP.add(listOctets.get(i));
+		}
+		HeaderDatagramIP hip = new HeaderDatagramIP(listHIP);
+		listTrame.add(hip);
+		return hip.getTailleIP();
+	}
+
 	
 	@Override
 	public String toString() {
