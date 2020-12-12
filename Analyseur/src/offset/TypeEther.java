@@ -28,7 +28,7 @@ public class TypeEther implements IOffset {
 		} else if(n0 == 8 && n1 == 6) {
 			type = "ARP";
 		} else {
-			type = "non traité";;
+			type = "inconnu";;
 		}
 	}
 	

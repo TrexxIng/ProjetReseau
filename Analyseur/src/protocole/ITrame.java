@@ -5,6 +5,6 @@ import java.util.List;
 import offset.IOffset;
 
 public interface ITrame {
-	public List<IOffset> getListOffset();
-	
+	List<IOffset> getListOffset();
+	boolean checkSize();
 }

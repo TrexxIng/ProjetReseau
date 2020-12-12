@@ -33,7 +33,7 @@ public class Protocol implements IOffset {
 		} else if(val  == 17) {
 			protocol = "UDP";
 		}  else {
-			protocol = "non traité";;
+			protocol = "inconnu";;
 		}
 	}
 	

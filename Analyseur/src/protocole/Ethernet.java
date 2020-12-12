@@ -15,21 +15,26 @@ public class Ethernet implements ITrame {
 	public Ethernet(List<String> listOctet) {
 		this.listOctet = listOctet;
 		this.listEther = new ArrayList<>();
-		List<String> listmacD= new ArrayList<>(); 
-		for(int i = 0; i < 6; i++) {
-			listmacD.add(listOctet.get(i));
-		}
+		List<String> list= new ArrayList<>(); 
 		
-		listEther.add(new AdresseMAC(listmacD,false));
-		List<String> listmacS= new ArrayList<>(); 
+		/** ajout adresseMac destination */
+		for(int i = 0; i < 6; i++) {
+			list.add(listOctet.get(i));
+		}		
+		listEther.add(new AdresseMAC(list,false));
+		
+		/** ajout adresseMac source */
+		list = new ArrayList<>(); 
 		for(int i = 6; i < 12; i++) {
-			listmacS.add(listOctet.get(i));
+			list.add(listOctet.get(i));
 		}
-		listEther.add(new AdresseMAC(listmacS,true));
-		List<String> listT= new ArrayList<>(); 
-		listT.add(listOctet.get(12));
-		listT.add(listOctet.get(13));
-		listEther.add(new TypeEther(listT));
+		listEther.add(new AdresseMAC(list,true));
+		
+		/** ajout Type Ethernet */
+		list= new ArrayList<>(); 
+		list.add(listOctet.get(12));
+		list.add(listOctet.get(13));
+		listEther.add(new TypeEther(list));
 	}
 
 	@Override
@@ -49,6 +54,12 @@ public class Ethernet implements ITrame {
 			s +="\n\t"+listEther.get(i).toString();
 		}
 		return s;
+	}
+
+	@Override
+	public boolean checkSize() {
+		if(listOctet.size() == 14) return true;
+		return false;
 	}
 	
 

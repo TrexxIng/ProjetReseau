@@ -1,6 +1,5 @@
 package offset;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IHL implements IOffset {
@@ -19,7 +18,9 @@ public class IHL implements IOffset {
 		return false;
 	}
 
-
+	public int getTailleIP() {
+		return longueur;
+	}
 	
 	@Override
 	public String toString() {

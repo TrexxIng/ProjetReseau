@@ -23,5 +23,7 @@ public class TotalLength implements IOffset {
 	public String toString() {
 		return "Longueur totale: 0x"+valHex.get(0)+valHex.get(1)+" ("+longueur+" octets)";
 	}
+	
+
 
 }

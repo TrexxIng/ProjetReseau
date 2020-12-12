@@ -1,6 +1,5 @@
 package offset;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VersionIP implements IOffset {
