@@ -4,12 +4,10 @@ import java.util.List;
 
 public class PSH implements IFlags {
 	
-	private List<String> valbits;
 	private int value;
 
 	public PSH(List<String> valbits) {
-		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(8));
+		this.value =  Integer.parseInt(valbits.get(12));
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class DF implements IFlags {
 	public String toString() {
 		String s = "."+valbits.get(1)+".. .... .... .... = Don't Fragment (DF): ";
 		if(value == 1)
-			return s +"fragmentation interdit";
+			return s +"fragmentation interdite";
 		else
 			return s +"fragmentation autorisé";
 	}

@@ -8,10 +8,17 @@ public class HeadLengthQuartet implements IOffset {
 	private String type;
 	
 	public HeadLengthQuartet(List<String> valHex, String type) {
-		char val = valHex.get(0).charAt(1);
-		this.quartet = ""+val;
-		this.longueur = Integer.parseInt(quartet,16) * 4;
 		this.type = type;
+		char val;
+		if(type == "IP")
+			val = valHex.get(0).charAt(1);
+		else 
+			val = valHex.get(0).charAt(0);
+		this.quartet = ""+val;
+		
+			
+		this.longueur = Integer.parseInt(quartet,16) * 4;
+		
 	}
 
 	@Override
@@ -26,7 +33,7 @@ public class HeadLengthQuartet implements IOffset {
 	
 	@Override
 	public String toString() {
-		return "Longueur de l'entête "+type+": "+longueur+" octets ("+quartet+")";
+		return "Longueur de l'entête "+type+": "+longueur+" octets ("+Integer.parseInt(quartet,16)+")";
 	}
 	
 	@Override

@@ -3,13 +3,11 @@ package flags;
 import java.util.List;
 
 public class FIN implements IFlags {
-	
-	private List<String> valbits;
+
 	private int value;
 
 	public FIN(List<String> valbits) {
-		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(11));
+		this.value =  Integer.parseInt(valbits.get(15));
 	}
 
 	@Override

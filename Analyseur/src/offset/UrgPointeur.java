@@ -2,13 +2,14 @@ package offset;
 
 import java.util.List;
 
-public class Windows implements IOffset {
+public class UrgPointeur implements IOffset {
 	
 	private String valHex;
-	
-	public Windows(List<String> valHex) {
+
+	public UrgPointeur(List<String> valHex) {
 		this.valHex = valHex.get(0)+valHex.get(1);
 	}
+
 
 	@Override
 	public boolean checkSize() {
@@ -18,7 +19,7 @@ public class Windows implements IOffset {
 
 	@Override
 	public String toString() {
-		return "Windows: 0x"+valHex+" ("+Integer.parseInt(valHex,16)+")";
+		return "Pointeur d'urgence (position): 0x"+valHex+" ("+Integer.parseInt(valHex,16)+")";
 	}
 	
 	@Override

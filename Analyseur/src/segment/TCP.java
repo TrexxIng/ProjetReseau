@@ -8,10 +8,11 @@ import offset.*;
 public class TCP implements ITrame {
 	private List<IOffset> listTCP;
 	private List<String> listData;
-	private int sizeTCP;
+	private int sizeOptions;
+	private int sizeTCPTotal;
 	
 	public TCP(List<String> listOctet) {
-		this.sizeTCP = listOctet.size();
+		this.sizeTCPTotal = listOctet.size();
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
 		
@@ -50,7 +51,7 @@ public class TCP implements ITrame {
 		/** ajout de la taille de l'entete TCP */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
-		listData.remove(0);
+		listData.remove(0);	
 		listTCP.add(new HeadLengthQuartet(list,"TCP"));
 		
 		/** ajout des flags */
@@ -64,6 +65,26 @@ public class TCP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		listTCP.add(new Windows(list));
+		
+		/** ajout de Checksum */
+		list= new ArrayList<>(); 
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
+		listTCP.add(new Checksum(list));
+		
+		/** ajout de Checksum */
+		list= new ArrayList<>(); 
+		list.add(listData.get(0));
+		listData.remove(0);
+		list.add(listData.get(0));
+		listData.remove(0);
+		listTCP.add(new UrgPointeur(list));
+		
+		/** calcul de la taille des options */
+		this.sizeOptions = ((HeadLengthQuartet)listTCP.get(4)).getTailleIP() - 20;
 		
 	}
 
@@ -74,7 +95,7 @@ public class TCP implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if((sizeTCP - listData.size()) == 20 && 
+		if((sizeTCPTotal - listData.size()) == 20 && 
 				(listTCP.size() == 4)) return true;
 		return false;
 	}
@@ -92,11 +113,19 @@ public class TCP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"TCP (Transmission Control Protocol): "+sizeTCP+" octets";
+		String s = stab+"TCP (Transmission Control Protocol): "+sizeTCPTotal+" octets";
 		for(int i = 0; i<listTCP.size(); i++) {
 			s +="\n"+listTCP.get(i).formatDisplay(tab+1);
 		}
 		return s;
+	}
+	
+	/**
+	 * donne la taille des options
+	 * @return la taille en octets
+	 */
+	public int getTailleOptions() {
+		return sizeOptions;
 	}
 
 }

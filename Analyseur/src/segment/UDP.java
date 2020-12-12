@@ -91,4 +91,9 @@ public class UDP implements ITrame {
 		return s;
 	}
 
+	@Override
+	public int getTailleOptions() {
+		return 0;
+	}
+
 }

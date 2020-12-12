@@ -4,12 +4,10 @@ import java.util.List;
 
 public class URG implements IFlags {
 	
-	private List<String> valbits;
 	private int value;
 
 	public URG(List<String> valbits) {
-		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(6));
+		this.value =  Integer.parseInt(valbits.get(10));
 	}
 
 	@Override

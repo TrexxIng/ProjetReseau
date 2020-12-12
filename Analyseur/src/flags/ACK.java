@@ -4,12 +4,10 @@ import java.util.List;
 
 public class ACK implements IFlags {
 	
-	private List<String> valbits;
 	private int value;
 
 	public ACK(List<String> valbits) {
-		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(7));
+		this.value =  Integer.parseInt(valbits.get(11));
 	}
 
 	@Override

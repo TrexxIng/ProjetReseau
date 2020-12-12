@@ -3,13 +3,11 @@ package flags;
 import java.util.List;
 
 public class SYN implements IFlags {
-	
-	private List<String> valbits;
+
 	private int value;
 	
 	public SYN(List<String> valbits) {
-		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(10));
+		this.value =  Integer.parseInt(valbits.get(14));
 	}
 
 	@Override

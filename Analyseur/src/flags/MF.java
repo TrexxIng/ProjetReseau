@@ -14,7 +14,7 @@ public class MF implements IFlags {
 	
 	@Override
 	public String toString() {
-		String s = "."+valbits.get(2)+".. .... .... .... = More Fragment (MF): ";
+		String s = ".."+valbits.get(2)+". .... .... .... = More Fragment (MF): ";
 		if(value == 1)
 			return s +"suivi d'un fragment";
 		else

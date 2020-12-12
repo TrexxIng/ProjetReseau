@@ -4,12 +4,10 @@ import java.util.List;
 
 public class RST implements IFlags {
 	
-	private List<String> valbits;
 	private int value;
 
 	public RST(List<String> valbits) {
-		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(9));
+		this.value =  Integer.parseInt(valbits.get(13));
 	}
 
 	@Override
@@ -26,7 +24,7 @@ public class RST implements IFlags {
 	
 	@Override
 	public String toString() {
-		String s = ".... .... ."+value+".. = RST:";
+		String s = ".... .... ."+value+".. = RST: ";
 		if(value == 1)
 			return s+"reinitialisation de la connexion";
 		return s+"pas de reinitialisation de la connexion";

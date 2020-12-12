@@ -9,4 +9,5 @@ public interface ITrame {
 	boolean checkSize();
 	List<String> getData();
 	String formatDisplay(int tab);
+	int getTailleOptions();
 }

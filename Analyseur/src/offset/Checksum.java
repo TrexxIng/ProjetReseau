@@ -4,24 +4,38 @@ import java.util.List;
 
 public class Checksum implements IOffset {
 	private String valHex;
+	private boolean error;
+	private boolean check = false;
+	private String checkValue;
 	
 	public Checksum(List<String> valHex) {
 		this.valHex = valHex.get(0)+valHex.get(1);
+		this.checkValue = this.valHex;
+		this.error = false;
+		this.check = false;
 	}
 
 	@Override
 	public boolean checkSize() {
-		if(valHex.length() == 2) return true;
+		if(valHex.length() == 4) return true;
 		return false;
 	}
 	
-	public boolean compareCheckSum(String hex) {
-		return hex == valHex; 
+	public void compareChecksum(String value) {
+		check = true;
+		checkValue = value;
+		if(checkValue == valHex) 
+			error = false;
 	}
 	
 	@Override
 	public String toString() {
-		return "Checksum: 0x"+valHex;
+		String s = "valeur: non vérifié";
+		if(check) {
+			if(error) s = "valeur: erreur, devrait etre"+checkValue;
+			else s = "valeur: correcte";
+		}
+		return "Checksum: 0x"+valHex+" ["+s+"]";
 	}
 	
 	@Override

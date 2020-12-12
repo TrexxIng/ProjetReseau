@@ -18,12 +18,12 @@ public class Reserved implements IFlags {
 			return valbits.get(0)+"... .... .... .... = Reserved";
 		
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i<4;i++) {
+		for(int i = 4; i<8;i++) {
 			sb.append(valbits.get(i));
 		}
 		sb.append(" ");
-		for(int i = 4; i<6;i++) {
-			sb.append(valbits.get(8+i));
+		for(int i = 8; i<10;i++) {
+			sb.append(valbits.get(i));
 		}
 		return sb.toString()+".. .... = Reserved";
 	}

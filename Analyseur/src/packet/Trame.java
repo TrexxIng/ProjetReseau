@@ -10,6 +10,7 @@ import java.util.List;
 import segment.Ethernet;
 import segment.HeaderDatagramIP;
 import segment.ITrame;
+import segment.TCP;
 import segment.UDP;
 
 
@@ -45,6 +46,7 @@ public class Trame {
 	
 	/**
 	 * ajout de la trame ethernet
+	 * @param liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 */
 	public List<String> addEthernet(List<String> data) {
@@ -56,6 +58,7 @@ public class Trame {
 	
 	/**
 	 * ajout l'entete du datagramme IP
+	 * @param data liste d'octets de l'ensemble du datagramme
 	 * @return la liste des octets en données
 	 */
 	public List<String> addHeaderIP(List<String> data) {
@@ -64,12 +67,29 @@ public class Trame {
 		return hip.getData();
 	}
 	
+	/**
+	 * ajout l'entete de l'UDP
+	 * @param data liste d'octets de l'ensemble de la trame
+	 * @return la liste des octets en données
+	 */
 	public List<String> addUDP(List<String> data) {
 		UDP udp = new UDP(data);
 		listTrame.add(udp);
 		return udp.getData();
 		
 	}	
+	
+	/**
+	 * ajout l'entete du TCP
+	 * @param data liste d'octets de l'ensemble de la trame
+	 * @return la liste des octets en données
+	 */
+	public List<String> addTCPHeader(List<String> data) {
+		TCP udp = new TCP(data);
+		listTrame.add(udp);
+		return udp.getData();
+		
+	}
 	
 	
 	/**
@@ -88,15 +108,14 @@ public class Trame {
 	}
 	
 	/**
-	 * determine la taille des options du datagramme IP
-	 * @return la taille des options, -1 si ce n'est pas un datagramme IP
+	 * determine la taille des options d'une couche
+	 * @param i: position dans la liste de segments
+	 * @return la taille des options, -1 s'il y a un probleme de couche
 	 */
-	public int getTailleOptions() {
-		if(listTrame.size() < 2) 
+	public int getTailleOptions(int i) {
+		if(listTrame.size() < i) 
 			return -1;
-		if(listTrame.get(1) instanceof HeaderDatagramIP)
-			return ((HeaderDatagramIP)listTrame.get(1)).getTailleOptions();
-		return -1;
+		return listTrame.get(i).getTailleOptions();
 	}
 	
 	public List<String> getOctets(){
