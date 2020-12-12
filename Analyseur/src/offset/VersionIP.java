@@ -8,7 +8,7 @@ public class VersionIP implements IOffset {
 	private String quartet;
 	
 	public VersionIP(List<String> valHex) {
-		char val = valHex.get(0).charAt(1);
+		char val = valHex.get(0).charAt(0);
 		this.quartet = ""+val;
 		this.version = Integer.parseInt(quartet,16);
 	}

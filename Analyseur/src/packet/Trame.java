@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import protocole.Ethernet;
-import protocole.HeaderDatagramIP;
-import protocole.ITrame;
+import segment.Ethernet;
+import segment.HeaderDatagramIP;
+import segment.ITrame;
 
 
 public class Trame {
@@ -50,6 +50,11 @@ public class Trame {
 		return ether.dataType();
 	}
 	
+	
+	/**
+	 * ajout l'entete du datagramme IP
+	 * @return la taille des options
+	 */
 	public int addHeaderIP() {
 		List<String> listHIP = new ArrayList<>();
 		for(int i = 14; i<34; i++) {
@@ -58,6 +63,12 @@ public class Trame {
 		HeaderDatagramIP hip = new HeaderDatagramIP(listHIP);
 		listTrame.add(hip);
 		return hip.getTailleIP();
+	}
+	
+	public String getProtocol() {
+		if(listTrame.get(1) instanceof HeaderDatagramIP)
+			return ((HeaderDatagramIP)listTrame.get(1)).getProtocol();
+		return "pas de protocole";
 	}
 
 	
