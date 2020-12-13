@@ -113,7 +113,7 @@ public class TCP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"TCP (Transmission Control Protocol): "+sizeTCPTotal+" octets";
+		String s = stab+"Transmission Control Protocol, taille (avec données et options): "+sizeTCPTotal+" octets";
 		for(int i = 0; i<listTCP.size(); i++) {
 			s +="\n"+listTCP.get(i).formatDisplay(tab+1);
 		}

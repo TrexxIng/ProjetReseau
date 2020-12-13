@@ -64,7 +64,7 @@ public class ICMP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"ICMP (Internet Control Message Protocol): "+sizeICMP+" octets";
+		String s = stab+"Internet Control Message Protocol, taille: "+sizeICMP+" octets";
 		for(int i = 0; i<listICMP.size(); i++) {
 			s +="\n"+listICMP.get(i).formatDisplay(tab+1);
 		}

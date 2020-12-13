@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import segment.ARP;
 import segment.Ethernet;
 import segment.HeaderDatagramIP;
 import segment.ICMP;
@@ -16,12 +17,14 @@ import segment.UDP;
 
 
 public class Trame {
-	List<ITrame> listTrame;
-	List<String> listOctets;
+	private List<ITrame> listTrame;
+	private List<String> listOctets;
+	private int tailleTrame;
 	
 	public Trame(String fileName) throws IOException {
 		this.listTrame = new ArrayList<>();
 		this.listOctets = readFile(fileName);
+		this.tailleTrame = listOctets.size();
 	}
 	
 	/**
@@ -89,7 +92,12 @@ public class Trame {
 		TCP udp = new TCP(data);
 		listTrame.add(udp);
 		return udp.getData();
-		
+	}
+	
+	public List<String> addARP(List<String> data){
+		ARP arp = new ARP(data);
+		listTrame.add(arp);
+		return arp.getData();
 	}
 
 	/**
@@ -143,7 +151,7 @@ public class Trame {
 	
 	@Override
 	public String toString() {
-		String s = "Trame: "+listOctets.size()+" octets";
+		String s = "Trame: "+this.tailleTrame+" octets";
 		for(int i = 0; i< listTrame.size(); i++) {
 			s = s + "\n" + listTrame.get(i).toString();
 		}
@@ -162,7 +170,7 @@ public class Trame {
 				stab += "\t";
 			}
 		}
-		String s =stab+ "Trame: "+listOctets.size()+" octets";
+		String s =stab+ "Trame: "+this.tailleTrame+" octets";
 		for(int i = 0; i< listTrame.size(); i++) {
 			s = s + "\n" + listTrame.get(i).formatDisplay(tab+1);
 		}

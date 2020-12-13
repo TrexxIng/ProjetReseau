@@ -24,7 +24,7 @@ public class Ethernet implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}		
-		listEther.add(new AdresseMAC(list,false));
+		listEther.add(new AdresseMAC(list,"Destination"));
 		
 		/** ajout adresseMac source */
 		list = new ArrayList<>(); 
@@ -32,7 +32,7 @@ public class Ethernet implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
-		listEther.add(new AdresseMAC(list,true));
+		listEther.add(new AdresseMAC(list,"Source"));
 		
 		/** ajout Type Ethernet */
 		list= new ArrayList<>(); 
@@ -55,7 +55,7 @@ public class Ethernet implements ITrame {
 	
 	@Override
 	public String toString() {
-		String s = "Trame Ethernet: "+sizeEther+" octets";
+		String s = "Trame Ethernet (avec données): "+sizeEther+" octets";
 		for(int i = 0; i<listEther.size(); i++) {
 			s +="\n\t"+listEther.get(i).toString();
 		}
@@ -82,7 +82,7 @@ public class Ethernet implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"Trame Ethernet: "+sizeEther+" octets";
+		String s = stab+"Trame Ethernet, taille (avec données): "+sizeEther+" octets";
 		for(int i = 0; i<listEther.size(); i++) {
 			s +="\n"+listEther.get(i).formatDisplay(tab+1);
 		}

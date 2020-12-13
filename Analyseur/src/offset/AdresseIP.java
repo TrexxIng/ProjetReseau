@@ -3,10 +3,10 @@ package offset;
 import java.util.List;
 
 public class AdresseIP implements IOffset {
-	private boolean source;
+	private String source;
 	private List<String> valHex;
 	
-	public AdresseIP(List<String> valHex, boolean source) {
+	public AdresseIP(List<String> valHex, String source) {
 		this.source = source;
 		this.valHex = valHex;
 	}
@@ -21,10 +21,7 @@ public class AdresseIP implements IOffset {
 	
 	@Override
 	public String toString() {
-		String s = "Destination";
-		if(source)
-			s = "Source";
-		s = "adresse IP "+s+": ";
+		String s = "adresse IP "+source+": ";
 		
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i< valHex.size()-1; i++) {

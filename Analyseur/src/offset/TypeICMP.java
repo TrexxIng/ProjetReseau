@@ -68,7 +68,7 @@ public class TypeICMP implements IOffset {
 	
 	@Override
 	public String toString() {
-		return "Type: "+value+" ("+type+")";
+		return "Type: "+type+" ("+value+")";
 	}
 
 	@Override

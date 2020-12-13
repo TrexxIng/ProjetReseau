@@ -4,20 +4,17 @@ package offset;
 import java.util.List;
 
 public class AdresseMAC implements IOffset {
-	private boolean source;
+	private String source;
 	private List<String> valHex;
 	
-	public AdresseMAC(List<String> valHex, boolean source) {
+	public AdresseMAC(List<String> valHex, String source) {
 		this.source = source;
 		this.valHex = valHex;
 	}
 	
 	@Override
 	public String toString() {
-		String s = "Destination";
-		if(source)
-			s = "Source";
-		s = "adresse MAC "+s+": ";
+		String s = "adresse MAC "+source+": ";
 		
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i< valHex.size()-1; i++) {

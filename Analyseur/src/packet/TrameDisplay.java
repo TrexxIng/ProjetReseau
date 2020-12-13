@@ -9,7 +9,7 @@ public class TrameDisplay {
 		List<String> data;
 		String suite;
 		int options = 0;
-		Trame trame = new Trame("data/ExempleICMP2.txt");
+		Trame trame = new Trame("data/ExempleARP2.txt");
 		data = trame.getOctets();
 		
 		
@@ -17,6 +17,10 @@ public class TrameDisplay {
 		data = trame.addEthernet(data);
 		suite = trame.getNextSegment(0);
 		
+		/** ajout de ARP/RARP */
+		if(suite == "ARP" || suite == "RARP") {
+			data = trame.addARP(data);
+		}
 		
 		/** ajout de IP */
 		if(suite == "Datagramme IP") {
@@ -45,6 +49,8 @@ public class TrameDisplay {
 		if(suite == "ICMP") {
 			data = trame.addICMP(data);
 		}
+		
+		
 		
 		System.out.println(trame.formatDisplay(0));
 		
