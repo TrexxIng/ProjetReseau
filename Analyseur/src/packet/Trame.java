@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import segment.ARP;
+import segment.AllOptions;
 import segment.Ethernet;
 import segment.HeaderDatagramIP;
 import segment.ICMP;
@@ -82,6 +83,12 @@ public class Trame {
 		return udp.getData();
 		
 	}	
+	
+	public List<String> addOption(List<String> data, int nbOptions){
+		AllOptions option = new AllOptions(data,nbOptions);
+		listTrame.add(option);
+		return option.getData();
+	}
 	
 	/**
 	 * ajoute l'entete du TCP

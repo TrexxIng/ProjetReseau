@@ -52,7 +52,7 @@ public class TCP implements ITrame {
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);	
-		listTCP.add(new HeadLengthQuartet(list,"TCP"));
+		listTCP.add(new LengthQuartet(list,"TCP"));
 		
 		/** ajout des flags */
 		list.add(listData.get(0));
@@ -84,14 +84,10 @@ public class TCP implements ITrame {
 		listTCP.add(new UrgPointeur(list));
 		
 		/** calcul de la taille des options */
-		this.sizeOptions = ((HeadLengthQuartet)listTCP.get(4)).getTailleIP() - 20;
+		this.sizeOptions = ((LengthQuartet)listTCP.get(4)).getTailleIP() - 20;
 		
 	}
 
-	@Override
-	public List<IOffset> getListOffset() {
-		return listTCP;
-	}
 
 	@Override
 	public boolean checkSize() {
@@ -104,6 +100,11 @@ public class TCP implements ITrame {
 	public List<String> getData() {
 		return listData;
 	}
+	
+	@Override
+	public String toString() {
+		return "Transmission Control Protocol, taille (avec données et options): "+sizeTCPTotal+" octets";
+	}
 
 	@Override
 	public String formatDisplay(int tab) {
@@ -113,7 +114,7 @@ public class TCP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"Transmission Control Protocol, taille (avec données et options): "+sizeTCPTotal+" octets";
+		String s = stab+this.toString();
 		for(int i = 0; i<listTCP.size(); i++) {
 			s +="\n"+listTCP.get(i).formatDisplay(tab+1);
 		}

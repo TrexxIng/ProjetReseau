@@ -2,12 +2,12 @@ package offset;
 
 import java.util.List;
 
-public class HeadLengthQuartet implements IOffset {
+public class LengthQuartet implements IOffset {
 	private int longueur;
 	private String quartet;
 	private String type;
 	
-	public HeadLengthQuartet(List<String> valHex, String type) {
+	public LengthQuartet(List<String> valHex, String type) {
 		this.type = type;
 		char val;
 		if(type == "IP")

@@ -43,23 +43,10 @@ public class Ethernet implements ITrame {
 		listEther.add(new TypeEther(list));
 	}
 
-	@Override
-	public List<IOffset> getListOffset() {
-		return listEther;
-	}
 	
 	public String getDataType() {
 		return ((TypeEther)listEther.get(2)).getType();
 		
-	}
-	
-	@Override
-	public String toString() {
-		String s = "Trame Ethernet (avec données): "+sizeEther+" octets";
-		for(int i = 0; i<listEther.size(); i++) {
-			s +="\n\t"+listEther.get(i).toString();
-		}
-		return s;
 	}
 
 	@Override
@@ -75,6 +62,11 @@ public class Ethernet implements ITrame {
 	}
 
 	@Override
+	public String toString() {
+		return "Trame Ethernet, taille (avec données): "+sizeEther+" octets";
+	}
+	
+	@Override
 	public String formatDisplay(int tab) {
 		String stab ="";
 		if(tab > 0) {
@@ -82,7 +74,7 @@ public class Ethernet implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"Trame Ethernet, taille (avec données): "+sizeEther+" octets";
+		String s = stab+this.toString();
 		for(int i = 0; i<listEther.size(); i++) {
 			s +="\n"+listEther.get(i).formatDisplay(tab+1);
 		}

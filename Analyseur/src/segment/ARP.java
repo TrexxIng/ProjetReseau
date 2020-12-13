@@ -6,11 +6,10 @@ import java.util.List;
 import offset.AdresseIP;
 import offset.AdresseMAC;
 import offset.Hardware;
-import offset.HardwareLength;
 import offset.IOffset;
+import offset.Length1Bytes;
 import offset.Operation;
 import offset.Protocol;
-import offset.ProtocolLength;
 
 
 public class ARP implements ITrame {
@@ -44,13 +43,13 @@ public class ARP implements ITrame {
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
-		listARP.add(new HardwareLength(list));
+		listARP.add(new Length1Bytes(list, "Hardware"));
 
 		/** ajout taille protocole */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
-		listARP.add(new ProtocolLength(list));
+		listARP.add(new Length1Bytes(list,"Protocole"));
 		
 		/** ajout de l'operation */
 		list= new ArrayList<>(); 
@@ -95,10 +94,6 @@ public class ARP implements ITrame {
 		
 	}
 
-	@Override
-	public List<IOffset> getListOffset() {
-		return listARP;
-	}
 
 	@Override
 	public boolean checkSize() {
@@ -110,6 +105,11 @@ public class ARP implements ITrame {
 	public List<String> getData() {
 		return listData;
 	}
+	
+	@Override
+	public String toString() {
+		return "(Reverse) Adress Resolution Protocole, taille: "+sizeARP+" octets";
+	}
 
 	@Override
 	public String formatDisplay(int tab) {
@@ -119,12 +119,13 @@ public class ARP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"(Reverse) Adress Resolution Protocole, taille: "+sizeARP+" octets";
+		String s = stab+this.toString();
 		for(int i = 0; i<listARP.size(); i++) {
 			s +="\n"+listARP.get(i).formatDisplay(tab+1);
 		}
 		return s;
 	}
+	
 
 	@Override
 	public int getTailleOptions() {

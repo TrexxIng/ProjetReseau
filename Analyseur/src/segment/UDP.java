@@ -51,10 +51,6 @@ public class UDP implements ITrame {
 		
 	}
 
-	@Override
-	public List<IOffset> getListOffset() {
-		return listUDP;
-	}
 
 	@Override
 	public boolean checkSize() {
@@ -69,11 +65,7 @@ public class UDP implements ITrame {
 	
 	@Override
 	public String toString() {
-		String s = "UDP (User Datagram Protocol, avec données): "+sizeUDP+" octets";
-		for(int i = 0; i<listUDP.size(); i++) {
-			s +="\n\t"+listUDP.get(i).toString();
-		}
-		return s;
+		return "User Datagram Protocol, taille (avec données): "+sizeUDP+" octets";
 	}
 
 	@Override
@@ -84,7 +76,7 @@ public class UDP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"User Datagram Protocol, taille (avec données): "+sizeUDP+" octets";
+		String s = stab+this.toString();
 		for(int i = 0; i<listUDP.size(); i++) {
 			s +="\n"+listUDP.get(i).formatDisplay(tab+1);
 		}

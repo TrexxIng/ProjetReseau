@@ -2,27 +2,30 @@ package offset;
 
 import java.util.List;
 
-public class HardwareLength implements IOffset {
-
+public class Data implements IOffset {
 	private List<String> valHex;
-	private int longueur;
+	private String data = "";
 	
-	public HardwareLength(List<String> valHex) {
+	public Data(List<String> valHex) {
 		this.valHex = valHex;
-		this.longueur = Integer.parseInt(valHex.get(0), 16);
+		
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<valHex.size();i++) {
+			sb.append(valHex.get(i));
+		}
+		this.data = sb.toString();
 	}
 
 	@Override
 	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
-	}
-	
-	@Override
-	public String toString() {
-		return "Longueur du Hardware: "+longueur+" octets (0x"+valHex.get(0)+")";
+		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Data ("+valHex.size()+"octets): "+data;
+	}
+	
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";

@@ -39,10 +39,6 @@ public class ICMP implements ITrame {
 		listICMP.add(new Checksum(list));
 	}
 
-	@Override
-	public List<IOffset> getListOffset() {
-		return listICMP;
-	}
 
 	@Override
 	public boolean checkSize() {
@@ -57,6 +53,11 @@ public class ICMP implements ITrame {
 	}
 
 	@Override
+	public String toString() {
+		return "Internet Control Message Protocol, taille: "+sizeICMP+" octets";
+	}
+	
+	@Override
 	public String formatDisplay(int tab) {
 		String stab ="";
 		if(tab > 0) {
@@ -64,7 +65,7 @@ public class ICMP implements ITrame {
 				stab += "\t";
 			}
 		}
-		String s = stab+"Internet Control Message Protocol, taille: "+sizeICMP+" octets";
+		String s = stab+this.toString();
 		for(int i = 0; i<listICMP.size(); i++) {
 			s +="\n"+listICMP.get(i).formatDisplay(tab+1);
 		}

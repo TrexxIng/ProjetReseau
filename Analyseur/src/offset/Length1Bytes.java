@@ -2,12 +2,13 @@ package offset;
 
 import java.util.List;
 
-public class ProtocolLength implements IOffset {
+public class Length1Bytes implements IOffset {
 
 	private List<String> valHex;
 	private int longueur;
+	private String type;
 	
-	public ProtocolLength(List<String> valHex) {
+	public Length1Bytes(List<String> valHex, String type) {
 		this.valHex = valHex;
 		this.longueur = Integer.parseInt(valHex.get(0), 16);
 	}
@@ -20,7 +21,7 @@ public class ProtocolLength implements IOffset {
 	
 	@Override
 	public String toString() {
-		return "Longueur du Protocole: "+longueur+" octets (0x"+valHex.get(0)+")";
+		return "Longueur "+type+": "+longueur+" octets (0x"+valHex.get(0)+")";
 	}
 
 	@Override
@@ -32,6 +33,10 @@ public class ProtocolLength implements IOffset {
 			}
 		}
 		return s+this.toString();
+	}
+	
+	public int getLongueur() {
+		return longueur;
 	}
 
 }
