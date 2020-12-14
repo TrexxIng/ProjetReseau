@@ -1,10 +1,11 @@
-package segment;
+package segment.subsegment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import champs.IChamps;
 import champs.options.Bourrage;
+import segment.ITrame;
 
 public class AllOptions implements ITrame {
 	

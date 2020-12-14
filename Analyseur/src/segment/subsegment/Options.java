@@ -1,4 +1,4 @@
-package segment;
+package segment.subsegment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import champs.adresseEtPort.AdresseIP;
 import champs.longueur.Length1Bytes;
 import champs.options.TypeOptions;
 import champs.options.ValeurOption;
+import segment.ITrame;
 
 
 public class Options implements ITrame {

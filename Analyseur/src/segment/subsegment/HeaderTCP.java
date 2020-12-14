@@ -1,4 +1,4 @@
-package segment;
+package segment.subsegment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import champs.longueur.LengthQuartet;
 import champs.simple.AckSeqNumber;
 import champs.simple.UrgPointeur;
 import champs.simple.Windows;
+import segment.ITrame;
 
 public class HeaderTCP implements ITrame {
 	private List<IChamps> listTCP;

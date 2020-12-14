@@ -1,4 +1,4 @@
-package segment;
+package segment.subsegment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import champs.simple.TOS;
 import champs.simple.TimeToLive;
 import champs.simple.VersionIP;
 import champs.trameSuiv.Protocol;
+import segment.ITrame;
 
 public class HeaderDatagramIP implements ITrame {
 	private List<IChamps> listIP;

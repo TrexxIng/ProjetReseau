@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import segment.ARP;
-import segment.AllOptions;
 import segment.Contenu;
 import segment.Ethernet;
-import segment.HeaderDatagramIP;
 import segment.ICMP;
 import segment.ITrame;
 import segment.InternetProtocol;
 import segment.TCP;
-import segment.HeaderTCP;
 import segment.UDP;
+import segment.subsegment.AllOptions;
+import segment.subsegment.HeaderDatagramIP;
+import segment.subsegment.HeaderTCP;
 
 
 public class Trame {
@@ -41,15 +41,53 @@ public class Trame {
 		List<String> hex = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
 		String line; 
+		List<String> list = new ArrayList<>();
 		while ((line = br.readLine())!=null) { 
 			for (String word : line.split(" ")) {
+				list.add(word);
 				if(word.equals("")) continue;	// ignore les espaces vides
 				if(word.length() != 2) continue;	// ignore ce qui n'est pas un octet
+				if(word.matches("-?[0-9a-fA-F]+"))
 	        	hex.add(word);
 	        } 
 		} 
 	    br.close();
 		return hex;
+	}
+	
+	/** fait une liste, chaque element correspondant à une liste d'octet
+	 * pour chaque tram
+	 * @param list: liste de String tel que lu dans le fichier
+	 * @return liste de liste d'octets
+	 */
+	public  List<List<String>> traitementDataFichier(List<String> list){
+		List<List<String>> listTrame = new ArrayList<>();
+		
+		/** on separe en deux listes par ligne: 
+		 * 1 pour les octets
+		 * 1 pour composée de [3eme colonne, Offset]*/
+		List<List<String>> colonnes = new ArrayList<>();
+		List<String> element = new ArrayList<>();
+		element.add("debut");
+		for(int i = 0; i<list.size(); i++) {
+			
+			/** nouvelle colonne **/
+			if(list.size() - 1 > i && 
+					list.get(i) == "" && 
+					list.get(i+1) == "") {
+				colonnes.add(element);
+				element = new ArrayList<>();
+				i++;
+				
+			} else {
+				element.add(list.get(i));
+			}
+			colonnes.add(element);	
+		}
+			
+		
+		return listTrame;
+		
 	}
 	
 	/**

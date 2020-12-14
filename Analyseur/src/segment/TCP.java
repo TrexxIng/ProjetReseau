@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import champs.options.Bourrage;
+import segment.subsegment.AllOptions;
+import segment.subsegment.HeaderTCP;
+import segment.subsegment.Padding;
 
 public class TCP implements ITrame {
 	private List<ITrame> listTCP;

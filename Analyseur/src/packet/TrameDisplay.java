@@ -9,7 +9,7 @@ public class TrameDisplay {
 		List<String> data;
 		String suite;
 		int options = 0;
-		Trame trame = new Trame("data/ExempleTCP.txt");
+		Trame trame = new Trame("data/ExempleHTTP.txt");
 		data = trame.getOctets();
 		
 		
