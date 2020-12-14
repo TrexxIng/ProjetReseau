@@ -1,6 +1,8 @@
-package champs;
+package champs.longueur;
 
 import java.util.List;
+
+import champs.IChamps;
 
 public class Length1Bytes implements IChamps {
 

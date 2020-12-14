@@ -1,6 +1,8 @@
-package champs;
+package champs.adresseEtPort;
 
 import java.util.List;
+
+import champs.IChamps;
 
 public class AdresseIP implements IChamps {
 	private String source;

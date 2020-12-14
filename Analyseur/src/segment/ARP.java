@@ -3,13 +3,13 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.AdresseIP;
-import champs.AdresseMAC;
-import champs.Hardware;
 import champs.IChamps;
-import champs.Length1Bytes;
-import champs.Operation;
-import champs.Protocol;
+import champs.adresseEtPort.AdresseIP;
+import champs.adresseEtPort.AdresseMAC;
+import champs.longueur.Length1Bytes;
+import champs.simple.Hardware;
+import champs.simple.Operation;
+import champs.trameSuiv.Protocol;
 
 
 public class ARP implements ITrame {

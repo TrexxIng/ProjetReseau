@@ -3,9 +3,9 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.AdresseMAC;
 import champs.IChamps;
-import champs.TypeEther;
+import champs.adresseEtPort.AdresseMAC;
+import champs.trameSuiv.TypeEther;
 
 public class Ethernet implements ITrame {
 	private List<IChamps> listEther;

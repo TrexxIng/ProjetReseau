@@ -1,26 +1,30 @@
-package champs;
+package champs.simple;
 
 import java.util.List;
 
-public class TimeToLive implements IChamps {
+import champs.IChamps;
+
+public class NextHopMTU implements IChamps {
+
 	private List<String> valHex;
+	private String value ="";
 	
-	public TimeToLive(List<String> valHex) {
-		this.valHex = valHex;	
+	public NextHopMTU(List<String> valHex) {
+		this.valHex = valHex;
+		this.value = valHex.get(0)+valHex.get(1);
+		
 	}
 
 	@Override
 	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
+		return valHex.size() == 2;
 	}
 	
 	@Override
 	public String toString() {
-		return "Time To Live (TTL): "+Integer.parseInt(valHex.get(0),16);
-		
+		return "Next hop MTU: 0x"+value;
 	}
-	
+
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";

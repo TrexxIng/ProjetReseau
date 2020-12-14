@@ -1,6 +1,8 @@
-package champs;
+package champs.trameSuiv;
 
 import java.util.List;
+
+import champs.IChamps;
 
 public class TypeEther implements IChamps {
 	private List<String> valHex;

@@ -1,26 +1,29 @@
-package champs;
+package champs.options;
 
 import java.util.List;
 
-public class ValeurOption implements IChamps {
-	
+import champs.IChamps;
+
+public class Bourrage implements IChamps {
+
 	private List<String> valHex;
-	private int value;
+	private String value ="";
 	
-	public ValeurOption(List<String> valHex) {
+	public Bourrage(List<String> valHex) {
 		this.valHex = valHex;
-		this.value = Integer.parseInt(valHex.get(0),16);
+		for(int i = 0; i<this.valHex.size();i++) {
+			this.value += valHex.get(i);
+		}
 	}
 
 	@Override
 	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
+		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "Valeur: "+value+" (0x"+valHex.get(0)+")";
+		return "Bourrage: 0x"+value;
 	}
 
 	@Override

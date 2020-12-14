@@ -1,29 +1,30 @@
-package champs;
+package champs.options;
 
 import java.util.List;
 
-public class TotalLength implements IChamps {
-	private List<String> valHex;
-	private int longueur;
+import champs.IChamps;
+
+public class ValeurOption implements IChamps {
 	
-	public TotalLength(List<String> valHex) {
+	private List<String> valHex;
+	private int value;
+	
+	public ValeurOption(List<String> valHex) {
 		this.valHex = valHex;
-		this.longueur = Integer.parseInt( valHex.get(0)+valHex.get(1),16);
+		this.value = Integer.parseInt(valHex.get(0),16);
 	}
-
-
 
 	@Override
 	public boolean checkSize() {
-		if(valHex.size() == 2) return true;
+		if(valHex.size() == 1) return true;
 		return false;
 	}
 	
-	@Override 
+	@Override
 	public String toString() {
-		return "Longueur totale: 0x"+valHex.get(0)+valHex.get(1)+" ("+longueur+" octets)";
+		return "Valeur: "+value+" (0x"+valHex.get(0)+")";
 	}
-	
+
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";
@@ -34,7 +35,5 @@ public class TotalLength implements IChamps {
 		}
 		return s+this.toString();
 	}
-	
-
 
 }

@@ -1,14 +1,15 @@
-package champs;
+package champs.simple;
 
 import java.util.List;
 
-public class TOS implements IChamps {
+import champs.IChamps;
+
+public class TimeToLive implements IChamps {
 	private List<String> valHex;
-
-	public TOS(List<String> valHex) {
-		this.valHex = valHex;
+	
+	public TimeToLive(List<String> valHex) {
+		this.valHex = valHex;	
 	}
-
 
 	@Override
 	public boolean checkSize() {
@@ -18,7 +19,8 @@ public class TOS implements IChamps {
 	
 	@Override
 	public String toString() {
-		return "Type of Service: 0x"+valHex.get(0);
+		return "Time To Live (TTL): "+Integer.parseInt(valHex.get(0),16);
+		
 	}
 	
 	@Override

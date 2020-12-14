@@ -3,12 +3,12 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.AdresseIP;
 import champs.Data;
 import champs.IChamps;
-import champs.Length1Bytes;
-import champs.TypeOptions;
-import champs.ValeurOption;
+import champs.adresseEtPort.AdresseIP;
+import champs.longueur.Length1Bytes;
+import champs.options.TypeOptions;
+import champs.options.ValeurOption;
 
 
 public class Options implements ITrame {

@@ -49,7 +49,7 @@ public class TrameDisplay {
 		}
 		
 		/** affichage */
-		System.out.println(trame.formatDisplay(0));
+		System.out.println(trame.formatDisplay(1));
 		
 		
 	}

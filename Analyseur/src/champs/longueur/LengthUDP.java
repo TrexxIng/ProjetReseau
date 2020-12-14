@@ -1,16 +1,18 @@
-package champs;
+package champs.longueur;
 
 import java.util.List;
 
-public class Port implements IChamps{
-	private boolean source;
-	private List<String> valHex;
-	private int valuePort;
+import champs.IChamps;
+
+public class LengthUDP implements IChamps{
 	
-	public Port(List<String> valHex, boolean source) {
-		this.source = source;
+	private List<String> valHex;
+	private int longueur;
+	
+	public LengthUDP(List<String> valHex) {
 		this.valHex = valHex;
-		this.valuePort = Integer.parseInt((valHex.get(0)+valHex.get(1)),16);
+		this.longueur = Integer.parseInt(
+				(valHex.get(0)+valHex.get(1)), 16) * 4;
 	}
 
 	@Override
@@ -21,11 +23,7 @@ public class Port implements IChamps{
 	
 	@Override
 	public String toString() {
-		String s = "Destination";
-		if(source)
-			s = "Source";
-		return  "Port "+s+": "+valuePort+" (0x"+valHex.get(0)+valHex.get(1)+")";
-
+		return "Longueur UDP: "+longueur+" octets (0x"+valHex.get(0)+valHex.get(1)+")";
 	}
 	
 	@Override
@@ -38,6 +36,5 @@ public class Port implements IChamps{
 		}
 		return s+this.toString();
 	}
-
 
 }

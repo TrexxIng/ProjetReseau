@@ -1,6 +1,8 @@
-package champs;
+package champs.options;
 
 import java.util.List;
+
+import champs.IChamps;
 
 public class TypeOptions implements IChamps{
 

@@ -1,6 +1,8 @@
-package champs;
+package champs.simple;
 
 import java.util.List;
+
+import champs.IChamps;
 
 public class Identification implements IChamps{
 	

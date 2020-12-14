@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import champs.*;
+import champs.adresseEtPort.Port;
+import champs.longueur.LengthUDP;
 
 public class UDP implements ITrame {
 	private List<IChamps> listUDP;

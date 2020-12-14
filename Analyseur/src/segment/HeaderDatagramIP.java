@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import champs.*;
+import champs.adresseEtPort.AdresseIP;
+import champs.longueur.LengthQuartet;
+import champs.longueur.TotalLength;
+import champs.simple.Identification;
+import champs.simple.TOS;
+import champs.simple.TimeToLive;
+import champs.simple.VersionIP;
+import champs.trameSuiv.Protocol;
 
 public class HeaderDatagramIP implements ITrame {
 	private List<IChamps> listIP;
