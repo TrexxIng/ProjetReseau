@@ -48,6 +48,7 @@ public class Trame {
 	        	hex.add(word);
 	        } 
 		} 
+		List<List<String>> liste = traitementDataFichier(list);
 	    br.close();
 		return hex;
 	}
@@ -70,8 +71,8 @@ public class Trame {
 			
 			/** nouvelle colonne **/
 			if(list.size() - 1 > i && 
-					list.get(i) == "" && 
-					list.get(i+1) == "") {
+					list.get(i).equals("") && 
+					list.get(i+1).equals("")) {
 				colonnes.add(element);
 				element = new ArrayList<>();
 				i++;
@@ -79,9 +80,9 @@ public class Trame {
 			} else {
 				element.add(list.get(i));
 			}
-			colonnes.add(element);	
+				
 		}
-			
+		colonnes.add(element);
 	
 		return listTrame;
 		
