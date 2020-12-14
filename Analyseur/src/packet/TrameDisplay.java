@@ -9,7 +9,7 @@ public class TrameDisplay {
 		List<String> data;
 		String suite;
 		int options = 0;
-		Trame trame = new Trame("data/ExempleICMP.txt");
+		Trame trame = new Trame("data/ExempleTCP.txt");
 		data = trame.getOctets();
 		
 		
@@ -35,7 +35,7 @@ public class TrameDisplay {
 		
 		/** ajout de TCP */
 		if(suite == "TCP") {
-			data = trame.addTCPHeader(data);
+			data = trame.addTCP(data);
 		}
 		
 		/** ajout de ICMP */

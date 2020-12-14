@@ -3,105 +3,47 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.*;
+import champs.Bourrage;
 
 public class TCP implements ITrame {
-	private List<IChamps> listTCP;
+	private List<ITrame> listTCP;
 	private List<String> listData;
-	private int sizeOptions;
 	private int sizeTCP;
+	private String protocol;
 	
 	public TCP(List<String> listOctet) {
 		this.sizeTCP = 0;
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
 		
-		/** ajout du port source */
-		List<String> list= new ArrayList<>(); 
-		list.add(listData.get(0));
-		listData.remove(0);
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeTCP += list.size();
-		listTCP.add(new Port(list,true));
+		/** header */
+		HeaderTCP hip = new HeaderTCP(listData);
+		listTCP.add(hip);
+		sizeTCP += hip.getSize();
+		listData = hip.getData();
+		int sizeOption = hip.getTailleOptions();
+		this.protocol = hip.getProtocol();
 		
-		/** ajout du port destination */
-		list= new ArrayList<>(); 
-		list.add(listData.get(0));
-		listData.remove(0);
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeTCP += list.size();
-		listTCP.add(new Port(list,false));
+		/** options */
+		AllOptions opt = new AllOptions(listData,sizeOption,"IP");
+		listTCP.add(opt);
+		sizeTCP += opt.getSize();
+		listData = opt.getData();
+		int padding = opt.getSizePadding();
 		
-		/** ajout du Sequence Number */
-		list= new ArrayList<>(); 
-		for(int i = 0; i<4;i++) {
-			list.add(listData.get(0));
-			listData.remove(0);
+		/** Padding */
+		if(padding > 0) {
+			Padding pad = new Padding(listData, padding);
+			listTCP.add(pad);
+			sizeTCP += pad.getSize();
+			listData = pad.getData();
 		}
-		this.sizeTCP += list.size();
-		listTCP.add(new AckSeqNumber(list,false));
-		
-		/** ajout du Acknowlegement Number */
-		list= new ArrayList<>(); 
-		for(int i = 0; i<4;i++) {
-			list.add(listData.get(0));
-			listData.remove(0);
-		}
-		this.sizeTCP += list.size();
-		listTCP.add(new AckSeqNumber(list,true));
-		
-		/** ajout de la taille de l'entete TCP */
-		list= new ArrayList<>(); 
-		list.add(listData.get(0));
-		listData.remove(0);	
-		listTCP.add(new LengthQuartet(list,"TCP"));
-		
-		/** ajout des flags */
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeTCP += list.size();
-		listTCP.add(new Flags(list, "TCP"));
-		
-		/** ajout de Windows */
-		list= new ArrayList<>(); 
-		list.add(listData.get(0));
-		listData.remove(0);
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeTCP += list.size();
-		listTCP.add(new Windows(list));
-		
-		/** ajout de Checksum */
-		list= new ArrayList<>(); 
-		list.add(listData.get(0));
-		listData.remove(0);
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeTCP += list.size();
-		listTCP.add(new Checksum(list));
-		
-		/** ajout de Checksum */
-		list= new ArrayList<>(); 
-		list.add(listData.get(0));
-		listData.remove(0);
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeTCP += list.size();
-		listTCP.add(new UrgPointeur(list));
-		
-		/** calcul de la taille des options */
-		this.sizeOptions = ((LengthQuartet)listTCP.get(4)).getTailleIP() - 20;
-		
-		
+			
 	}
-
 
 	@Override
 	public boolean checkSize() {
-		if(sizeTCP == 20 && 
-				(listTCP.size() == 4)) return true;
+		if(listTCP.size() == 2 && sizeTCP > 19) return true;
 		return false;
 	}
 
@@ -114,6 +56,7 @@ public class TCP implements ITrame {
 	public String toString() {
 		return "Transmission Control Protocol: "+sizeTCP+" octets";
 	}
+
 
 	@Override
 	public String formatDisplay(int tab) {
@@ -129,18 +72,20 @@ public class TCP implements ITrame {
 		}
 		return s;
 	}
-	
-	/**
-	 * donne la taille des options
-	 * @return la taille en octets
-	 */
+
+	@Override
 	public int getTailleOptions() {
-		return sizeOptions;
+		return 0;
 	}
-	
+
 	@Override
 	public int getSize() {
 		return sizeTCP;
 	}
+	
+	public String getProtocol() {
+		return protocol;
+	}
+	
 
 }

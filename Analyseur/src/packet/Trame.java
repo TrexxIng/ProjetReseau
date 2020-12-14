@@ -16,6 +16,7 @@ import segment.ICMP;
 import segment.ITrame;
 import segment.InternetProtocol;
 import segment.TCP;
+import segment.HeaderTCP;
 import segment.UDP;
 
 
@@ -93,10 +94,10 @@ public class Trame {
 	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 */
-	public List<String> addTCPHeader(List<String> data) {
-		TCP udp = new TCP(data);
-		listTrame.add(udp);
-		return udp.getData();
+	public List<String> addTCP(List<String> data) {
+		TCP tcp = new TCP(data);
+		listTrame.add(tcp);
+		return tcp.getData();
 	}
 	
 	public List<String> addARP(List<String> data,String type){
