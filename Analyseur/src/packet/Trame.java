@@ -38,21 +38,22 @@ public class Trame {
 		List<String> hex = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
 		String line; 
-		List<String> list = new ArrayList<>();
+		//List<String> list = new ArrayList<>();
 		while ((line = br.readLine())!=null) { 
 			for (String word : line.split(" ")) {
-				list.add(word);
+				//list.add(word);
 				if(word.equals("")) continue;	// ignore les espaces vides
 				if(word.length() != 2) continue;	// ignore ce qui n'est pas un octet
 				if(word.matches("-?[0-9a-fA-F]+"))
 	        	hex.add(word);
 	        } 
 		} 
-		List<List<String>> liste = traitementDataFichier(list);
+		//List<List<String>> liste = traitementDataFichier(list);
 	    br.close();
 		return hex;
 	}
 	
+	/*** A FAIRE AUTREMENT */
 	/** fait une liste, chaque element correspondant à une liste d'octet
 	 * pour chaque tram
 	 * @param list: liste de String tel que lu dans le fichier
@@ -70,7 +71,12 @@ public class Trame {
 		for(int i = 0; i<list.size(); i++) {
 			
 			/** nouvelle colonne **/
-			if(list.size() - 1 > i && 
+			if(list.size() - 2 > i && 
+					list.get(i).equals("") && 
+					list.get(i+1).equals("") && 
+					list.get(i+2).equals("") ) {
+				break;
+			} else if(list.size() - 1 > i && 
 					list.get(i).equals("") && 
 					list.get(i+1).equals("")) {
 				colonnes.add(element);
@@ -83,6 +89,17 @@ public class Trame {
 				
 		}
 		colonnes.add(element);
+		
+		/** on fait un traitement pour retirer les caracteres inutiles de la 3e colonne */
+		String debut;
+		for(int i = 0; i<colonnes.size(); i++) {
+			if(i%2 == 1) continue;
+			debut = colonnes.get(i).get(colonnes.get(i).size()-1);
+			colonnes.get(i).clear();
+			colonnes.get(i).add(debut);
+			
+		}
+		
 	
 		return listTrame;
 		
