@@ -9,4 +9,5 @@ public interface ITrame {
 	List<String> getData();
 	String formatDisplay(int tab);
 	int getTailleOptions();
+	int getSize();
 }

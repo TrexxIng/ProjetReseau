@@ -9,10 +9,10 @@ public class TCP implements ITrame {
 	private List<IOffset> listTCP;
 	private List<String> listData;
 	private int sizeOptions;
-	private int sizeTCPTotal;
+	private int sizeTCP;
 	
 	public TCP(List<String> listOctet) {
-		this.sizeTCPTotal = listOctet.size();
+		this.sizeTCP = 0;
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
 		
@@ -22,6 +22,7 @@ public class TCP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeTCP += list.size();
 		listTCP.add(new Port(list,true));
 		
 		/** ajout du port destination */
@@ -30,6 +31,7 @@ public class TCP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeTCP += list.size();
 		listTCP.add(new Port(list,false));
 		
 		/** ajout du Sequence Number */
@@ -38,6 +40,7 @@ public class TCP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeTCP += list.size();
 		listTCP.add(new AckSeqNumber(list,false));
 		
 		/** ajout du Acknowlegement Number */
@@ -46,6 +49,7 @@ public class TCP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeTCP += list.size();
 		listTCP.add(new AckSeqNumber(list,true));
 		
 		/** ajout de la taille de l'entete TCP */
@@ -57,6 +61,7 @@ public class TCP implements ITrame {
 		/** ajout des flags */
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeTCP += list.size();
 		listTCP.add(new Flags(list, "TCP"));
 		
 		/** ajout de Windows */
@@ -65,6 +70,7 @@ public class TCP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeTCP += list.size();
 		listTCP.add(new Windows(list));
 		
 		/** ajout de Checksum */
@@ -73,6 +79,7 @@ public class TCP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeTCP += list.size();
 		listTCP.add(new Checksum(list));
 		
 		/** ajout de Checksum */
@@ -81,6 +88,7 @@ public class TCP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeTCP += list.size();
 		listTCP.add(new UrgPointeur(list));
 		
 		/** calcul de la taille des options */
@@ -91,7 +99,7 @@ public class TCP implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if((sizeTCPTotal - listData.size()) == 20 && 
+		if(sizeTCP == 20 && 
 				(listTCP.size() == 4)) return true;
 		return false;
 	}
@@ -103,7 +111,7 @@ public class TCP implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "Transmission Control Protocol, taille (avec données et options): "+sizeTCPTotal+" octets";
+		return "Transmission Control Protocol: "+sizeTCP+" octets";
 	}
 
 	@Override
@@ -127,6 +135,11 @@ public class TCP implements ITrame {
 	 */
 	public int getTailleOptions() {
 		return sizeOptions;
+	}
+	
+	@Override
+	public int getSize() {
+		return sizeTCP;
 	}
 
 }

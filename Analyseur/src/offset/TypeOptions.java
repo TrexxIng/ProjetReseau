@@ -11,7 +11,7 @@ public class TypeOptions implements IOffset{
 	
 	public TypeOptions(List<String> valHex) {
 		this.valHex = valHex;
-		this.value = Integer.parseInt(valHex.get(0));
+		this.value = Integer.parseInt(valHex.get(0),16);
 		this.setType(this.value); 
 	}
 
@@ -23,7 +23,7 @@ public class TypeOptions implements IOffset{
 	
 	private void setType(int i) {
 		if(i == 0) {
-			this.type = "EOOL: Fin d'options";
+			this.type = "Fin d'options EOOL";
 		}
 		else if(i == 1) {
 			this.type = "Pas d’opération";

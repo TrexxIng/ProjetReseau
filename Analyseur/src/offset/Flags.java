@@ -83,7 +83,7 @@ public class Flags implements IOffset {
 	@Override 
 	public String toString() {
 		if(this.type == "IP")
-			return "Flags: 0x"+hex+" : "+valDec;
+			return "Flags: 0x"+hex+" ("+valDec+")";
 		String s = "Flags: 0x"+hex;
 		if(typeFlags != "")
 			s += " ("+typeFlags+")";

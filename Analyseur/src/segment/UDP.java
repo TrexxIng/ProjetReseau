@@ -12,7 +12,7 @@ public class UDP implements ITrame {
 	
 	
 	public UDP(List<String> listOctet) {
-		this.sizeUDP = listOctet.size();
+		this.sizeUDP = 0;
 		this.listUDP = new ArrayList<>();
 		this.listData = listOctet;
 		
@@ -22,6 +22,7 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeUDP += list.size();
 		listUDP.add(new Port(list,true));
 		
 		/** ajout du port destination */
@@ -30,6 +31,7 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeUDP += list.size();
 		listUDP.add(new Port(list,false));
 		
 		
@@ -39,6 +41,7 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeUDP += list.size();
 		listUDP.add(new LengthUDP(list));
 		
 		/** ajout du checksum */
@@ -47,6 +50,7 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeUDP += list.size();
 		listUDP.add(new Checksum(list));	
 		
 	}
@@ -54,7 +58,7 @@ public class UDP implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if((sizeUDP - listData.size()) == 20 && (listUDP.size() == 4)) return true;
+		if((sizeUDP  == 20) && (listUDP.size() == 4)) return true;
 		return false;
 	}
 
@@ -65,7 +69,7 @@ public class UDP implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "User Datagram Protocol, taille (avec données): "+sizeUDP+" octets";
+		return "User Datagram Protocol: "+sizeUDP+" octets";
 	}
 
 	@Override
@@ -86,6 +90,11 @@ public class UDP implements ITrame {
 	@Override
 	public int getTailleOptions() {
 		return 0;
+	}
+	
+	@Override
+	public int getSize() {
+		return sizeUDP;
 	}
 
 }

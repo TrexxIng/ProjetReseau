@@ -2,30 +2,28 @@ package offset;
 
 import java.util.List;
 
-public class Data implements IOffset {
+public class Bourrage implements IOffset {
+
 	private List<String> valHex;
-	private String data = "";
+	private String value ="";
 	
-	public Data(List<String> valHex) {
+	public Bourrage(List<String> valHex) {
 		this.valHex = valHex;
-		
-		StringBuilder sb = new StringBuilder();
-		for(int i=0; i<valHex.size();i++) {
-			sb.append(valHex.get(i));
+		for(int i = 0; i<this.valHex.size();i++) {
+			this.value += valHex.get(i);
 		}
-		this.data = sb.toString();
 	}
 
 	@Override
 	public boolean checkSize() {
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Data ("+valHex.size()+" octets): "+data;
+		return "Bourrage: 0x"+value;
 	}
-	
+
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";

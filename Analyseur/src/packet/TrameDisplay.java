@@ -9,7 +9,7 @@ public class TrameDisplay {
 		List<String> data;
 		String suite;
 		int options = 0;
-		Trame trame = new Trame("data/ExempleICMP.txt");
+		Trame trame = new Trame("data/ExempleUDP2.txt");
 		data = trame.getOctets();
 		
 		
@@ -24,35 +24,31 @@ public class TrameDisplay {
 		
 		/** ajout de IP */
 		if(suite == "Datagramme IP") {
-			data = trame.addHeaderIP(data);
+			data = trame.addIP(data);
 			suite = trame.getNextSegment(1);
-			options = trame.getTailleOptions(1);
-			data = trame.addOption(data,options);
 		}
 		
 		/** ajout de UDP */
 		if(suite == "UDP") {
 			data = trame.addUDP(data);
-			options = trame.getTailleOptions(3);
-			data = trame.addOption(data,options);
 		}
 		
 		/** ajout de TCP */
 		if(suite == "TCP") {
 			data = trame.addTCPHeader(data);
-			options = trame.getTailleOptions(3);
-			data = trame.addOption(data,options);
 		}
 		
 		/** ajout de ICMP */
 		if(suite == "ICMP") {
 			data = trame.addICMP(data);
-			options = trame.getTailleOptions(3);
-			data = trame.addOption(data,options);
 		}
 		
+		/** ajout des données */
+		if(data.size() > 0) {
+			data = trame.addDonnees(data);
+		}
 		
-		
+		/** affichage */
 		System.out.println(trame.formatDisplay(0));
 		
 		

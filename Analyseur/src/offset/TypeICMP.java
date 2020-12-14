@@ -10,7 +10,7 @@ public class TypeICMP implements IOffset {
 	
 	public TypeICMP(List<String> valHex) {
 		this.valHex = valHex;
-		this.value = Integer.parseInt(valHex.get(0));
+		this.value = Integer.parseInt(valHex.get(0),16);
 		this.setType(this.value); 
 	}
 
@@ -34,7 +34,7 @@ public class TypeICMP implements IOffset {
 			this.type = "Redirect";
 		}
 		else if(i == 8) {
-			this.type = "Echo";
+			this.type = "Echo request";
 		}
 		else if(i == 11) {
 			this.type = "Time Exceeded";
@@ -80,6 +80,10 @@ public class TypeICMP implements IOffset {
 			}
 		}
 		return s+this.toString();
+	}
+	
+	public String getType(){
+		return type;
 	}
 
 }

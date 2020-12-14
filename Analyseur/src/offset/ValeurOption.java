@@ -9,7 +9,7 @@ public class ValeurOption implements IOffset {
 	
 	public ValeurOption(List<String> valHex) {
 		this.valHex = valHex;
-		this.value = Integer.parseInt(valHex.get(0));
+		this.value = Integer.parseInt(valHex.get(0),16);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ public class Length1Bytes implements IOffset {
 	private String type;
 	
 	public Length1Bytes(List<String> valHex, String type) {
+		this.type = type;
 		this.valHex = valHex;
 		this.longueur = Integer.parseInt(valHex.get(0), 16);
 	}

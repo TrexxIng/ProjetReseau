@@ -9,16 +9,17 @@ public class HeaderDatagramIP implements ITrame {
 	private List<IOffset> listIP;
 	private List<String> listData;
 	private int sizeOptions;
-	private int sizeIPtotal;
+	private int sizeIP = 0;
 	
 	public HeaderDatagramIP(List<String> listOctet) {
-		this.sizeIPtotal = listOctet.size();
+		this.sizeIP = 0;
 		this.listData = listOctet;
 		this.listIP = new ArrayList<>();
 		
 		/** ajout de version et IHL */
 		List<String> list= new ArrayList<>(); 
 		list.add(listData.get(0));
+		this.sizeIP += list.size();
 		listIP.add(new VersionIP(list));
 		listIP.add(new LengthQuartet(list,"IP"));
 		listData.remove(0);
@@ -27,6 +28,7 @@ public class HeaderDatagramIP implements ITrame {
 		list.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new TOS(list));
 		
 		/** ajout de la taille totale */
@@ -35,6 +37,7 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new TotalLength(list));
 		
 		/** ajout de l' Identification */
@@ -43,6 +46,7 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new Identification(list));
 		
 		/** ajout des Flags */
@@ -51,18 +55,21 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new Flags(list,"IP"));
 		
 		/** ajout de TTL */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new TimeToLive(list));
 		
 		/** ajout de Protocol */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new Protocol(list,"IP"));
 		
 		/** ajout du checksum */
@@ -71,6 +78,7 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeIP += list.size();
 		listIP.add(new Checksum(list));
 		
 		
@@ -80,6 +88,7 @@ public class HeaderDatagramIP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeIP += list.size();
 		listIP.add(new AdresseIP(list,"Source"));
 		
 		/** ajout de l'adresse IP destination */
@@ -88,6 +97,7 @@ public class HeaderDatagramIP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeIP += list.size();
 		listIP.add(new AdresseIP(list,"Destination"));
 		
 		/** calcul de la taille des options */
@@ -100,7 +110,7 @@ public class HeaderDatagramIP implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if((sizeIPtotal - listData.size() == 20) && 
+		if((sizeIP  == 20) && 
 				listIP.size() == 11) return true;
 		return false;
 	}
@@ -127,7 +137,7 @@ public class HeaderDatagramIP implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "Datagramme IP, taille (avec options et données): "+sizeIPtotal+" octets";
+		return "Entête IP: "+sizeIP+" octets";
 	}
 
 	@Override
@@ -148,6 +158,11 @@ public class HeaderDatagramIP implements ITrame {
 			s +="\n"+listIP.get(i).formatDisplay(tab+1);
 		}
 		return s;
+	}
+	
+	@Override
+	public int getSize() {
+		return sizeIP;
 	}
 
 }

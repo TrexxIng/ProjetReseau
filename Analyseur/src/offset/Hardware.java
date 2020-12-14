@@ -9,7 +9,7 @@ public class Hardware implements IOffset {
 	
 	public Hardware(List<String> valHex) {
 		this.valHex = valHex;
-		this.value = Integer.parseInt(valHex.get(0)+valHex.get(1));
+		this.value = Integer.parseInt(valHex.get(0)+valHex.get(1),16);
 		this.setType(this.value); 
 	}
 

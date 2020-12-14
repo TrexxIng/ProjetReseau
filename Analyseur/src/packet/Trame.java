@@ -9,10 +9,12 @@ import java.util.List;
 
 import segment.ARP;
 import segment.AllOptions;
+import segment.Contenu;
 import segment.Ethernet;
 import segment.HeaderDatagramIP;
 import segment.ICMP;
 import segment.ITrame;
+import segment.InternetProtocol;
 import segment.TCP;
 import segment.UDP;
 
@@ -62,15 +64,16 @@ public class Trame {
 	
 	
 	/**
-	 * ajoute l'entete du datagramme IP
+	 * ajoute le datagramme IP
 	 * @param data: liste d'octets de l'ensemble du datagramme
 	 * @return la liste des octets en données
 	 */
-	public List<String> addHeaderIP(List<String> data) {
-		HeaderDatagramIP hip = new HeaderDatagramIP(data);
+	public List<String> addIP(List<String> data) {
+		InternetProtocol hip = new InternetProtocol(data);
 		listTrame.add(hip);
 		return hip.getData();
 	}
+	
 	
 	/**
 	 * ajoute l'entete de l'UDP
@@ -119,6 +122,18 @@ public class Trame {
 	}
 	
 	
+	/**
+	 * ajoute les données
+	 * @param data: liste d'octets représentant les données
+	 * @return liste vide
+	 */
+	public List<String> addDonnees(List<String> data){
+		Contenu fin = new Contenu(data);
+		listTrame.add(fin);
+		return fin.getData();
+	}
+	
+	
 	
 	/**
 	 * determine le segment suivant
@@ -130,8 +145,8 @@ public class Trame {
 			return "pas de segment";
 		if(listTrame.get(seg) instanceof Ethernet)
 			return ((Ethernet)listTrame.get(seg)).getDataType();
-		if(listTrame.get(seg) instanceof HeaderDatagramIP)
-			return ((HeaderDatagramIP)listTrame.get(seg)).getProtocol();
+		if(listTrame.get(seg) instanceof InternetProtocol)
+			return ((InternetProtocol)listTrame.get(seg)).getProtocol();
 		return "pas de segment";
 	}
 	

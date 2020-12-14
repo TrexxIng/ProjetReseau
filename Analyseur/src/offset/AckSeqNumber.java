@@ -19,7 +19,7 @@ public class AckSeqNumber implements IOffset {
 
 	@Override
 	public boolean checkSize() {
-		if(valHex.size() == 4) return true;
+		if(valHex.size()%2 == 0) return true;
 		return false;
 	}
 	
@@ -28,8 +28,13 @@ public class AckSeqNumber implements IOffset {
 		String s = "Sequence";
 		if(ackseq)
 			s = "Acknowlegment";
-		return  s+" Number: 0x"+
-					valHex.get(0)+valHex.get(1)+valHex.get(2)+valHex.get(3);
+		
+		s = s+" Number: 0x";
+				
+		for(int i = 0; i<valHex.size(); i++) {
+			s += valHex.get(i);
+		}
+		return  s;
 	}
 
 	@Override

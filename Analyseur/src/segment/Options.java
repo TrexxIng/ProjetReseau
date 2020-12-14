@@ -29,12 +29,12 @@ public class Options implements ITrame {
 		listOption.add(new TypeOptions(list));
 		this.type = ((TypeOptions)listOption.get(0)).getType();
 			
-		if(type != "EOOL: Fin d'options") {
+		if(type != "Fin d'options EOOL") {
 			/** ajout taille option */
 			list= new ArrayList<>(); 
 			list.add(listData.get(0));
 			listData.remove(0);
-			listOption.add(new Length1Bytes(list,"Options"));
+			listOption.add(new Length1Bytes(list,"option"));
 			this.sizeOption = ((Length1Bytes)listOption.get(1)).getLongueur();
 			
 			/** ajout de la valeur */
@@ -44,6 +44,7 @@ public class Options implements ITrame {
 			listOption.add(new ValeurOption(list));
 			
 			/** traitement des options selon type et taille */
+			list= new ArrayList<>(); 
 			for(int i = 0; i<sizeOption-3;i++) {
 				list.add(listData.get(0));
 				listData.remove(0);	
@@ -110,6 +111,11 @@ public class Options implements ITrame {
 			}
 			listOption.add(new AdresseIP(listIP,""));		
 		}
+	}
+	
+	@Override
+	public int getSize() {
+		return sizeOption;
 	}
 
 }

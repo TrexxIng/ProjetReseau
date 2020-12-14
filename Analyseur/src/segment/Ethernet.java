@@ -14,7 +14,7 @@ public class Ethernet implements ITrame {
 	
 	
 	public Ethernet(List<String> listOctet) {
-		this.sizeEther = listOctet.size();
+		this.sizeEther = 0;
 		this.listData = listOctet;
 		this.listEther = new ArrayList<>();
 		List<String> list= new ArrayList<>(); 
@@ -24,6 +24,7 @@ public class Ethernet implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}		
+		this.sizeEther += list.size();
 		listEther.add(new AdresseMAC(list,"Destination"));
 		
 		/** ajout adresseMac source */
@@ -32,6 +33,7 @@ public class Ethernet implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeEther += list.size();
 		listEther.add(new AdresseMAC(list,"Source"));
 		
 		/** ajout Type Ethernet */
@@ -40,6 +42,7 @@ public class Ethernet implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeEther += list.size();
 		listEther.add(new TypeEther(list));
 	}
 
@@ -51,7 +54,7 @@ public class Ethernet implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if((sizeEther - listData.size() == 14) 
+		if((sizeEther == 14) 
 				&& (listEther.size() == 3)) return true;
 		return false;
 	}
@@ -63,7 +66,7 @@ public class Ethernet implements ITrame {
 
 	@Override
 	public String toString() {
-		return "Trame Ethernet, taille (avec données): "+sizeEther+" octets";
+		return "Trame Ethernet: "+sizeEther+" octets";
 	}
 	
 	@Override
@@ -84,6 +87,11 @@ public class Ethernet implements ITrame {
 	@Override
 	public int getTailleOptions() {
 		return 0;
+	}
+	
+	@Override
+	public int getSize() {
+		return sizeEther;
 	}
 	
 

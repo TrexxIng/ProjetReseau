@@ -9,11 +9,11 @@ public class AllOptions implements ITrame {
 	
 	private List<Options> listOption;
 	private List<String> listData;
-	private int nbOptions;
+	private int sizeOptions;
 	
 	public AllOptions(List<String> listOctet, int nbOptions) {
 		this.listData = listOctet;
-		this.nbOptions = nbOptions;
+		this.sizeOptions = nbOptions;
 		this.listOption = new ArrayList<>();
 		
 		/** s'il y a des options */
@@ -49,7 +49,7 @@ public class AllOptions implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "Options: "+nbOptions+" octets";
+		return "Options: "+sizeOptions+" octets";
 	}
 
 	@Override
@@ -70,6 +70,11 @@ public class AllOptions implements ITrame {
 	@Override
 	public int getTailleOptions() {
 		return 0;
+	}
+
+	@Override
+	public int getSize() {
+		return sizeOptions;
 	}
 	
 

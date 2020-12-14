@@ -19,7 +19,7 @@ public class ARP implements ITrame {
 	private int sizeARP;
 	
 	public ARP(List<String> listOctet) {
-		this.sizeARP = listOctet.size();
+		this.sizeARP = 0;
 		this.listARP = new ArrayList<>();
 		this.listData = listOctet;
 		
@@ -29,6 +29,7 @@ public class ARP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeARP += list.size();
 		listARP.add(new Hardware(list));
 		
 		/** ajout du protocol */
@@ -37,18 +38,21 @@ public class ARP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeARP += list.size();
 		listARP.add(new Protocol(list,"ARP"));
 		
 		/** ajout taille hardware */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeARP += list.size();
 		listARP.add(new Length1Bytes(list, "Hardware"));
 
 		/** ajout taille protocole */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeARP += list.size();
 		listARP.add(new Length1Bytes(list,"Protocole"));
 		
 		/** ajout de l'operation */
@@ -57,6 +61,7 @@ public class ARP implements ITrame {
 		listData.remove(0);
 		list.add(listData.get(0));
 		listData.remove(0);
+		this.sizeARP += list.size();
 		listARP.add(new Operation(list));
 		
 		/** ajout adresseMac emetteur */
@@ -65,6 +70,7 @@ public class ARP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeARP += list.size();
 		listARP.add(new AdresseMAC(list,"Emetteur"));
 		
 		/** ajout de l'adresse IP emetteur */
@@ -73,6 +79,7 @@ public class ARP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeARP += list.size();
 		listARP.add(new AdresseIP(list,"Emetteur"));
 		
 		
@@ -82,6 +89,7 @@ public class ARP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeARP += list.size();
 		listARP.add(new AdresseMAC(list,"Destinataire"));
 		
 		/** ajout de l'adresse IP destinaire */
@@ -90,6 +98,7 @@ public class ARP implements ITrame {
 			list.add(listData.get(0));
 			listData.remove(0);
 		}
+		this.sizeARP += list.size();
 		listARP.add(new AdresseIP(list,"Destinataire"));
 		
 	}
@@ -97,7 +106,7 @@ public class ARP implements ITrame {
 
 	@Override
 	public boolean checkSize() {
-		if((listARP.size() == 9) && (sizeARP - listData.size() == 28)) return true;
+		if((listARP.size() == 9) && (sizeARP == 28)) return true;
 		return false;
 	}
 
@@ -108,7 +117,7 @@ public class ARP implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "(Reverse) Adress Resolution Protocole, taille: "+sizeARP+" octets";
+		return "(Reverse) Adress Resolution Protocole: "+sizeARP+" octets";
 	}
 
 	@Override
@@ -130,6 +139,12 @@ public class ARP implements ITrame {
 	@Override
 	public int getTailleOptions() {
 		return 0;
+	}
+
+
+	@Override
+	public int getSize() {
+		return sizeARP;
 	}
 
 }
