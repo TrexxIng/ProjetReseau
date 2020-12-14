@@ -27,7 +27,10 @@ public class TypeEther implements IOffset {
 			type = "Datagramme IP";
 		} else if(n0 == 8 && n1 == 6) {
 			type = "ARP";
-		} else {
+		}else if(n0 == 128 && n1 == 53) {
+			type = "RARP";
+		}
+		else {
 			type = "inconnu";;
 		}
 	}

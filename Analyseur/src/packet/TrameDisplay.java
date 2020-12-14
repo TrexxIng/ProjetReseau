@@ -9,7 +9,7 @@ public class TrameDisplay {
 		List<String> data;
 		String suite;
 		int options = 0;
-		Trame trame = new Trame("data/ExempleUDP2.txt");
+		Trame trame = new Trame("data/ExempleARP.txt");
 		data = trame.getOctets();
 		
 		
@@ -19,7 +19,7 @@ public class TrameDisplay {
 		
 		/** ajout de ARP/RARP */
 		if(suite == "ARP" || suite == "RARP") {
-			data = trame.addARP(data);
+			data = trame.addARP(data,suite);
 		}
 		
 		/** ajout de IP */

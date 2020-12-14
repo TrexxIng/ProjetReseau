@@ -87,11 +87,6 @@ public class Trame {
 		
 	}	
 	
-	public List<String> addOption(List<String> data, int nbOptions){
-		AllOptions option = new AllOptions(data,nbOptions);
-		listTrame.add(option);
-		return option.getData();
-	}
 	
 	/**
 	 * ajoute l'entete du TCP
@@ -104,8 +99,8 @@ public class Trame {
 		return udp.getData();
 	}
 	
-	public List<String> addARP(List<String> data){
-		ARP arp = new ARP(data);
+	public List<String> addARP(List<String> data,String type){
+		ARP arp = new ARP(data, type);
 		listTrame.add(arp);
 		return arp.getData();
 	}

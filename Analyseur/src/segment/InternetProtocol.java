@@ -23,7 +23,7 @@ public class InternetProtocol implements ITrame {
 		this.protocol = hip.getProtocol();
 		
 		/** options */
-		AllOptions opt = new AllOptions(listData,sizeOption);
+		AllOptions opt = new AllOptions(listData,sizeOption,"IP");
 		listIP.add(opt);
 		sizeIP += opt.getSize();
 		listData = opt.getData();

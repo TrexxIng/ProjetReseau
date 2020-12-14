@@ -17,8 +17,10 @@ public class ARP implements ITrame {
 	private List<IOffset> listARP;
 	private List<String> listData;
 	private int sizeARP;
+	private String type;
 	
-	public ARP(List<String> listOctet) {
+	public ARP(List<String> listOctet, String type) {
+		this.type = type;
 		this.sizeARP = 0;
 		this.listARP = new ArrayList<>();
 		this.listData = listOctet;
@@ -117,7 +119,10 @@ public class ARP implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "(Reverse) Adress Resolution Protocole: "+sizeARP+" octets";
+		String s = "Reverse Address Resolution Protocole";
+		if(type == "ARP")
+			s = "Address Resolution Protocole";
+		return s+": "+sizeARP+" octets";
 	}
 
 	@Override

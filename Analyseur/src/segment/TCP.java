@@ -94,6 +94,7 @@ public class TCP implements ITrame {
 		/** calcul de la taille des options */
 		this.sizeOptions = ((LengthQuartet)listTCP.get(4)).getTailleIP() - 20;
 		
+		
 	}
 
 
