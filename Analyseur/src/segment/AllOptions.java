@@ -10,8 +10,10 @@ public class AllOptions implements ITrame {
 	private List<Options> listOption;
 	private List<String> listData;
 	private int sizeOptions;
+	private String protocol;
 	
-	public AllOptions(List<String> listOctet, int nbOptions) {
+	public AllOptions(List<String> listOctet, int nbOptions, String protocol) {
+		this.protocol = protocol;
 		this.listData = listOctet;
 		this.sizeOptions = nbOptions;
 		this.listOption = new ArrayList<>();
@@ -25,7 +27,7 @@ public class AllOptions implements ITrame {
 			}
 			int cpt = 0;
 			while(listOctetsOptions.size() > 0) {
-				listOption.add(new Options(listOctetsOptions));
+				listOption.add(new Options(listOctetsOptions, protocol));
 				listOctetsOptions = listOption.get(cpt).getData();
 				cpt++;
 			}

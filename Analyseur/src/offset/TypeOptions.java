@@ -7,10 +7,11 @@ public class TypeOptions implements IOffset{
 	private List<String> valHex;
 	private int value;
 	private String type = "";
+	private String protocol;
 	
-	
-	public TypeOptions(List<String> valHex) {
+	public TypeOptions(List<String> valHex, String protocol) {
 		this.valHex = valHex;
+		this.protocol = protocol;
 		this.value = Integer.parseInt(valHex.get(0),16);
 		this.setType(this.value); 
 	}
@@ -25,31 +26,35 @@ public class TypeOptions implements IOffset{
 		if(i == 0) {
 			this.type = "Fin d'options EOOL";
 		}
-		else if(i == 1) {
-			this.type = "Pas d’opération";
-		}
-		else if(i == 7) {
-			this.type = "Enregistrement de route";
-		}
-		else if(i == 68) {
-			this.type = "Enregistrement d’instant";
-		}
-		else if(i == 130) {
-			this.type = "Sécurité";
-		}
-		else if(i == 131) {
-			this.type = "Routage approximatif";
-		}
-		else if(i == 136) {
-			this.type = "Identificateur de stream";
-		}
-		else if(i == 137) {
-			this.type = "Routage impératif";
+		else if(protocol == "IP") {
+			if(i == 1) {
+				this.type = "Pas d’opération";
+			}
+			else if(i == 7) {
+				this.type = "Enregistrement de route";
+			}
+			else if(i == 68) {
+				this.type = "Enregistrement d’instant";
+			}
+			else if(i == 130) {
+				this.type = "Sécurité";
+			}
+			else if(i == 131) {
+				this.type = "Routage approximatif";
+			}
+			else if(i == 136) {
+				this.type = "Identificateur de stream";
+			}
+			else if(i == 137) {
+				this.type = "Routage impératif";
+			}
+			else {
+				this.type = "option non listée";
+			}
 		}
 		else {
-			this.type = "option non listée";
+			
 		}
-
 		
 	}
 	

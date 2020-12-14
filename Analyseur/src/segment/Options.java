@@ -16,8 +16,10 @@ public class Options implements ITrame {
 	private List<String> listData;
 	private int sizeOption = 0;
 	private String type;
+	private String protocol;
 	
-	public Options(List<String> listOctet) {
+	public Options(List<String> listOctet, String protocol) {
+		this.protocol = protocol;
 		this.listData = listOctet;
 		this.listOption = new ArrayList<>();
 		
@@ -26,7 +28,7 @@ public class Options implements ITrame {
 		/** ajout type d'options */
 		list.add(listData.get(0));
 		listData.remove(0);
-		listOption.add(new TypeOptions(list));
+		listOption.add(new TypeOptions(list,protocol));
 		this.type = ((TypeOptions)listOption.get(0)).getType();
 			
 		if(type != "Fin d'options EOOL") {
