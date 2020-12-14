@@ -20,27 +20,31 @@ public class TrameDisplay {
 		/** ajout de ARP/RARP */
 		if(suite == "ARP" || suite == "RARP") {
 			data = trame.addARP(data,suite);
-		}
+		}	
 		
 		/** ajout de IP */
-		if(suite == "Datagramme IP") {
+		else if(suite == "Datagramme IP") {
 			data = trame.addIP(data);
 			suite = trame.getNextSegment(1);
-		}
-		
-		/** ajout de UDP */
-		if(suite == "UDP") {
-			data = trame.addUDP(data);
-		}
-		
-		/** ajout de TCP */
-		if(suite == "TCP") {
-			data = trame.addTCP(data);
-		}
-		
-		/** ajout de ICMP */
-		if(suite == "ICMP") {
-			data = trame.addICMP(data);
+			
+			/** ajout de UDP */
+			if(suite == "UDP") {
+				data = trame.addUDP(data);
+			}
+			
+			/** ajout de TCP */
+			else if(suite == "TCP") {
+				data = trame.addTCP(data);
+				suite =  trame.getNextSegment(2);
+				if(suite == "HTTP") {
+					System.out.println("HTTP");
+				}
+			}
+			
+			/** ajout de ICMP */
+			else if(suite == "ICMP") {
+				data = trame.addICMP(data);
+			}
 		}
 		
 		/** ajout des données */
@@ -49,7 +53,7 @@ public class TrameDisplay {
 		}
 		
 		/** affichage */
-		System.out.println(trame.formatDisplay(1));
+		System.out.println(trame.formatDisplay(0));
 		
 		
 	}

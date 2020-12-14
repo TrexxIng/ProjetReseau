@@ -40,6 +40,10 @@ public class Port implements IChamps{
 		}
 		return s+this.toString();
 	}
+	
+	public int getPortNumber() {
+		return valuePort;
+	}
 
 
 }

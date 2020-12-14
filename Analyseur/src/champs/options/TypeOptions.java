@@ -55,7 +55,7 @@ public class TypeOptions implements IChamps{
 			}
 		}
 		else {
-			
+			this.type = "option non listée";
 		}
 		
 	}

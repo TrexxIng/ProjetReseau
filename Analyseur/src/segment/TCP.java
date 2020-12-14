@@ -12,7 +12,7 @@ public class TCP implements ITrame {
 	private List<ITrame> listTCP;
 	private List<String> listData;
 	private int sizeTCP;
-	private String protocol;
+	private String port;
 	
 	public TCP(List<String> listOctet) {
 		this.sizeTCP = 0;
@@ -25,7 +25,7 @@ public class TCP implements ITrame {
 		sizeTCP += hip.getSize();
 		listData = hip.getData();
 		int sizeOption = hip.getTailleOptions();
-		this.protocol = hip.getProtocol();
+		this.port = hip.getPort();
 		
 		/** options */
 		AllOptions opt = new AllOptions(listData,sizeOption,"IP");
@@ -86,8 +86,8 @@ public class TCP implements ITrame {
 		return sizeTCP;
 	}
 	
-	public String getProtocol() {
-		return protocol;
+	public String getPort() {
+		return port;
 	}
 	
 

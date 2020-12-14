@@ -16,6 +16,8 @@ public class HeaderTCP implements ITrame {
 	private List<String> listData;
 	private int sizeOptions;
 	private int sizeTCP;
+	private int portSrc = -1;
+	private int portDest = -1;
 	
 	public HeaderTCP(List<String> listOctet) {
 		this.sizeTCP = 0;
@@ -97,9 +99,10 @@ public class HeaderTCP implements ITrame {
 		this.sizeTCP += list.size();
 		listTCP.add(new UrgPointeur(list));
 		
-		/** calcul de la taille des options */
+		/** calcul de la taille des options et recupere les numero des ports*/
 		this.sizeOptions = ((LengthQuartet)listTCP.get(4)).getTailleIP() - 20;
-		
+		this.portSrc = ((Port)listTCP.get(0)).getPortNumber();
+		this.portDest = ((Port)listTCP.get(1)).getPortNumber();
 		
 	}
 
@@ -153,8 +156,13 @@ public class HeaderTCP implements ITrame {
 	 * donne le protocole
 	 * @return le protocole
 	 */
-	public String getProtocol() {
-		return "";
+	public String getPort() {
+		return this.PortNumToString();
+	}
+	
+	private String PortNumToString() {
+		if(portDest == 80 || portSrc == 80) return "HTTP";
+		return "Ports non listé";
 	}
 
 }

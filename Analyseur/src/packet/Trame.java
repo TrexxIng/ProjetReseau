@@ -122,6 +122,8 @@ public class Trame {
 			return ((Ethernet)listTrame.get(seg)).getDataType();
 		if(listTrame.get(seg) instanceof InternetProtocol)
 			return ((InternetProtocol)listTrame.get(seg)).getProtocol();
+		if(listTrame.get(seg) instanceof TCP)
+			return ((TCP)listTrame.get(seg)).getPort();
 		return "pas de segment";
 	}
 	
