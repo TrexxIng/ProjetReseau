@@ -85,7 +85,7 @@ public class Trame {
 			colonnes.add(element);	
 		}
 			
-		
+	
 		return listTrame;
 		
 	}
