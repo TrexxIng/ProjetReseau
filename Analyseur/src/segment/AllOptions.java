@@ -3,8 +3,8 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.Bourrage;
-import offset.IOffset;
+import champs.Bourrage;
+import champs.IChamps;
 
 public class AllOptions implements ITrame {
 	

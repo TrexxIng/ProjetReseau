@@ -3,16 +3,16 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.AdresseIP;
-import offset.Data;
-import offset.IOffset;
-import offset.Length1Bytes;
-import offset.TypeOptions;
-import offset.ValeurOption;
+import champs.AdresseIP;
+import champs.Data;
+import champs.IChamps;
+import champs.Length1Bytes;
+import champs.TypeOptions;
+import champs.ValeurOption;
 
 
 public class Options implements ITrame {
-	private List<IOffset> listOption;
+	private List<IChamps> listOption;
 	private List<String> listData;
 	private int sizeOption = 0;
 	private String type;

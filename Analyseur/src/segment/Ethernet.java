@@ -3,12 +3,12 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.AdresseMAC;
-import offset.IOffset;
-import offset.TypeEther;
+import champs.AdresseMAC;
+import champs.IChamps;
+import champs.TypeEther;
 
 public class Ethernet implements ITrame {
-	private List<IOffset> listEther;
+	private List<IChamps> listEther;
 	private List<String> listData;
 	private int sizeEther;
 	

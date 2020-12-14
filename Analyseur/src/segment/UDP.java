@@ -3,10 +3,10 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.*;
+import champs.*;
 
 public class UDP implements ITrame {
-	private List<IOffset> listUDP;
+	private List<IChamps> listUDP;
 	private List<String> listData;
 	private int sizeUDP;
 	

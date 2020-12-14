@@ -3,10 +3,10 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.*;
+import champs.*;
 
 public class HeaderDatagramIP implements ITrame {
-	private List<IOffset> listIP;
+	private List<IChamps> listIP;
 	private List<String> listData;
 	private int sizeOptions;
 	private int sizeIP = 0;

@@ -3,10 +3,10 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.*;
+import champs.*;
 
 public class TCP implements ITrame {
-	private List<IOffset> listTCP;
+	private List<IChamps> listTCP;
 	private List<String> listData;
 	private int sizeOptions;
 	private int sizeTCP;

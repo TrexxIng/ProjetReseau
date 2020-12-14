@@ -2,7 +2,7 @@ package segment;
 
 import java.util.List;
 
-import offset.IOffset;
+import champs.IChamps;
 
 public interface ITrame {
 	boolean checkSize();

@@ -3,11 +3,11 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.Data;
-import offset.IOffset;
+import champs.Data;
+import champs.IChamps;
 
 public class Contenu implements ITrame {
-	private List<IOffset> data;
+	private List<IChamps> data;
 	private int sizeContenu;
 	
 	public Contenu(List<String> listOctet) {

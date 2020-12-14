@@ -3,18 +3,18 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.AdresseIP;
-import offset.AdresseMAC;
-import offset.Hardware;
-import offset.IOffset;
-import offset.Length1Bytes;
-import offset.Operation;
-import offset.Protocol;
+import champs.AdresseIP;
+import champs.AdresseMAC;
+import champs.Hardware;
+import champs.IChamps;
+import champs.Length1Bytes;
+import champs.Operation;
+import champs.Protocol;
 
 
 public class ARP implements ITrame {
 	
-	private List<IOffset> listARP;
+	private List<IChamps> listARP;
 	private List<String> listData;
 	private int sizeARP;
 	private String type;

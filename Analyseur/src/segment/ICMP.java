@@ -3,21 +3,21 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import offset.AckSeqNumber;
-import offset.AdresseIP;
-import offset.AdresseMask;
-import offset.Bourrage;
-import offset.Checksum;
-import offset.CodeICMP;
-import offset.Data;
-import offset.Horodatage;
-import offset.IOffset;
-import offset.Identification;
-import offset.NextHopMTU;
-import offset.TypeICMP;
+import champs.AckSeqNumber;
+import champs.AdresseIP;
+import champs.AdresseMask;
+import champs.Bourrage;
+import champs.Checksum;
+import champs.CodeICMP;
+import champs.Data;
+import champs.Horodatage;
+import champs.IChamps;
+import champs.Identification;
+import champs.NextHopMTU;
+import champs.TypeICMP;
 
 public class ICMP implements ITrame {
-	private List<IOffset> listICMP;
+	private List<IChamps> listICMP;
 	private List<String> listData;
 	private int sizeICMP;
 	private String type;
