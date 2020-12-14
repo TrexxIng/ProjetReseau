@@ -23,7 +23,7 @@ public class Data implements IOffset {
 
 	@Override
 	public String toString() {
-		return "Data ("+valHex.size()+" octets): "+data;
+		return "Data ("+valHex.size()+" octets): 0x"+data;
 	}
 	
 	@Override

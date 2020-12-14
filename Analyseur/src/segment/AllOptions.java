@@ -3,6 +3,7 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
+import offset.Bourrage;
 import offset.IOffset;
 
 public class AllOptions implements ITrame {
@@ -11,11 +12,11 @@ public class AllOptions implements ITrame {
 	private List<String> listData;
 	private int sizeOptions;
 	private String protocol;
+	private int padding;
 	
 	public AllOptions(List<String> listOctet, int nbOptions, String protocol) {
 		this.protocol = protocol;
 		this.listData = listOctet;
-		this.sizeOptions = nbOptions;
 		this.listOption = new ArrayList<>();
 		
 		/** s'il y a des options */
@@ -26,11 +27,20 @@ public class AllOptions implements ITrame {
 				listData.remove(0);
 			}
 			int cpt = 0;
-			while(listOctetsOptions.size() > 0) {
+			int size = 0;
+			boolean stop = false;
+			while((listOctetsOptions.size() > 0) && (!stop)) {
 				listOption.add(new Options(listOctetsOptions, protocol));
 				listOctetsOptions = listOption.get(cpt).getData();
+				size += listOption.get(cpt).getSize();
+				stop = listOption.get(cpt).stop();
 				cpt++;
 			}
+			
+			this.sizeOptions = size;
+			
+			this.padding = nbOptions - size;
+
 		}
 	
 	}
@@ -79,5 +89,8 @@ public class AllOptions implements ITrame {
 		return sizeOptions;
 	}
 	
+	public int getSizePadding() {
+		return padding;
+	}
 
 }

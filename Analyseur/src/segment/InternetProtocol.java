@@ -3,6 +3,8 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
+import offset.Bourrage;
+
 public class InternetProtocol implements ITrame {
 	private List<ITrame> listIP;
 	private List<String> listData;
@@ -27,6 +29,16 @@ public class InternetProtocol implements ITrame {
 		listIP.add(opt);
 		sizeIP += opt.getSize();
 		listData = opt.getData();
+		int padding = opt.getSizePadding();
+		
+		/** Padding */
+		if(padding > 0) {
+			Padding pad = new Padding(listData, padding);
+			listIP.add(pad);
+			sizeIP += pad.getSize();
+			listData = pad.getData();
+		}
+			
 	}
 
 	@Override

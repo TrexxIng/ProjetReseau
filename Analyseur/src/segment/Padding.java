@@ -1,0 +1,68 @@
+package segment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import offset.Bourrage;
+import offset.IOffset;
+
+public class Padding implements ITrame {
+
+	private List<IOffset> listBourrage;
+	private List<String> listData;
+	private int sizeBourrage = 0;;
+	
+	public Padding(List<String> listOctets, int size) {
+		this.listData = listOctets;
+		listBourrage = new ArrayList<>();
+		
+		List<String> list = new ArrayList<>();
+		for(int i = 0; i<size; i++) {
+			list.add(listData.get(0));
+			listData.remove(0);
+		}
+		sizeBourrage += list.size();
+		listBourrage.add(new Bourrage(list));	
+	}
+
+	@Override
+	public boolean checkSize() {
+		return true;
+	}
+
+	@Override
+	public List<String> getData() {
+		return listData;
+	}
+	
+	@Override
+	public String toString() {
+		return "Padding: "+sizeBourrage+" octets";
+	}
+
+	@Override
+	public String formatDisplay(int tab) {
+		String stab ="";
+		if(tab > 0) {
+			for (int i = 0; i<tab; i++) {
+				stab += "\t";
+			}
+		}
+		String s = stab+this.toString();
+		for(int i = 0; i<listBourrage.size(); i++) {
+			s +="\n"+listBourrage.get(i).formatDisplay(tab+1);
+		}
+		return s;
+	}
+
+	@Override
+	public int getTailleOptions() {
+		return 0;
+	}
+
+	@Override
+	public int getSize() {
+		return sizeBourrage;
+	}
+
+}

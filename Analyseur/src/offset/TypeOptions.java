@@ -26,11 +26,11 @@ public class TypeOptions implements IOffset{
 		if(i == 0) {
 			this.type = "Fin d'options EOOL";
 		}
+		else if(i == 1) {
+			this.type = "Pas d’opération";
+		}
 		else if(protocol == "IP") {
-			if(i == 1) {
-				this.type = "Pas d’opération";
-			}
-			else if(i == 7) {
+			if(i == 7) {
 				this.type = "Enregistrement de route";
 			}
 			else if(i == 68) {

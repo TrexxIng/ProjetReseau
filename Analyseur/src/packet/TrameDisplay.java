@@ -9,7 +9,7 @@ public class TrameDisplay {
 		List<String> data;
 		String suite;
 		int options = 0;
-		Trame trame = new Trame("data/ExempleARP.txt");
+		Trame trame = new Trame("data/ExempleICMP.txt");
 		data = trame.getOctets();
 		
 		

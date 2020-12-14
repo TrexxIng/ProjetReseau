@@ -17,11 +17,13 @@ public class Options implements ITrame {
 	private int sizeOption = 0;
 	private String type;
 	private String protocol;
+	private boolean stop = false;
 	
 	public Options(List<String> listOctet, String protocol) {
 		this.protocol = protocol;
 		this.listData = listOctet;
 		this.listOption = new ArrayList<>();
+		
 		
 		List<String> list= new ArrayList<>();
 			
@@ -31,7 +33,7 @@ public class Options implements ITrame {
 		listOption.add(new TypeOptions(list,protocol));
 		this.type = ((TypeOptions)listOption.get(0)).getType();
 			
-		if(type != "Fin d'options EOOL") {
+		if(type != "Fin d'options EOOL" && type != "Pas d’opération") {
 			/** ajout taille option */
 			list= new ArrayList<>(); 
 			list.add(listData.get(0));
@@ -60,13 +62,14 @@ public class Options implements ITrame {
 		}
 		else {
 			this.sizeOption = 1;
+			if(type == "Fin d'options EOOL") 
+				stop = true;
 		}
 	}
 
 	@Override
 	public boolean checkSize() {
-		if(sizeOption == 1 || ((sizeOption+1) % 4 == 0) ) return true;
-		return false;
+		return true;
 	}
 
 	
@@ -118,6 +121,10 @@ public class Options implements ITrame {
 	@Override
 	public int getSize() {
 		return sizeOption;
+	}
+	
+	public boolean stop() {
+		return stop;
 	}
 
 }
