@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import champs.*;
+import champs.adresseEtPort.Port;
+import champs.longueur.LengthQuartet;
+import champs.simple.AckSeqNumber;
+import champs.simple.UrgPointeur;
+import champs.simple.Windows;
 
 public class HeaderTCP implements ITrame {
 	private List<IChamps> listTCP;

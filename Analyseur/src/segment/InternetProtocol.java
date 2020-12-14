@@ -3,7 +3,7 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.Bourrage;
+import champs.options.Bourrage;
 
 public class InternetProtocol implements ITrame {
 	private List<ITrame> listIP;

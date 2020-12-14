@@ -3,18 +3,18 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.AckSeqNumber;
-import champs.AdresseIP;
-import champs.AdresseMask;
-import champs.Bourrage;
 import champs.Checksum;
-import champs.CodeICMP;
 import champs.Data;
-import champs.Horodatage;
 import champs.IChamps;
-import champs.Identification;
-import champs.NextHopMTU;
-import champs.TypeICMP;
+import champs.adresseEtPort.AdresseIP;
+import champs.adresseEtPort.AdresseMask;
+import champs.options.Bourrage;
+import champs.simple.AckSeqNumber;
+import champs.simple.CodeICMP;
+import champs.simple.Horodatage;
+import champs.simple.Identification;
+import champs.simple.NextHopMTU;
+import champs.trameSuiv.TypeICMP;
 
 public class ICMP implements ITrame {
 	private List<IChamps> listICMP;

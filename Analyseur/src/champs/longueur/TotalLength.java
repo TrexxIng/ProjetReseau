@@ -1,17 +1,19 @@
-package champs;
+package champs.longueur;
 
 import java.util.List;
 
-public class LengthUDP implements IChamps{
-	
+import champs.IChamps;
+
+public class TotalLength implements IChamps {
 	private List<String> valHex;
 	private int longueur;
 	
-	public LengthUDP(List<String> valHex) {
+	public TotalLength(List<String> valHex) {
 		this.valHex = valHex;
-		this.longueur = Integer.parseInt(
-				(valHex.get(0)+valHex.get(1)), 16) * 4;
+		this.longueur = Integer.parseInt( valHex.get(0)+valHex.get(1),16);
 	}
+
+
 
 	@Override
 	public boolean checkSize() {
@@ -19,9 +21,9 @@ public class LengthUDP implements IChamps{
 		return false;
 	}
 	
-	@Override
+	@Override 
 	public String toString() {
-		return "Longueur UDP: "+longueur+" octets (0x"+valHex.get(0)+valHex.get(1)+")";
+		return "Longueur totale: 0x"+valHex.get(0)+valHex.get(1)+" ("+longueur+" octets)";
 	}
 	
 	@Override
@@ -34,5 +36,7 @@ public class LengthUDP implements IChamps{
 		}
 		return s+this.toString();
 	}
+	
+
 
 }
