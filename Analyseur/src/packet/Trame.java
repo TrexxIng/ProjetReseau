@@ -15,9 +15,6 @@ import segment.ITrame;
 import segment.InternetProtocol;
 import segment.TCP;
 import segment.UDP;
-import segment.subsegment.AllOptions;
-import segment.subsegment.HeaderDatagramIP;
-import segment.subsegment.HeaderTCP;
 
 
 public class Trame {
