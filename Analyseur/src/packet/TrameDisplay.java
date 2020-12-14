@@ -6,11 +6,11 @@ import java.util.List;
 public class TrameDisplay {
 
 	public static void main(String[] args) throws IOException {
-		List<String> data;
-		String suite;
-		int options = 0;
-		Trame trame = new Trame("data/ExempleHTTP.txt");
-		data = trame.getOctets();
+		List<String> data = 
+				TraitementFichier.readFile2Col("data/ExempleHTTP.txt");
+		String suite;		
+		Trame trame = new Trame(data);
+		
 		
 		
 		/** ajout de la trame Ethernet */
