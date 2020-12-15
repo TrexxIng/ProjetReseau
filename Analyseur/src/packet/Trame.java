@@ -10,6 +10,7 @@ import java.util.List;
 import segment.ARP;
 import segment.Contenu;
 import segment.Ethernet;
+import segment.HTTP;
 import segment.ICMP;
 import segment.ITrame;
 import segment.InternetProtocol;
@@ -106,6 +107,17 @@ public class Trame {
 		Contenu fin = new Contenu(data);
 		listTrame.add(fin);
 		return fin.getData();
+	}
+	
+	/**
+	 * ajoute les données
+	 * @param data: liste d'octets représentant les données
+	 * @return liste vide
+	 */
+	public List<String> addHTTP(List<String> data){
+		HTTP http = new HTTP(data);
+		listTrame.add(http);
+		return http.getData();
 	}
 	
 	

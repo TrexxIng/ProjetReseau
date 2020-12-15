@@ -37,7 +37,7 @@ public class TrameDisplay {
 				data = trame.addTCP(data);
 				suite =  trame.getNextSegment(2);
 				if(suite == "HTTP") {
-					System.out.println("HTTP");
+					data = trame.addHTTP(data);
 				}
 			}
 			
