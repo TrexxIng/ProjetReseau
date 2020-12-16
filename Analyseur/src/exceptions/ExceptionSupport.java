@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class ExceptionSupport extends Exception{
 
 	public ExceptionSupport(String s) {
