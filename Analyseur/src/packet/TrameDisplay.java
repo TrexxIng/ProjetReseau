@@ -6,55 +6,30 @@ import java.util.List;
 public class TrameDisplay {
 
 	public static void main(String[] args) throws IOException {
-		List<String> data = 
-				TraitementFichier.readFile2Col("data/ExempleHTTP.txt");
-		String suite;		
-		Trame trame = new Trame(data);
-		
-		
-		
-		/** ajout de la trame Ethernet */
-		data = trame.addEthernet(data);
-		suite = trame.getNextSegment(0);
-		
-		/** ajout de ARP/RARP */
-		if(suite == "ARP" || suite == "RARP") {
-			data = trame.addARP(data,suite);
-		}	
-		
-		/** ajout de IP */
-		else if(suite == "Datagramme IP") {
-			data = trame.addIP(data);
-			suite = trame.getNextSegment(1);
+		List<String> data;
+		try {
 			
-			/** ajout de UDP */
-			if(suite == "UDP") {
-				data = trame.addUDP(data);
-			}
+			/** determine la liste d'octets à partir du fichier */
+			//data = TraitementFichier.readFile2Col("data/ExempleHTTP.txt");
 			
-			/** ajout de TCP */
-			else if(suite == "TCP") {
-				data = trame.addTCP(data);
-				suite =  trame.getNextSegment(2);
-				if(suite == "HTTP") {
-					data = trame.addHTTP(data);
-				}
-			}
+			data = TraitementFichier.readFile2Col("data/ErreurTaille.txt");
 			
-			/** ajout de ICMP */
-			else if(suite == "ICMP") {
-				data = trame.addICMP(data);
+			/** calcule la trame */
+			Trame trame = new Trame(data);	
+			try {
+				trame.calculTrameEthernet(data);
+			} catch (ExceptionTaille e) {
+				System.out.println(e.toString());
 			}
-		}
-		
-		/** ajout des données */
-		if(data.size() > 0) {
-			data = trame.addDonnees(data);
-		}
-		
-		/** affichage */
-		System.out.println(trame.formatDisplay(0));
-		
+				
+			/** affichage */
+			System.out.println(trame.formatDisplay(0));
+			
+		} catch (IOException e) {
+			System.out.println("Fichier non trouvé: vérifier son nom (ou le chemin relatif)");
+		} catch (ExceptionFormat e) {
+			System.out.println(e.toString());
+		} 
 		
 	}
 	

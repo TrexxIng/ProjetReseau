@@ -8,16 +8,15 @@ public class TraductionHTTP implements IChamps {
 	private List<String> phrases;
 	
 	public TraductionHTTP(List<String> valHex) {
-		this.valHex = valHex;
-		
+		this.valHex = valHex;		
 		this.phrases = new ArrayList<>();
 		int n;
 		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < valHex.size(); i++) {
+		for (int i = 0; i < this.valHex.size(); i++) {
 	         // Etape 1: regarde s'il y a saut de ligne
-	    	  if(valHex.get(i).equals("0d")) {
-	    		  if((i < valHex.size()-1 && valHex.get(i+1).equals("0a")) ||
-	    				  (i == valHex.size() - 1)){
+	    	  if(this.valHex.get(i).equals("0d")) {
+	    		  if((i < this.valHex.size()-1 && this.valHex.get(i+1).equals("0a")) ||
+	    				  (i == this.valHex.size() - 1)){
 	    			// Etape 2.1: si oui, on stocke la phrase dans la liste
 	    			  if(builder.length() > 0)
 	    				  phrases.add(builder.toString());

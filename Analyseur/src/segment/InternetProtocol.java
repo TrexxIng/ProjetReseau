@@ -3,7 +3,7 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.options.Bourrage;
+import packet.ExceptionTaille;
 import segment.subsegment.AllOptions;
 import segment.subsegment.HeaderDatagramIP;
 import segment.subsegment.Padding;
@@ -14,7 +14,7 @@ public class InternetProtocol implements ITrame {
 	private int sizeIP;
 	private String protocol;
 	
-	public InternetProtocol(List<String> listOctet) {
+	public InternetProtocol(List<String> listOctet) throws ExceptionTaille {
 		this.sizeIP = 0;
 		this.listData = listOctet;
 		this.listIP = new ArrayList<>();
@@ -44,11 +44,6 @@ public class InternetProtocol implements ITrame {
 			
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(listIP.size() == 2 && sizeIP > 19) return true;
-		return false;
-	}
 
 	@Override
 	public List<String> getData() {

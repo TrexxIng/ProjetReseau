@@ -10,6 +10,7 @@ import champs.longueur.Length1Bytes;
 import champs.simple.Hardware;
 import champs.simple.Operation;
 import champs.trameSuiv.Protocol;
+import packet.ExceptionTaille;
 
 
 public class ARP implements ITrame {
@@ -19,11 +20,14 @@ public class ARP implements ITrame {
 	private int sizeARP;
 	private String type;
 	
-	public ARP(List<String> listOctet, String type) {
+	public ARP(List<String> listOctet, String type) throws ExceptionTaille {
 		this.type = type;
 		this.sizeARP = 0;
 		this.listARP = new ArrayList<>();
 		this.listData = listOctet;
+		
+		if(listData.size() < 28) 
+			throw new ExceptionTaille("pas assez d'octets pour ARP ");
 		
 		/** ajout du hardware */
 		List<String> list= new ArrayList<>(); 
@@ -103,13 +107,6 @@ public class ARP implements ITrame {
 		this.sizeARP += list.size();
 		listARP.add(new AdresseIP(list,"Destinataire"));
 		
-	}
-
-
-	@Override
-	public boolean checkSize() {
-		if((listARP.size() == 9) && (sizeARP == 28)) return true;
-		return false;
 	}
 
 	@Override

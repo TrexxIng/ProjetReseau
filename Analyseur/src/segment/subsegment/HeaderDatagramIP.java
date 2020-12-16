@@ -12,6 +12,7 @@ import champs.simple.TOS;
 import champs.simple.TimeToLive;
 import champs.simple.VersionIP;
 import champs.trameSuiv.Protocol;
+import packet.ExceptionTaille;
 import segment.ITrame;
 
 public class HeaderDatagramIP implements ITrame {
@@ -20,10 +21,14 @@ public class HeaderDatagramIP implements ITrame {
 	private int sizeOptions;
 	private int sizeIP = 0;
 	
-	public HeaderDatagramIP(List<String> listOctet) {
+	
+	public HeaderDatagramIP(List<String> listOctet) throws ExceptionTaille {
 		this.sizeIP = 0;
 		this.listData = listOctet;
 		this.listIP = new ArrayList<>();
+		
+		if(listData.size() < 20) 
+			throw new ExceptionTaille("pas assez d'octets pour le datagramme IP");
 		
 		/** ajout de version et IHL */
 		List<String> list= new ArrayList<>(); 
@@ -117,13 +122,6 @@ public class HeaderDatagramIP implements ITrame {
 	}
 
 
-	@Override
-	public boolean checkSize() {
-		if((sizeIP  == 20) && 
-				listIP.size() == 11) return true;
-		return false;
-	}
-	
 	
 	
 	/**

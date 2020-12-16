@@ -9,6 +9,7 @@ import champs.longueur.LengthQuartet;
 import champs.simple.AckSeqNumber;
 import champs.simple.UrgPointeur;
 import champs.simple.Windows;
+import packet.ExceptionTaille;
 import segment.ITrame;
 
 public class HeaderTCP implements ITrame {
@@ -19,10 +20,13 @@ public class HeaderTCP implements ITrame {
 	private int portSrc = -1;
 	private int portDest = -1;
 	
-	public HeaderTCP(List<String> listOctet) {
+	public HeaderTCP(List<String> listOctet) throws ExceptionTaille {
 		this.sizeTCP = 0;
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
+		
+		if(listData.size() < 20) 
+			throw new ExceptionTaille("pas assez d'octets pour TCP");
 		
 		/** ajout du port source */
 		List<String> list= new ArrayList<>(); 
@@ -106,13 +110,6 @@ public class HeaderTCP implements ITrame {
 		
 	}
 
-
-	@Override
-	public boolean checkSize() {
-		if(sizeTCP == 20 && 
-				(listTCP.size() == 4)) return true;
-		return false;
-	}
 
 	@Override
 	public List<String> getData() {

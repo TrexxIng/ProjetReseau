@@ -16,18 +16,41 @@ public class TraitementFichier {
 	 * @return liste de String, chacun correspondant à un octet
 	 * @throws IOException fichier non trouvé
 	 */
-	public static List<String> readFile2Col(String file) throws IOException{
+	public static List<String> readFile2Col(String file) throws IOException,ExceptionFormat{
+		
 		List<String> hex = new ArrayList<>();
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
 		String line; 
+		int cpt = 16;
+		String numligne="";
+		int cptligne = 0;
 		while ((line = br.readLine())!=null) { 
+			if(cpt != 16) {
+				throw new ExceptionFormat("Probleme de nombre d'octets ou caractère non conforme",cptligne);
+			}
+			cptligne++;
+			cpt = 0;
 			for (String word : line.split(" ")) {
-				if(word.equals("")) continue; 					
+				if(word.equals("")) continue; 	
+				if(word.length() == 4 && word.matches("-?[0-9a-fA-F]+")) {
+					numligne = word;
+				}
 				if(word.length() != 2) continue;	// ignore ce qui n'est pas un octet
-				if(word.matches("-?[0-9a-fA-F]+"))
-	        	hex.add(word);
-	        } 
+				if(word.matches("-?[0-9a-fA-F]+")) {
+					hex.add(word);
+					cpt++;
+				}
+	        }
+			if(numligne == "" || Integer.parseInt(numligne,16)%16 != 0) {
+				throw new ExceptionFormat("Probleme de numerotation de la ligne",cptligne);
+			}
+			numligne = "";
 		} 
+		if(cpt > 16) {
+			throw new ExceptionFormat("Probleme de nombre d'octets ou caractère non conforme",cptligne);
+		}
+		
 	    br.close();
 		return hex;
 	}

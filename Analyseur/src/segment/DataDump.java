@@ -6,19 +6,14 @@ import java.util.List;
 import champs.Data;
 import champs.IChamps;
 
-public class Contenu implements ITrame {
+public class DataDump implements ITrame {
 	private List<IChamps> data;
 	private int sizeContenu;
 	
-	public Contenu(List<String> listOctet) {
+	public DataDump(List<String> listOctet) {
 		this.sizeContenu = listOctet.size();
 		this.data = new ArrayList<>();
 		this.data.add(new Data(listOctet));
-	}
-
-	@Override
-	public boolean checkSize() {
-		return true;
 	}
 
 	@Override

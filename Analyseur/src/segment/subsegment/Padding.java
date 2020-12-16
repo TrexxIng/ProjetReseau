@@ -11,7 +11,7 @@ public class Padding implements ITrame {
 
 	private List<IChamps> listBourrage;
 	private List<String> listData;
-	private int sizeBourrage = 0;;
+	private int sizeBourrage = 0;
 	
 	public Padding(List<String> listOctets, int size) {
 		this.listData = listOctets;
@@ -24,11 +24,6 @@ public class Padding implements ITrame {
 		}
 		sizeBourrage += list.size();
 		listBourrage.add(new Bourrage(list));	
-	}
-
-	@Override
-	public boolean checkSize() {
-		return true;
 	}
 
 	@Override

@@ -3,8 +3,7 @@ package segment.subsegment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.IChamps;
-import champs.options.Bourrage;
+import packet.ExceptionTaille;
 import segment.ITrame;
 
 public class AllOptions implements ITrame {
@@ -12,13 +11,14 @@ public class AllOptions implements ITrame {
 	private List<Options> listOption;
 	private List<String> listData;
 	private int sizeOptions;
-	private String protocol;
 	private int padding;
 	
-	public AllOptions(List<String> listOctet, int nbOptions, String protocol) {
-		this.protocol = protocol;
+	public AllOptions(List<String> listOctet, int nbOptions, String protocol) throws ExceptionTaille {
 		this.listData = listOctet;
 		this.listOption = new ArrayList<>();
+		
+		if(listData.size() < nbOptions) 
+			throw new ExceptionTaille("pas assez d'octets pour les options "+protocol);
 		
 		/** s'il y a des options */
 		if(nbOptions > 0) {
@@ -46,14 +46,6 @@ public class AllOptions implements ITrame {
 	
 	}
 
-	@Override
-	public boolean checkSize() {
-		boolean check = true;
-		for(int i=0; i<listOption.size(); i++) {
-			check = check && listOption.get(i).checkSize();
-		}
-		return check;
-	}
 
 	@Override
 	public List<String> getData() {

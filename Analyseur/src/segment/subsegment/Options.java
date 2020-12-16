@@ -9,6 +9,7 @@ import champs.adresseEtPort.AdresseIP;
 import champs.longueur.Length1Bytes;
 import champs.options.TypeOptions;
 import champs.options.ValeurOption;
+import packet.ExceptionTaille;
 import segment.ITrame;
 
 
@@ -17,14 +18,14 @@ public class Options implements ITrame {
 	private List<String> listData;
 	private int sizeOption = 0;
 	private String type;
-	private String protocol;
 	private boolean stop = false;
 	
-	public Options(List<String> listOctet, String protocol) {
-		this.protocol = protocol;
+	public Options(List<String> listOctet, String protocol) throws ExceptionTaille {
 		this.listData = listOctet;
 		this.listOption = new ArrayList<>();
 		
+		if(listData.size()  == 0 ) 
+			throw new ExceptionTaille("pas assez d'octets pour les options "+protocol);
 		
 		List<String> list= new ArrayList<>();
 			
@@ -33,8 +34,13 @@ public class Options implements ITrame {
 		listData.remove(0);
 		listOption.add(new TypeOptions(list,protocol));
 		this.type = ((TypeOptions)listOption.get(0)).getType();
+		
 			
 		if(type != "Fin d'options EOOL" && type != "Pas d’opération") {
+			
+			if(listData.size()  < 2) 
+				throw new ExceptionTaille("pas assez d'octets pour les options "+protocol);
+			
 			/** ajout taille option */
 			list= new ArrayList<>(); 
 			list.add(listData.get(0));
@@ -68,10 +74,6 @@ public class Options implements ITrame {
 		}
 	}
 
-	@Override
-	public boolean checkSize() {
-		return true;
-	}
 
 	
 	@Override

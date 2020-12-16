@@ -6,6 +6,7 @@ import java.util.List;
 import champs.IChamps;
 import champs.adresseEtPort.AdresseMAC;
 import champs.trameSuiv.TypeEther;
+import packet.ExceptionTaille;
 
 public class Ethernet implements ITrame {
 	private List<IChamps> listEther;
@@ -13,11 +14,16 @@ public class Ethernet implements ITrame {
 	private int sizeEther;
 	
 	
-	public Ethernet(List<String> listOctet) {
+	public Ethernet(List<String> listOctet) throws ExceptionTaille {
+		
+		
 		this.sizeEther = 0;
 		this.listData = listOctet;
 		this.listEther = new ArrayList<>();
 		List<String> list= new ArrayList<>(); 
+		
+		if(listData.size() < 14) 
+			throw new ExceptionTaille("pas assez d'octets pour la trame ethernet");
 		
 		/** ajout adresseMac destination */
 		for(int i = 0; i < 6; i++) {
@@ -50,13 +56,6 @@ public class Ethernet implements ITrame {
 	public String getDataType() {
 		return ((TypeEther)listEther.get(2)).getType();
 		
-	}
-
-	@Override
-	public boolean checkSize() {
-		if((sizeEther == 14) 
-				&& (listEther.size() == 3)) return true;
-		return false;
 	}
 
 	@Override

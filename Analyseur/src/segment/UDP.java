@@ -6,6 +6,7 @@ import java.util.List;
 import champs.*;
 import champs.adresseEtPort.Port;
 import champs.longueur.LengthUDP;
+import packet.ExceptionTaille;
 
 public class UDP implements ITrame {
 	private List<IChamps> listUDP;
@@ -13,10 +14,13 @@ public class UDP implements ITrame {
 	private int sizeUDP;
 	
 	
-	public UDP(List<String> listOctet) {
+	public UDP(List<String> listOctet) throws ExceptionTaille {
 		this.sizeUDP = 0;
 		this.listUDP = new ArrayList<>();
 		this.listData = listOctet;
+		
+		if(listData.size() < 8) 
+			throw new ExceptionTaille("pas assez d'octets pour UDP");
 		
 		/** ajout du port source */
 		List<String> list= new ArrayList<>(); 
@@ -58,11 +62,6 @@ public class UDP implements ITrame {
 	}
 
 
-	@Override
-	public boolean checkSize() {
-		if((sizeUDP  == 20) && (listUDP.size() == 4)) return true;
-		return false;
-	}
 
 	@Override
 	public List<String> getData() {
@@ -98,5 +97,6 @@ public class UDP implements ITrame {
 	public int getSize() {
 		return sizeUDP;
 	}
+
 
 }

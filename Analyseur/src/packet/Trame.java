@@ -1,14 +1,11 @@
 package packet;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import segment.ARP;
-import segment.Contenu;
+import segment.DataDump;
 import segment.Ethernet;
 import segment.HTTP;
 import segment.ICMP;
@@ -29,15 +26,62 @@ public class Trame {
 		this.tailleTrame = listOctets.size();
 	}
 	
-
-	
+	/**
+	 * Calcul des sections de la trame 
+	 * @param data: liste d'octets correspondant à une trame
+	 * @throws ExceptionTaille probleme de nombre d'octets
+	 */
+	public void calculTrameEthernet(List<String> data) throws ExceptionTaille {
+		
+		String suite = "Ethernet";
+		
+		/** ajout de la trame Ethernet */
+		data = this.addEthernet(data);
+		suite = this.getNextSegment(0);
+		
+		/** ajout de ARP/RARP */
+		if(suite == "ARP" || suite == "RARP") {
+			data = this.addARP(data,suite);
+		}	
+		
+		/** ajout de IP */
+		else if(suite == "Datagramme IP") {
+			data = this.addIP(data);
+			suite = this.getNextSegment(1);
+			
+			/** ajout de UDP */
+			if(suite == "UDP") {
+				data = this.addUDP(data);
+			}
+			
+			/** ajout de TCP */
+			else if(suite == "TCP") {
+				data = this.addTCP(data);
+				suite =  this.getNextSegment(2);
+				if(suite == "HTTP") {
+					data = this.addHTTP(data);
+				}
+			}
+			
+			/** ajout de ICMP */
+			else if(suite == "ICMP") {
+				data = this.addICMP(data);
+			}
+		}
+		
+		/** ajout des données s'il en reste */
+		if(data.size() > 0) {
+			data = this.addDonnees(data);
+		}
+	}
 	
 	/**
 	 * ajout de la trame ethernet
 	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
+	 * @throws ExceptionTaille: probleme de nombre d'octets
 	 */
-	public List<String> addEthernet(List<String> data) {
+	private List<String> addEthernet(List<String> data) throws ExceptionTaille{
 		Ethernet ether = new Ethernet(data);
 		listTrame.add(ether);
 		return ether.getData();
@@ -48,39 +92,48 @@ public class Trame {
 	 * ajoute le datagramme IP
 	 * @param data: liste d'octets de l'ensemble du datagramme
 	 * @return la liste des octets en données
+	 * @throws ExceptionTaille: probleme du nombre d'octets d'octets
 	 */
-	public List<String> addIP(List<String> data) {
+	private List<String> addIP(List<String> data) throws ExceptionTaille {
 		InternetProtocol hip = new InternetProtocol(data);
 		listTrame.add(hip);
 		return hip.getData();
-	}
-	
+	}	
 	
 	/**
 	 * ajoute l'entete de l'UDP
 	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
+	 * @throws ExceptionTaille: probleme de nombre d'octets 
 	 */
-	public List<String> addUDP(List<String> data) {
+	private List<String> addUDP(List<String> data) throws ExceptionTaille{
 		UDP udp = new UDP(data);
 		listTrame.add(udp);
 		return udp.getData();
 		
 	}	
-	
-	
+		
 	/**
 	 * ajoute l'entete du TCP
 	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
+	 * @throws ExceptionTaille: probleme du nombre d'octets 
 	 */
-	public List<String> addTCP(List<String> data) {
+	private List<String> addTCP(List<String> data) throws ExceptionTaille{
 		TCP tcp = new TCP(data);
 		listTrame.add(tcp);
 		return tcp.getData();
 	}
 	
-	public List<String> addARP(List<String> data,String type){
+	
+	/**
+	 * ajoute de l'ARP/RARP
+	 * @param data: liste d'octets de l'ensemble de la trame
+	 * @param type: permet de savoir si c'est ARP ou RARP
+	 * @return la liste des octets en données
+	 * @throws ExceptionTaille: probleme du nombre d'octets
+	 */
+	private List<String> addARP(List<String> data,String type) throws ExceptionTaille{
 		ARP arp = new ARP(data, type);
 		listTrame.add(arp);
 		return arp.getData();
@@ -90,8 +143,9 @@ public class Trame {
 	 * ajoute le message ICMP
 	 * @param data: liste d'octets du message ICMP
 	 * @return la liste des octets en données
+	 * @throws ExceptionTaille: probleme de nombre d'octets
 	 */
-	public List<String> addICMP(List<String> data){
+	private List<String> addICMP(List<String> data) throws ExceptionTaille{
 		ICMP icmp = new ICMP(data);
 		listTrame.add(icmp);
 		return icmp.getData();
@@ -103,8 +157,8 @@ public class Trame {
 	 * @param data: liste d'octets représentant les données
 	 * @return liste vide
 	 */
-	public List<String> addDonnees(List<String> data){
-		Contenu fin = new Contenu(data);
+	private List<String> addDonnees(List<String> data){
+		DataDump fin = new DataDump(data);
 		listTrame.add(fin);
 		return fin.getData();
 	}
@@ -113,8 +167,9 @@ public class Trame {
 	 * ajoute les données
 	 * @param data: liste d'octets représentant les données
 	 * @return liste vide
+	 * @throws ExceptionTaille: erreur de taille sur le nombre d'octets
 	 */
-	public List<String> addHTTP(List<String> data){
+	private List<String> addHTTP(List<String> data) throws ExceptionTaille{
 		HTTP http = new HTTP(data);
 		listTrame.add(http);
 		return http.getData();
@@ -127,7 +182,7 @@ public class Trame {
 	 * @param seg: numero de la trame
 	 * @return le nom du segment suivant, "pas de segment" si ce n'est pas le cas
 	 */
-	public String getNextSegment(int seg) {
+	private String getNextSegment(int seg) {
 		if(listTrame.size()-1 - seg < 0) 
 			return "pas de segment";
 		if(listTrame.get(seg) instanceof Ethernet)
@@ -141,24 +196,13 @@ public class Trame {
 	
 	
 	/**
-	 * determine la taille des options d'une couche
-	 * @param i: position dans la liste de segments
-	 * @return la taille des options, -1 s'il y a un probleme de couche
-	 */
-	public int getTailleOptions(int i) {
-		if(listTrame.size() < i) 
-			return -1;
-		return listTrame.get(i).getTailleOptions();
-	}
-	
-	/**
 	 * retourne la liste des octets de la trame
 	 * @return liste des octets (string)
 	 */
 	public List<String> getOctets(){
 		return listOctets;
 	}
-
+	
 	
 	@Override
 	public String toString() {

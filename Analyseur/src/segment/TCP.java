@@ -3,7 +3,7 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import champs.options.Bourrage;
+import packet.ExceptionTaille;
 import segment.subsegment.AllOptions;
 import segment.subsegment.HeaderTCP;
 import segment.subsegment.Padding;
@@ -14,7 +14,7 @@ public class TCP implements ITrame {
 	private int sizeTCP;
 	private String port;
 	
-	public TCP(List<String> listOctet) {
+	public TCP(List<String> listOctet) throws ExceptionTaille {
 		this.sizeTCP = 0;
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
@@ -44,11 +44,7 @@ public class TCP implements ITrame {
 			
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(listTCP.size() == 2 && sizeTCP > 19) return true;
-		return false;
-	}
+
 
 	@Override
 	public List<String> getData() {

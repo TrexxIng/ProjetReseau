@@ -15,6 +15,7 @@ import champs.simple.Horodatage;
 import champs.simple.Identification;
 import champs.simple.NextHopMTU;
 import champs.trameSuiv.TypeICMP;
+import packet.ExceptionTaille;
 
 public class ICMP implements ITrame {
 	private List<IChamps> listICMP;
@@ -22,10 +23,13 @@ public class ICMP implements ITrame {
 	private int sizeICMP;
 	private String type;
 	
-	public ICMP(List<String> listOctet) {
+	public ICMP(List<String> listOctet) throws ExceptionTaille {
 		this.sizeICMP = 0;
 		this.listICMP = new ArrayList<>();
 		this.listData = listOctet;
+		
+		if(listData.size() < 4)
+			throw new ExceptionTaille("entête commune de l'ICMP trop courte");		
 		
 		/** ajout du type */
 		List<String> list= new ArrayList<>(); 
@@ -64,12 +68,6 @@ public class ICMP implements ITrame {
 	}
 
 
-	@Override
-	public boolean checkSize() {
-		if((sizeICMP == 4) 
-				&& (listICMP.size() == 3)) return true;
-		return false;
-	}
 
 	@Override
 	public List<String> getData() {
@@ -106,11 +104,15 @@ public class ICMP implements ITrame {
 		return sizeICMP;
 	}
 	
-	public void addTrameType() {
+	public void addTrameType() throws ExceptionTaille {
 		List<String> list;
 		
 		if(this.type == "Echo reply" || this.type == "Echo request" 
 				|| this.type == "Timestamp" || this.type == "Timestamp reply") {
+			
+			if(listData.size() < 4)
+				throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+			
 			list= new ArrayList<>(); 
 			list.add(listData.get(0));
 			listData.remove(0);
@@ -128,6 +130,10 @@ public class ICMP implements ITrame {
 			listICMP.add(new AckSeqNumber(list,false));	
 			
 			if(this.type == "Timestamp" || this.type == "Timestamp reply") {
+				
+				if(listData.size() < 12)
+					throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+				
 				list= new ArrayList<>(); 
 				for(int i=0; i<4; i++) {
 					list.add(listData.get(0));
@@ -159,6 +165,9 @@ public class ICMP implements ITrame {
 		if(this.type == "Destination Unreachable") {
 			list= new ArrayList<>(); 
 			
+			if(listData.size() < 4)
+				throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+			
 			list.add(listData.get(0));
 			listData.remove(0);
 			list.add(listData.get(0));
@@ -177,6 +186,10 @@ public class ICMP implements ITrame {
 			return;			
 		}		
 		if(this.type == "Source Quench" || this.type == "Time Exceeded") {
+			
+			if(listData.size() < 4)
+				throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+			
 			list= new ArrayList<>(); 
 			for(int i=0; i<4; i++) {
 				list.add(listData.get(0));
@@ -187,6 +200,10 @@ public class ICMP implements ITrame {
 			return;
 		}		
 		if(this.type == "Redirect") {
+			
+			if(listData.size() < 4)
+				throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+			
 			list= new ArrayList<>(); 
 			for(int i=0; i<4; i++) {
 				list.add(listData.get(0));
@@ -197,6 +214,10 @@ public class ICMP implements ITrame {
 			return;
 		}		
 		if(this.type == "Address Mask Request") {
+			
+			if(listData.size() < 4)
+				throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+			
 			list= new ArrayList<>(); 
 			for(int i=0; i<4; i++) {
 				list.add(listData.get(0));
@@ -207,6 +228,10 @@ public class ICMP implements ITrame {
 			return;
 		}		
 		if(this.type == "Address Mask Reply") {
+			
+			if(listData.size() < 4)
+				throw new ExceptionTaille("l'ICMP type "+type+" trop court");
+			
 			list= new ArrayList<>(); 
 			for(int i=0; i<4; i++) {
 				list.add(listData.get(0));
