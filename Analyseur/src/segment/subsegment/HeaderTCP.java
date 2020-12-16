@@ -9,7 +9,9 @@ import champs.longueur.LengthQuartet;
 import champs.simple.AckSeqNumber;
 import champs.simple.UrgPointeur;
 import champs.simple.Windows;
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.ITrame;
 
 public class HeaderTCP implements ITrame {
@@ -19,8 +21,9 @@ public class HeaderTCP implements ITrame {
 	private int sizeTCP;
 	private int portSrc = -1;
 	private int portDest = -1;
+	private int reserved;
 	
-	public HeaderTCP(List<String> listOctet) throws ExceptionTaille {
+	public HeaderTCP(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeTCP = 0;
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
@@ -75,6 +78,7 @@ public class HeaderTCP implements ITrame {
 		listData.remove(0);
 		this.sizeTCP += list.size();
 		listTCP.add(new Flags(list, "TCP"));
+		this.reserved = ((Flags)listTCP.get(5)).reserved();
 		
 		/** ajout de Windows */
 		list= new ArrayList<>(); 
@@ -94,7 +98,7 @@ public class HeaderTCP implements ITrame {
 		this.sizeTCP += list.size();
 		listTCP.add(new Checksum(list));
 		
-		/** ajout de Checksum */
+		/** ajout du Pointeur d'urgence */
 		list= new ArrayList<>(); 
 		list.add(listData.get(0));
 		listData.remove(0);
@@ -107,6 +111,11 @@ public class HeaderTCP implements ITrame {
 		this.sizeOptions = ((LengthQuartet)listTCP.get(4)).getTailleIP() - 20;
 		this.portSrc = ((Port)listTCP.get(0)).getPortNumber();
 		this.portDest = ((Port)listTCP.get(1)).getPortNumber();
+		
+		
+		int taille = ((LengthQuartet)listTCP.get(4)).getTailleIP();
+		if(taille < 20)
+			throw new ExceptionIncoherence("Taille de l'entête TCP indiquée en données ("+taille+") inférieur à 20 octets");
 		
 	}
 
@@ -160,6 +169,27 @@ public class HeaderTCP implements ITrame {
 	private String PortNumToString() {
 		if(portDest == 80 || portSrc == 80) return "HTTP";
 		return "Ports non listé";
+	}
+	
+	@Override
+	public String nextSegment() {
+		return null;
+		
+	}
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		// aucune erreur de support ou d'incoherence detectable
+		
+	}
+
+
+	@Override
+	public String messageVerification() {
+		if(reserved != 0)
+			return "TCP: les bits réservés du flags ne sont pas à zéro";
+		return "";
 	}
 
 }

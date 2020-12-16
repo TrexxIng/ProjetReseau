@@ -5,15 +5,19 @@ import java.util.List;
 
 import champs.Data;
 import champs.IChamps;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
 
 public class DataDump implements ITrame {
 	private List<IChamps> data;
 	private int sizeContenu;
+	private boolean erreur;
 	
-	public DataDump(List<String> listOctet) {
+	public DataDump(List<String> listOctet, boolean erreur) {
 		this.sizeContenu = listOctet.size();
 		this.data = new ArrayList<>();
 		this.data.add(new Data(listOctet));
+		this.erreur = erreur;
 	}
 
 	@Override
@@ -23,7 +27,9 @@ public class DataDump implements ITrame {
 	
 	@Override
 	public String toString() {
-		return "Données: "+sizeContenu+" octets";
+		if(!erreur)
+			return "Données: "+sizeContenu+" octets";
+		return "Données (interruption pour cause d'erreur): "+sizeContenu+" octets";
 	}
 
 	@Override
@@ -49,6 +55,22 @@ public class DataDump implements ITrame {
 	@Override
 	public int getSize() {
 		return sizeContenu;
+	}
+	
+	@Override
+	public String nextSegment() {
+		return "Rien";
+	}
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		// pas d'erreur d'incoherence sévère ou de support detectable
+	}
+
+	@Override
+	public String messageVerification() {
+		// aucune erreur non importante ne peut etre determinée ici
+		return "";
 	}
 
 }

@@ -4,6 +4,9 @@ package packet;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.ARP;
 import segment.DataDump;
 import segment.Ethernet;
@@ -19,54 +22,77 @@ public class Trame {
 	private List<ITrame> listTrame;
 	private List<String> listOctets;
 	private int tailleTrame;
+	private List<String> data = new ArrayList<>();
 	
 	public Trame(List<String> listOctets) {
 		this.listTrame = new ArrayList<>();
 		this.listOctets = listOctets;
 		this.tailleTrame = listOctets.size();
+		this.data = listOctets;
 	}
 	
 	/**
 	 * Calcul des sections de la trame 
 	 * @param data: liste d'octets correspondant à une trame
 	 * @throws ExceptionTaille probleme de nombre d'octets
+	 * @throws ExceptionSupport probleme de version supporté
+	 * @throws ExceptionIncoherence probleme d'incoherence des donnees
 	 */
-	public void calculTrameEthernet(List<String> data) throws ExceptionTaille {
+	public void calculTrameEthernet() throws ExceptionTaille, ExceptionSupport, ExceptionIncoherence {
+	
 		
 		String suite = "Ethernet";
 		
-		/** ajout de la trame Ethernet */
-		data = this.addEthernet(data);
-		suite = this.getNextSegment(0);
-		
-		/** ajout de ARP/RARP */
-		if(suite == "ARP" || suite == "RARP") {
-			data = this.addARP(data,suite);
-		}	
-		
-		/** ajout de IP */
-		else if(suite == "Datagramme IP") {
-			data = this.addIP(data);
-			suite = this.getNextSegment(1);
+		while(suite != "Rien") {
 			
-			/** ajout de UDP */
-			if(suite == "UDP") {
-				data = this.addUDP(data);
+			/** ajout de la trame Ethernet */
+			if(suite == "Ethernet") {
+				data = this.addEthernet(data);
+				suite = this.getNextSegment();
+				
+			} 
+			/** ajout de ARP/RARP */
+			else if(suite == "ARP" || suite == "RARP") {
+				data = this.addARP(data,suite);
+				suite = this.getNextSegment();
 			}
-			
+			/** ajout de IP */
+			else if(suite == "Datagramme IP") {
+				data = this.addIP(data);
+				suite = this.getNextSegment();
+			}
+			/** ajout de UDP */
+			else if(suite == "UDP") {
+				data = this.addUDP(data);
+				suite = this.getNextSegment();
+			}			
 			/** ajout de TCP */
 			else if(suite == "TCP") {
 				data = this.addTCP(data);
-				suite =  this.getNextSegment(2);
-				if(suite == "HTTP") {
-					data = this.addHTTP(data);
-				}
+				suite =  this.getNextSegment();
 			}
-			
+			/** ajout de HTTP */
+			else if(suite == "HTTP") {
+				data = this.addHTTP(data);
+				suite =  this.getNextSegment();
+			}			
 			/** ajout de ICMP */
 			else if(suite == "ICMP") {
 				data = this.addICMP(data);
+				suite =  this.getNextSegment();		
 			}
+			else {
+				/** ajout des données s'il en reste */
+				if(data.size() > 0) {
+					data = this.addDonnees(data);
+					suite = this.getNextSegment();
+				}
+				else {
+					suite = "Rien";
+				}
+			}
+			
+			detectMessageError();
 		}
 		
 		/** ajout des données s'il en reste */
@@ -92,9 +118,10 @@ public class Trame {
 	 * ajoute le datagramme IP
 	 * @param data: liste d'octets de l'ensemble du datagramme
 	 * @return la liste des octets en données
-	 * @throws ExceptionTaille: probleme du nombre d'octets d'octets
+	 * @throws ExceptionTaille: probleme du nombre d'octets 
+	 * @throws ExceptionIncoherence: probleme d'incoherence entre data et octets
 	 */
-	private List<String> addIP(List<String> data) throws ExceptionTaille {
+	private List<String> addIP(List<String> data) throws ExceptionTaille, ExceptionIncoherence {
 		InternetProtocol hip = new InternetProtocol(data);
 		listTrame.add(hip);
 		return hip.getData();
@@ -105,8 +132,9 @@ public class Trame {
 	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 * @throws ExceptionTaille: probleme de nombre d'octets 
+	 * @throws ExceptionIncoherence: probleme d'incoherence entre data et octets
 	 */
-	private List<String> addUDP(List<String> data) throws ExceptionTaille{
+	private List<String> addUDP(List<String> data) throws ExceptionTaille, ExceptionIncoherence{
 		UDP udp = new UDP(data);
 		listTrame.add(udp);
 		return udp.getData();
@@ -118,8 +146,9 @@ public class Trame {
 	 * @param data: liste d'octets de l'ensemble de la trame
 	 * @return la liste des octets en données
 	 * @throws ExceptionTaille: probleme du nombre d'octets 
+	 * @throws ExceptionIncoherence 
 	 */
-	private List<String> addTCP(List<String> data) throws ExceptionTaille{
+	private List<String> addTCP(List<String> data) throws ExceptionTaille, ExceptionIncoherence{
 		TCP tcp = new TCP(data);
 		listTrame.add(tcp);
 		return tcp.getData();
@@ -158,7 +187,7 @@ public class Trame {
 	 * @return liste vide
 	 */
 	private List<String> addDonnees(List<String> data){
-		DataDump fin = new DataDump(data);
+		DataDump fin = new DataDump(data,false);
 		listTrame.add(fin);
 		return fin.getData();
 	}
@@ -172,6 +201,8 @@ public class Trame {
 	private List<String> addHTTP(List<String> data) throws ExceptionTaille{
 		HTTP http = new HTTP(data);
 		listTrame.add(http);
+		if(http.getSize() < 26)
+			throw new ExceptionTaille("message HTTP trop court, vérifiez la taille");
 		return http.getData();
 	}
 	
@@ -179,21 +210,23 @@ public class Trame {
 	
 	/**
 	 * determine le segment suivant
-	 * @param seg: numero de la trame
-	 * @return le nom du segment suivant, "pas de segment" si ce n'est pas le cas
+	 * @return le nom du segment suivant
 	 */
-	private String getNextSegment(int seg) {
-		if(listTrame.size()-1 - seg < 0) 
+	private String getNextSegment() {		
+		if(listTrame.size() == 0)
 			return "pas de segment";
-		if(listTrame.get(seg) instanceof Ethernet)
-			return ((Ethernet)listTrame.get(seg)).getDataType();
-		if(listTrame.get(seg) instanceof InternetProtocol)
-			return ((InternetProtocol)listTrame.get(seg)).getProtocol();
-		if(listTrame.get(seg) instanceof TCP)
-			return ((TCP)listTrame.get(seg)).getPort();
-		return "pas de segment";
+		else
+			return listTrame.get(listTrame.size()-1).nextSegment();
 	}
 	
+	private void detectMessageError() throws ExceptionSupport, ExceptionIncoherence {
+		listTrame.get(listTrame.size()-1).errorDetect();
+	}
+	
+	public void addDataNonTraduite() {
+		DataDump dump = new DataDump(data,true);
+		listTrame.add(dump);
+	}
 	
 	/**
 	 * retourne la liste des octets de la trame
@@ -229,6 +262,20 @@ public class Trame {
 		for(int i = 0; i< listTrame.size(); i++) {
 			s = s + "\n" + listTrame.get(i).formatDisplay(tab+1);
 		}
+		return s;
+	}
+	
+	
+	public String messageVerification() {
+		String s = "";
+		String message;
+		for(int i = 0; i<listTrame.size();i++) {
+			message = listTrame.get(i).messageVerification();
+			if(!message.equals(""))
+				s += message+"\n";
+		}
+		if(!s.equals(""))
+			return "\n"+s;
 		return s;
 	}
 	

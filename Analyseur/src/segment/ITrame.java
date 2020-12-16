@@ -2,6 +2,9 @@ package segment;
 
 import java.util.List;
 
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+
 
 public interface ITrame {
 	
@@ -30,4 +33,24 @@ public interface ITrame {
 	 * @return la taille
 	 */
 	int getSize();
+	
+	/**
+	 * détermine le segent suivant de la trame 
+	 * @return le segment suivant
+	 */
+	String nextSegment();
+	
+	/**
+	 * detection d'erreur sans interrompre le programme 
+	 * @throws ExceptionSupport probleme de support de version
+	 * @throws ExceptionIncoherence probleme d'incoherence des donnees
+	 */
+	void errorDetect() throws ExceptionSupport, ExceptionIncoherence;
+	
+	
+	/**
+	 * detecte des erreurs qui n'impacte pas le programme
+	 * @return le message à afficher
+	 */
+	String messageVerification();
 }

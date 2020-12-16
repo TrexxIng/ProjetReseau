@@ -6,7 +6,9 @@ import java.util.List;
 import champs.IChamps;
 import champs.adresseEtPort.AdresseMAC;
 import champs.trameSuiv.TypeEther;
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 
 public class Ethernet implements ITrame {
 	private List<IChamps> listEther;
@@ -52,11 +54,6 @@ public class Ethernet implements ITrame {
 		listEther.add(new TypeEther(list));
 	}
 
-	
-	public String getDataType() {
-		return ((TypeEther)listEther.get(2)).getType();
-		
-	}
 
 	@Override
 	public List<String> getData() {
@@ -91,6 +88,27 @@ public class Ethernet implements ITrame {
 	@Override
 	public int getSize() {
 		return sizeEther;
+	}
+	
+	@Override
+	public String nextSegment() {
+		return ((TypeEther)listEther.get(2)).getType();
+	}
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence{
+		if(nextSegment() != "Datagramme IP" 
+				&& nextSegment() != "ARP" 
+				&& nextSegment() != "RARP")
+			throw new ExceptionSupport("Ethertype (type de la trame Eternet) non supporté par l'analyseur, IPv4, ARP et RARP");
+	}
+
+
+	@Override
+	public String messageVerification() {
+		// aucune erreur non importante ne peut etre determinée ici
+		return "";
 	}
 	
 

@@ -9,7 +9,9 @@ import champs.adresseEtPort.AdresseIP;
 import champs.longueur.Length1Bytes;
 import champs.options.TypeOptions;
 import champs.options.ValeurOption;
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.ITrame;
 
 
@@ -17,12 +19,18 @@ public class Options implements ITrame {
 	private List<IChamps> listOption;
 	private List<String> listData;
 	private int sizeOption = 0;
+	private int sizeData;
 	private String type;
 	private boolean stop = false;
+	private boolean erreur = false;
+	private String protocol;
 	
 	public Options(List<String> listOctet, String protocol) throws ExceptionTaille {
+		this.protocol = protocol;
+		this.sizeData = listOctet.size();
 		this.listData = listOctet;
 		this.listOption = new ArrayList<>();
+		
 		
 		if(listData.size()  == 0 ) 
 			throw new ExceptionTaille("pas assez d'octets pour les options "+protocol);
@@ -48,23 +56,35 @@ public class Options implements ITrame {
 			listOption.add(new Length1Bytes(list,"option"));
 			this.sizeOption = ((Length1Bytes)listOption.get(1)).getLongueur();
 			
+			
 			/** ajout de la valeur */
 			list= new ArrayList<>(); 
 			list.add(listData.get(0));
 			listData.remove(0);
 			listOption.add(new ValeurOption(list));
 			
-			/** traitement des options selon type et taille */
-			list= new ArrayList<>(); 
-			for(int i = 0; i<sizeOption-3;i++) {
-				list.add(listData.get(0));
-				listData.remove(0);	
-			}
-			if(type == "Enregistrement de route") {
-				this.listAdresseIP(list);
+			
+			/** verifie la coherence entre taille et nombre d'octets */
+			if(sizeOption-3 > listData.size()) {
+				this.erreur = true;
+				listOption.add(new Data(listData));
+				listData.clear();
 			}
 			else {
-				listOption.add(new Data(list));
+				/** traitement des options selon la taille */
+				list= new ArrayList<>(); 
+				for(int i = 0; i<sizeOption-3;i++) {
+					list.add(listData.get(0));
+					listData.remove(0);	
+				}
+				
+				/** et traitement des options selon le type */
+				if(type == "Enregistrement de route") {
+					this.listAdresseIP(list);
+				}
+				else {
+					listOption.add(new Data(list));
+				}
 			}
 		}
 		else {
@@ -128,6 +148,30 @@ public class Options implements ITrame {
 	
 	public boolean stop() {
 		return stop;
+	}
+	
+	@Override
+	public String nextSegment() {
+		return "Data";
+		
+	}
+
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		if(erreur)
+			throw new ExceptionIncoherence("longueur indiquée en données de l'option de "+protocol+
+					" ("+sizeOption+") supérieure au nombre d'octets restants en option ("+sizeData+")");
+		
+	}
+
+
+
+	@Override
+	public String messageVerification() {
+		// aucune erreur non importante ne peut etre determiné ici
+		return "";
 	}
 
 }

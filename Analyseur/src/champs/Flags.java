@@ -11,6 +11,7 @@ public class Flags implements IChamps {
 	private List<IFlags> flags;
 	private String type;
 	private String typeFlags = "";
+	private int reserved;
 	
 	
 	public Flags(List<String> valHex, String type) {
@@ -30,6 +31,8 @@ public class Flags implements IChamps {
 			flags.add(new FragOffset(valbits));
 		}
 		else {
+			/** ajout d'une liste de flags 
+			 * (reserved, DF, MF, fragments offset) */	
 			hex = valHex.get(0).charAt(1)+valHex.get(1);
 			valDec = Integer.parseInt(hex, 16);
 			valbits = decToBinary(valDec,16);
@@ -40,8 +43,7 @@ public class Flags implements IChamps {
 			flags.add(new PSH(valbits));
 			flags.add(new RST(valbits));
 			flags.add(new SYN(valbits));
-			flags.add(new FIN(valbits));
-			
+			flags.add(new FIN(valbits));			
 			for(int i = 1; i<flags.size(); i++) {
 				if(flags.get(i).getValue() == 1) {
 					this.typeFlags = flags.get(i).getType();
@@ -49,6 +51,8 @@ public class Flags implements IChamps {
 				}
 			}
 		}
+		/** pour verifier si les bits reservés sont à 0 */
+		this.reserved = flags.get(0).getValue();
 	}
 
 	
@@ -104,6 +108,11 @@ public class Flags implements IChamps {
 			s +="\n"+flags.get(i).formatDisplay(tab+1);
 		}
 		return s;
+	}
+	
+	/** renvoie la valeur du/des bits reservés */
+	public int reserved() {
+		return reserved;
 	}
 
 }

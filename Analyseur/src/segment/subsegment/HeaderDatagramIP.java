@@ -12,7 +12,9 @@ import champs.simple.TOS;
 import champs.simple.TimeToLive;
 import champs.simple.VersionIP;
 import champs.trameSuiv.Protocol;
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.ITrame;
 
 public class HeaderDatagramIP implements ITrame {
@@ -20,10 +22,14 @@ public class HeaderDatagramIP implements ITrame {
 	private List<String> listData;
 	private int sizeOptions;
 	private int sizeIP = 0;
+	private int tailleCoherente = 0;
+	private int taillePaquet;
+	private int reserved;
 	
 	
-	public HeaderDatagramIP(List<String> listOctet) throws ExceptionTaille {
+	public HeaderDatagramIP(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeIP = 0;
+		this.taillePaquet = listOctet.size();
 		this.listData = listOctet;
 		this.listIP = new ArrayList<>();
 		
@@ -37,6 +43,7 @@ public class HeaderDatagramIP implements ITrame {
 		listIP.add(new VersionIP(list));
 		listIP.add(new LengthQuartet(list,"IP"));
 		listData.remove(0);
+		
 		
 		/** ajout de TOS */
 		list.remove(0);
@@ -53,6 +60,9 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		this.sizeIP += list.size();
 		listIP.add(new TotalLength(list));
+		
+		/** on voudra verifier que la taille du paquet correspond à la taille indiqué */
+		this.tailleCoherente = ((TotalLength)listIP.get(3)).getTailleTotale();
 		
 		/** ajout de l' Identification */
 		list= new ArrayList<>(); 
@@ -71,6 +81,7 @@ public class HeaderDatagramIP implements ITrame {
 		listData.remove(0);
 		this.sizeIP += list.size();
 		listIP.add(new Flags(list,"IP"));
+		this.reserved = ((Flags)listIP.get(5)).reserved();
 		
 		/** ajout de TTL */
 		list= new ArrayList<>(); 
@@ -113,6 +124,13 @@ public class HeaderDatagramIP implements ITrame {
 		}
 		this.sizeIP += list.size();
 		listIP.add(new AdresseIP(list,"Destination"));
+		
+		
+		
+		/** on s'assure que la taille du header indiqué est bien supérieure à 20 */
+		int taille = ((LengthQuartet)listIP.get(1)).getTailleIP();
+		if(taille < 20)
+			throw new ExceptionIncoherence("Taille de l'entête IP indiquée en données ("+taille+") inférieur à 20 octets");
 		
 		/** calcul de la taille des options */
 		this.sizeOptions = ((LengthQuartet)listIP.get(1)).getTailleIP() - 20;
@@ -170,6 +188,31 @@ public class HeaderDatagramIP implements ITrame {
 	@Override
 	public int getSize() {
 		return sizeIP;
+	}
+	
+	@Override
+	public String nextSegment() {
+		return null;
+	}
+
+
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		if(tailleCoherente != taillePaquet)
+			throw new  ExceptionIncoherence("taille totale indiquée en données ("+tailleCoherente+" octets) différente de la taille du paquet ("+
+			taillePaquet+" octets)");
+	}
+
+
+
+
+	@Override
+	public String messageVerification() {
+		if(reserved != 0)
+			return "Datagramme IP: le bit réservé des flags n'est pas à zéro";
+		return "";
 	}
 
 }

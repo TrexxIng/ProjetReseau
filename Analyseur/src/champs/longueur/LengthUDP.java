@@ -12,7 +12,7 @@ public class LengthUDP implements IChamps{
 	public LengthUDP(List<String> valHex) {
 		this.valHex = valHex;
 		this.longueur = Integer.parseInt(
-				(valHex.get(0)+valHex.get(1)), 16) * 4;
+				(valHex.get(0)+valHex.get(1)), 16);
 	}
 
 	@Override
@@ -24,6 +24,10 @@ public class LengthUDP implements IChamps{
 	@Override
 	public String toString() {
 		return "Longueur UDP: "+longueur+" octets (0x"+valHex.get(0)+valHex.get(1)+")";
+	}
+	
+	public int getTailleUDP() {
+		return longueur;
 	}
 	
 	@Override

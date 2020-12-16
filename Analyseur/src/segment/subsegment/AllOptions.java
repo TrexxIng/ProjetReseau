@@ -3,7 +3,9 @@ package segment.subsegment;
 import java.util.ArrayList;
 import java.util.List;
 
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.ITrame;
 
 public class AllOptions implements ITrame {
@@ -84,6 +86,28 @@ public class AllOptions implements ITrame {
 	
 	public int getSizePadding() {
 		return padding;
+	}
+	
+	@Override
+	public String nextSegment() {
+		return null;
+		
+	}
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		for(int i=0; i<listOption.size();i++) {
+			listOption.get(i).errorDetect();
+		}
+		
+	}
+
+
+	@Override
+	public String messageVerification() {
+		// aucune erreur non importante ne peut etre determinée ici
+		return "";
 	}
 
 }

@@ -37,6 +37,10 @@ public class TotalLength implements IChamps {
 		return s+this.toString();
 	}
 	
+	public int getTailleTotale() {
+		return longueur;
+	}
+	
 
 
 }

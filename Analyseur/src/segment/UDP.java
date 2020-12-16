@@ -6,18 +6,23 @@ import java.util.List;
 import champs.*;
 import champs.adresseEtPort.Port;
 import champs.longueur.LengthUDP;
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 
 public class UDP implements ITrame {
 	private List<IChamps> listUDP;
 	private List<String> listData;
 	private int sizeUDP;
+	private int tailleUDP;
+	private int longueurUDP;
 	
 	
-	public UDP(List<String> listOctet) throws ExceptionTaille {
+	public UDP(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeUDP = 0;
 		this.listUDP = new ArrayList<>();
 		this.listData = listOctet;
+		this.tailleUDP = listData.size();	
 		
 		if(listData.size() < 8) 
 			throw new ExceptionTaille("pas assez d'octets pour UDP");
@@ -49,6 +54,8 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		this.sizeUDP += list.size();
 		listUDP.add(new LengthUDP(list));
+		
+		this.longueurUDP = ((LengthUDP)listUDP.get(2)).getTailleUDP();
 		
 		/** ajout du checksum */
 		list= new ArrayList<>(); 
@@ -96,6 +103,30 @@ public class UDP implements ITrame {
 	@Override
 	public int getSize() {
 		return sizeUDP;
+	}
+
+
+
+	@Override
+	public String nextSegment() {
+		return "Data";
+	}
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		if(longueurUDP != tailleUDP)
+			throw new ExceptionIncoherence("Taille de l'UDP indiquée en données ("+longueurUDP+") différente du nombre "
+					+ "d'octets dans UDP ("+tailleUDP+")");
+		
+	}
+
+
+
+	@Override
+	public String messageVerification() {
+		// aucune erreur non importante ne peut etre determiné ici
+		return "";
 	}
 
 

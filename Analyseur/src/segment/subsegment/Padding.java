@@ -5,6 +5,8 @@ import java.util.List;
 
 import champs.IChamps;
 import champs.options.Bourrage;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
 import segment.ITrame;
 
 public class Padding implements ITrame {
@@ -59,6 +61,23 @@ public class Padding implements ITrame {
 	@Override
 	public int getSize() {
 		return sizeBourrage;
+	}
+	
+	@Override
+	public String nextSegment() {
+		return null;
+		
+	}
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		// pas d'erreur d'incoherence sévère ou de support detectable
+	}
+
+	@Override
+	public String messageVerification() {
+		// aucune erreur non importante ne peut etre determinée ici
+		return "";
 	}
 
 }

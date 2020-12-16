@@ -10,7 +10,8 @@ import champs.longueur.Length1Bytes;
 import champs.simple.Hardware;
 import champs.simple.Operation;
 import champs.trameSuiv.Protocol;
-import packet.ExceptionTaille;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 
 
 public class ARP implements ITrame {
@@ -19,6 +20,8 @@ public class ARP implements ITrame {
 	private List<String> listData;
 	private int sizeARP;
 	private String type;
+	private int hardwareL;
+	private int protocoleL;
 	
 	public ARP(List<String> listOctet, String type) throws ExceptionTaille {
 		this.type = type;
@@ -53,6 +56,7 @@ public class ARP implements ITrame {
 		listData.remove(0);
 		this.sizeARP += list.size();
 		listARP.add(new Length1Bytes(list, "Hardware"));
+		this.hardwareL = ((Length1Bytes)listARP.get(2)).getLongueur();
 
 		/** ajout taille protocole */
 		list= new ArrayList<>(); 
@@ -60,6 +64,7 @@ public class ARP implements ITrame {
 		listData.remove(0);
 		this.sizeARP += list.size();
 		listARP.add(new Length1Bytes(list,"Protocole"));
+		this.protocoleL = ((Length1Bytes)listARP.get(3)).getLongueur();
 		
 		/** ajout de l'operation */
 		list= new ArrayList<>(); 
@@ -148,5 +153,29 @@ public class ARP implements ITrame {
 	public int getSize() {
 		return sizeARP;
 	}
+	
+	@Override
+	public String nextSegment() {
+		return "Data";
+	}
+
+	@Override
+	public void errorDetect() throws ExceptionSupport {
+		// pas d'erreur d'incoherence sévère ou de support detectable
+	}
+
+	@Override
+	public String messageVerification() {
+		// adresse hardware = 6, adresse protocole 4
+		if(hardwareL != 6 && protocoleL != 4)
+			return "ARP: problème sur la longueur de l'adresse protocole et l'adresse hardware (en IPv4, doit etre égale à 6 et 4 respectivement)";
+		if(hardwareL != 6)
+			return "ARP: problème sur la longueur de l'adresse hardware (en IPv4, doit etre égale à 6)";
+		if (protocoleL != 4)
+			return "ARP: problème sur la longueur de l'adresse protocole (en IPv4, doit etre égale à 4)";
+		return "";
+	}
+
+
 
 }

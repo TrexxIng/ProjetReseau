@@ -3,7 +3,9 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.subsegment.AllOptions;
 import segment.subsegment.HeaderTCP;
 import segment.subsegment.Padding;
@@ -14,7 +16,7 @@ public class TCP implements ITrame {
 	private int sizeTCP;
 	private String port;
 	
-	public TCP(List<String> listOctet) throws ExceptionTaille {
+	public TCP(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeTCP = 0;
 		this.listData = listOctet;
 		this.listTCP = new ArrayList<>();
@@ -28,7 +30,7 @@ public class TCP implements ITrame {
 		this.port = hip.getPort();
 		
 		/** options */
-		AllOptions opt = new AllOptions(listData,sizeOption,"IP");
+		AllOptions opt = new AllOptions(listData,sizeOption,"TCP");
 		listTCP.add(opt);
 		sizeTCP += opt.getSize();
 		listData = opt.getData();
@@ -82,9 +84,20 @@ public class TCP implements ITrame {
 		return sizeTCP;
 	}
 	
-	public String getPort() {
+	@Override
+	public String nextSegment() {
 		return port;
 	}
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		for(int i =0; i<listTCP.size(); i++)
+			listTCP.get(i).errorDetect();	
+	}
 	
+	@Override
+	public String messageVerification() {
+		return listTCP.get(0).messageVerification();
+	}
 
 }

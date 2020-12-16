@@ -1,10 +1,10 @@
-package packet;
+package exceptions;
 
 @SuppressWarnings("serial")
 public class ExceptionTaille extends Exception{
 
 	public ExceptionTaille(String s) {
-		super("Probleme de taille: "+s);
+		super("Probleme de taille: "+s+"\n");
 	}
 	
 	@Override

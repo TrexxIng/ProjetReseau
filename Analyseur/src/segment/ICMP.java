@@ -15,13 +15,16 @@ import champs.simple.Horodatage;
 import champs.simple.Identification;
 import champs.simple.NextHopMTU;
 import champs.trameSuiv.TypeICMP;
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 
 public class ICMP implements ITrame {
 	private List<IChamps> listICMP;
 	private List<String> listData;
 	private int sizeICMP;
 	private String type;
+	private boolean typeConnu = true;
 	
 	public ICMP(List<String> listOctet) throws ExceptionTaille {
 		this.sizeICMP = 0;
@@ -29,7 +32,7 @@ public class ICMP implements ITrame {
 		this.listData = listOctet;
 		
 		if(listData.size() < 4)
-			throw new ExceptionTaille("entête commune de l'ICMP trop courte");		
+			throw new ExceptionTaille("entête commune de l'ICMP trop courte (inférieure à 8 octets)");		
 		
 		/** ajout du type */
 		List<String> list= new ArrayList<>(); 
@@ -63,10 +66,8 @@ public class ICMP implements ITrame {
 			this.sizeICMP += listData.size();
 			listICMP.add(new Data(listData));
 		}
-		
-		
+				
 	}
-
 
 
 	@Override
@@ -241,7 +242,28 @@ public class ICMP implements ITrame {
 			listICMP.add(new AdresseMask(list, "donné"));
 			return;
 		}
+		else {
+			typeConnu = false;
+		}
 		
+	}
+	
+	@Override
+	public String nextSegment() {
+		return "Rien";
+	}
+	
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence{
+		if(!typeConnu)
+			throw new ExceptionSupport("type ICMP non supporté par l'analyseur");
+	}
+
+
+	@Override
+	public String messageVerification() {
+		// qqch entre type et code à coder
+		return "";
 	}
 
 }

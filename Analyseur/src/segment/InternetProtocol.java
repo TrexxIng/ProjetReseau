@@ -3,7 +3,9 @@ package segment;
 import java.util.ArrayList;
 import java.util.List;
 
-import packet.ExceptionTaille;
+import exceptions.ExceptionIncoherence;
+import exceptions.ExceptionSupport;
+import exceptions.ExceptionTaille;
 import segment.subsegment.AllOptions;
 import segment.subsegment.HeaderDatagramIP;
 import segment.subsegment.Padding;
@@ -14,7 +16,7 @@ public class InternetProtocol implements ITrame {
 	private int sizeIP;
 	private String protocol;
 	
-	public InternetProtocol(List<String> listOctet) throws ExceptionTaille {
+	public InternetProtocol(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeIP = 0;
 		this.listData = listOctet;
 		this.listIP = new ArrayList<>();
@@ -81,8 +83,23 @@ public class InternetProtocol implements ITrame {
 		return sizeIP;
 	}
 	
-	public String getProtocol() {
+	@Override
+	public String nextSegment() {
 		return protocol;
+	}
+
+
+	@Override
+	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
+		for(int i =0; i<listIP.size(); i++)
+			listIP.get(i).errorDetect();
+		
+	}
+
+
+	@Override
+	public String messageVerification() {
+		return listIP.get(0).messageVerification();
 	}
 	
 
