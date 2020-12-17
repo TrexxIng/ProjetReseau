@@ -8,7 +8,7 @@ import champs.IChamps;
 import champs.adresseEtPort.AdresseIP;
 import champs.longueur.Length1Bytes;
 import champs.options.TypeOptions;
-import champs.options.ValeurOption;
+import champs.options.PointeurOption;
 import exceptions.ExceptionIncoherence;
 import exceptions.ExceptionSupport;
 import exceptions.ExceptionTaille;
@@ -57,15 +57,9 @@ public class Options implements ITrame {
 			this.sizeOption = ((Length1Bytes)listOption.get(1)).getLongueur();
 			
 			
-			/** ajout de la valeur */
-			list= new ArrayList<>(); 
-			list.add(listData.get(0));
-			listData.remove(0);
-			listOption.add(new ValeurOption(list));
-			
 			
 			/** verifie la coherence entre taille et nombre d'octets */
-			if(sizeOption-3 > listData.size()) {
+			if(sizeOption-2 > listData.size()) {
 				this.erreur = true;
 				listOption.add(new Data(listData));
 				listData.clear();
@@ -73,13 +67,17 @@ public class Options implements ITrame {
 			else {
 				/** traitement des options selon la taille */
 				list= new ArrayList<>(); 
-				for(int i = 0; i<sizeOption-3;i++) {
+				for(int i = 0; i<sizeOption-2;i++) {
 					list.add(listData.get(0));
 					listData.remove(0);	
 				}
 				
 				/** et traitement des options selon le type */
 				if(type == "Enregistrement de route") {
+					List<String> pointeur = new ArrayList<>();
+					pointeur.add(list.get(0));
+					list.remove(0);
+					listOption.add(new PointeurOption(pointeur));
 					this.listAdresseIP(list);
 				}
 				else {

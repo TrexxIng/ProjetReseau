@@ -4,12 +4,12 @@ import java.util.List;
 
 import champs.IChamps;
 
-public class ValeurOption implements IChamps {
+public class PointeurOption implements IChamps {
 	
 	private List<String> valHex;
 	private int value;
 	
-	public ValeurOption(List<String> valHex) {
+	public PointeurOption(List<String> valHex) {
 		this.valHex = valHex;
 		this.value = Integer.parseInt(valHex.get(0),16);
 	}
@@ -22,7 +22,7 @@ public class ValeurOption implements IChamps {
 	
 	@Override
 	public String toString() {
-		return "Valeur: "+value+" (0x"+valHex.get(0)+")";
+		return "Pointeur: "+value+" (0x"+valHex.get(0)+")";
 	}
 
 	@Override

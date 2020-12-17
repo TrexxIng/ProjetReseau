@@ -29,7 +29,7 @@ public class DataDump implements ITrame {
 	public String toString() {
 		if(!erreur)
 			return "Données: "+sizeContenu+" octets";
-		return "Données (interruption pour cause d'erreur): "+sizeContenu+" octets";
+		return "Données (non analysées): "+sizeContenu+" octets";
 	}
 
 	@Override
