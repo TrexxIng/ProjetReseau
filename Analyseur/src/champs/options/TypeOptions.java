@@ -5,14 +5,11 @@ import java.util.List;
 import champs.IChamps;
 
 public class TypeOptions implements IChamps{
-
-	private List<String> valHex;
 	private int value;
 	private String type = "";
 	private String protocol;
 	
 	public TypeOptions(List<String> valHex, String protocol) {
-		this.valHex = valHex;
 		this.protocol = protocol;
 		this.value = Integer.parseInt(valHex.get(0),16);
 		this.setType(this.value); 

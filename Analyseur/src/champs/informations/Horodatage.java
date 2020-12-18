@@ -1,4 +1,4 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 

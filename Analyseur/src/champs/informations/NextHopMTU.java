@@ -1,23 +1,23 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
 import champs.IChamps;
 
-public class Windows implements IChamps {
+public class NextHopMTU implements IChamps {
+
+	private String value ="";
 	
-	private String valHex;
-	
-	public Windows(List<String> valHex) {
-		this.valHex = valHex.get(0)+valHex.get(1);
+	public NextHopMTU(List<String> valHex) {
+		this.value = valHex.get(0)+valHex.get(1);
 	}
 
-
+	
 	@Override
 	public String toString() {
-		return "Windows: 0x"+valHex+" ("+Integer.parseInt(valHex,16)+")";
+		return "Next hop MTU: 0x"+value;
 	}
-	
+
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";

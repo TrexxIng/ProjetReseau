@@ -1,20 +1,21 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
 import champs.IChamps;
 
-public class TOS implements IChamps {
-	private List<String> valHex;
-
-	public TOS(List<String> valHex) {
-		this.valHex = valHex;
+public class Windows implements IChamps {
+	
+	private String valHex;
+	
+	public Windows(List<String> valHex) {
+		this.valHex = valHex.get(0)+valHex.get(1);
 	}
 
-	
+
 	@Override
 	public String toString() {
-		return "Type of Service: 0x"+valHex.get(0);
+		return "Windows: 0x"+valHex+" ("+Integer.parseInt(valHex,16)+")";
 	}
 	
 	@Override

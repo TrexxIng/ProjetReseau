@@ -5,12 +5,12 @@ import java.util.List;
 
 import champs.*;
 import champs.adresseEtPort.AdresseIP;
+import champs.informations.Identification;
+import champs.informations.TOS;
+import champs.informations.TimeToLive;
+import champs.informations.VersionIP;
 import champs.longueur.LengthQuartet;
 import champs.longueur.TotalLength;
-import champs.simple.Identification;
-import champs.simple.TOS;
-import champs.simple.TimeToLive;
-import champs.simple.VersionIP;
 import champs.trameSuiv.Protocol;
 import exceptions.ExceptionIncoherence;
 import exceptions.ExceptionSupport;
@@ -201,7 +201,7 @@ public class HeaderDatagramIP implements ITrame {
 	@Override
 	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
 		if(tailleCoherente != taillePaquet)
-			throw new  ExceptionIncoherence("taille totale indiquée en données ("+tailleCoherente+" octets) différente de la taille du paquet ("+
+			throw new  ExceptionIncoherence("taille totale indiquée en données ("+tailleCoherente+" octets) différente de la taille du datagramme IP("+
 			taillePaquet+" octets)");
 	}
 

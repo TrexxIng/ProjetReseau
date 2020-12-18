@@ -1,26 +1,24 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
 import champs.IChamps;
 
-public class Identification implements IChamps{
-	
+public class CodeICMP implements IChamps {
 	private List<String> valHex;
-	private int valDec;
+	private int value;
 	
-	public Identification(List<String> valHex) {
+	public CodeICMP(List<String> valHex) {
 		this.valHex = valHex;
-		this.valDec = Integer.parseInt( valHex.get(0)+valHex.get(1),16);
+		this.value = Integer.parseInt(valHex.get(0),16);
 	}
 
 
-
-	@Override 
+	@Override
 	public String toString() {
-		return "Identification: 0x"+valHex.get(0)+valHex.get(1)+" ("+valDec+")";
+		return "Code: "+value+" (0x"+valHex.get(0)+")";
 	}
-	
+
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";
@@ -31,5 +29,7 @@ public class Identification implements IChamps{
 		}
 		return s+this.toString();
 	}
+
 	
+
 }

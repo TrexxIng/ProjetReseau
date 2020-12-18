@@ -3,8 +3,8 @@ package exceptions;
 @SuppressWarnings("serial")
 public class ExceptionFormat extends Exception{
 
-	public ExceptionFormat(String s, int num) {
-		super("Erreur dans le fichier (ligne "+num+"): "+s+"\n");
+	public ExceptionFormat(String s, String filename, int num) {
+		super("Erreur dans le fichier '"+filename+"' (ligne "+num+"): "+s+"\n");
 	}
 	
 	@Override

@@ -1,26 +1,22 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
 import champs.IChamps;
 
-public class NextHopMTU implements IChamps {
-
+public class TOS implements IChamps {
 	private List<String> valHex;
-	private String value ="";
-	
-	public NextHopMTU(List<String> valHex) {
+
+	public TOS(List<String> valHex) {
 		this.valHex = valHex;
-		this.value = valHex.get(0)+valHex.get(1);
-		
 	}
 
 	
 	@Override
 	public String toString() {
-		return "Next hop MTU: 0x"+value;
+		return "Type of Service: 0x"+valHex.get(0);
 	}
-
+	
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";

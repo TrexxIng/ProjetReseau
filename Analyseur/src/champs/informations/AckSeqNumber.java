@@ -1,4 +1,4 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
@@ -52,29 +52,6 @@ public class AckSeqNumber implements IChamps {
 		return s+this.toString();
 	}
 	
-	private int valueNumber() {
-		String s = "";
-		int pwr;
-		int calc = 0;
-		if(valHex.size() < 5) {		
-			for(int i = 0; i<valHex.size(); i++) {
-				s += valHex.get(i);
-			}
-			return Integer.parseInt(s,16);
-		}
-
-		pwr = valHex.size();
-		for(int i = 0; i<valHex.size(); i++) {
-			s += valHex.get(i);
-			pwr--;
-			if(pwr%4 == 0) {
-				calc += Integer.parseInt(s,16) * Math.pow(16, pwr);
-				s = "";
-			}
-		}
-		calc += Integer.parseInt(s,16) * Math.pow(16, pwr);
-		return calc;
-		
-	}
+	
 
 }

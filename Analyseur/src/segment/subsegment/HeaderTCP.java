@@ -5,10 +5,10 @@ import java.util.List;
 
 import champs.*;
 import champs.adresseEtPort.Port;
+import champs.informations.AckSeqNumber;
+import champs.informations.UrgPointeur;
+import champs.informations.Windows;
 import champs.longueur.LengthQuartet;
-import champs.simple.AckSeqNumber;
-import champs.simple.UrgPointeur;
-import champs.simple.Windows;
 import exceptions.ExceptionIncoherence;
 import exceptions.ExceptionSupport;
 import exceptions.ExceptionTaille;

@@ -1,4 +1,4 @@
-package display;
+package analyseur;
 
 
 import java.util.ArrayList;

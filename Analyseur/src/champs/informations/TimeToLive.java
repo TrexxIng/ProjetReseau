@@ -1,24 +1,23 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
 import champs.IChamps;
 
-public class CodeICMP implements IChamps {
+public class TimeToLive implements IChamps {
 	private List<String> valHex;
-	private int value;
 	
-	public CodeICMP(List<String> valHex) {
-		this.valHex = valHex;
-		this.value = Integer.parseInt(valHex.get(0),16);
+	public TimeToLive(List<String> valHex) {
+		this.valHex = valHex;	
 	}
 
-
+	
 	@Override
 	public String toString() {
-		return "Code: "+value+" (0x"+valHex.get(0)+")";
+		return "Time To Live (TTL): "+Integer.parseInt(valHex.get(0),16);
+		
 	}
-
+	
 	@Override
 	public String formatDisplay(int tab) {
 		String s ="";
@@ -29,7 +28,5 @@ public class CodeICMP implements IChamps {
 		}
 		return s+this.toString();
 	}
-
-	
 
 }

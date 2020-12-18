@@ -1,6 +1,5 @@
 package champs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TraductionHTTP implements IChamps {

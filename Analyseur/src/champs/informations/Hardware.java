@@ -1,16 +1,14 @@
-package champs.simple;
+package champs.informations;
 
 import java.util.List;
 
 import champs.IChamps;
 
 public class Hardware implements IChamps {
-	private List<String> valHex;
 	private int value;
 	private String type = "";
 	
 	public Hardware(List<String> valHex) {
-		this.valHex = valHex;
 		this.value = Integer.parseInt(valHex.get(0)+valHex.get(1),16);
 		this.setType(this.value); 
 	}

@@ -1,4 +1,4 @@
-package display;
+package analyseur;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,7 +8,7 @@ import exceptions.ExceptionIncoherence;
 import exceptions.ExceptionSupport;
 import exceptions.ExceptionTaille;
 
-public class TrameDisplay {
+public class Tests {
 
 	public static void main(String[] args) throws IOException {
 		try {
@@ -16,12 +16,21 @@ public class TrameDisplay {
 			/** determine la liste d'octets à partir du fichier */
 			List<String> data1 = TraitementFichier.readFile2Col("data/ExempleHTTP2.txt");			
 			List<String> data2 = TraitementFichier.readFile2Col("data/ErreurTaille.txt");
+			/**List<List<String>> data3 = TraitementFichier.ReadFile("data/DoubleTrame.txt");*/
 			
 			System.out.println("-----------------------------------------------------");
 			displayTrame(data2);
 			System.out.println("-----------------------------------------------------");
 			displayTrame(data1);
 			System.out.println("-----------------------------------------------------");
+			
+			/**for(int i = 0; i<data3.size();i++) {
+				displayTrame(data3.get(i));
+				System.out.println("-----------------------------------------------------");
+			}*/
+			
+			/**TraitementFichier.writeFile("trame.txt", data3, true);*/
+			
 			
 		} catch (IOException e) {
 			System.out.println("Fichier non trouvé: vérifier son nom (ou le chemin relatif)");
