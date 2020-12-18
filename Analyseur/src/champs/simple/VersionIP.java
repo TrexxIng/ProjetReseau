@@ -16,12 +16,6 @@ public class VersionIP implements IChamps {
 	}
 
 
-
-	@Override
-	public boolean checkSize() {
-		if(quartet.length() == 1) return true;
-		return false;
-	}
 	
 	@Override
 	public String toString() {

@@ -15,11 +15,6 @@ public class Checksum implements IChamps {
 		this.check = false;
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.length() == 4) return true;
-		return false;
-	}
 	
 	public void compareChecksum(String value) {
 		check = true;

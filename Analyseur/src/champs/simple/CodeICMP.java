@@ -12,12 +12,7 @@ public class CodeICMP implements IChamps {
 		this.valHex = valHex;
 		this.value = Integer.parseInt(valHex.get(0),16);
 	}
-	
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
-	}
+
 
 	@Override
 	public String toString() {

@@ -43,11 +43,14 @@ public class Flags implements IChamps {
 			flags.add(new PSH(valbits));
 			flags.add(new RST(valbits));
 			flags.add(new SYN(valbits));
-			flags.add(new FIN(valbits));			
+			flags.add(new FIN(valbits));
+			
+			/** type pour affichage */
 			for(int i = 1; i<flags.size(); i++) {
 				if(flags.get(i).getValue() == 1) {
-					this.typeFlags = flags.get(i).getType();
-					i = flags.size();
+					if(!typeFlags.equals(""))
+						this.typeFlags += ",";
+					this.typeFlags += flags.get(i).getType();
 				}
 			}
 		}
@@ -77,12 +80,7 @@ public class Flags implements IChamps {
 		return decToBits;
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(type == "IP" && flags.size() == 4) return true;
-		if(type != "IP" && flags.size() == 7) return true;
-		return false;
-	}
+
 	
 	@Override 
 	public String toString() {

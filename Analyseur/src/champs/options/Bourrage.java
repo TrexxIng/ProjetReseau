@@ -16,10 +16,6 @@ public class Bourrage implements IChamps {
 		}
 	}
 
-	@Override
-	public boolean checkSize() {
-		return true;
-	}
 	
 	@Override
 	public String toString() {

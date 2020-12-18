@@ -14,12 +14,6 @@ public class AdresseMask implements IChamps {
 	}
 
 
-
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 4) return true;
-		return false;
-	}
 	
 	@Override
 	public String toString() {

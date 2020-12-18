@@ -16,10 +16,6 @@ public class Data implements IChamps {
 		this.data = sb.toString();
 	}
 
-	@Override
-	public boolean checkSize() {
-		return true;
-	}
 
 	@Override
 	public String toString() {

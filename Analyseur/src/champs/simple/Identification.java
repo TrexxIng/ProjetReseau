@@ -16,12 +16,6 @@ public class Identification implements IChamps{
 
 
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 2) return true;
-		return false;
-	}
-
 	@Override 
 	public String toString() {
 		return "Identification: 0x"+valHex.get(0)+valHex.get(1)+" ("+valDec+")";

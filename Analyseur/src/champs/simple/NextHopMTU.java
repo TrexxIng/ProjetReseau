@@ -15,10 +15,6 @@ public class NextHopMTU implements IChamps {
 		
 	}
 
-	@Override
-	public boolean checkSize() {
-		return valHex.size() == 2;
-	}
 	
 	@Override
 	public String toString() {

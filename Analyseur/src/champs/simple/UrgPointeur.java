@@ -13,11 +13,6 @@ public class UrgPointeur implements IChamps {
 	}
 
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.length() == 4) return true;
-		return false;
-	}
 
 	@Override
 	public String toString() {

@@ -30,12 +30,6 @@ public class AdresseMAC implements IChamps {
 	}
 
 
-
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 6) return true;
-		return false;
-	}
 	
 	@Override
 	public String formatDisplay(int tab) {

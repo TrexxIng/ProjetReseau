@@ -12,11 +12,6 @@ public class Windows implements IChamps {
 		this.valHex = valHex.get(0)+valHex.get(1);
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.length() == 4) return true;
-		return false;
-	}
 
 	@Override
 	public String toString() {

@@ -14,11 +14,6 @@ public class Operation implements IChamps {
 		setType();
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 2) return true;
-		return false;
-	}
 
 	@Override
 	public String toString() {

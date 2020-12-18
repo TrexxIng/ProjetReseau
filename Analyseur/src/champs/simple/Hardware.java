@@ -15,11 +15,6 @@ public class Hardware implements IChamps {
 		this.setType(this.value); 
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 2) return true;
-		return false;
-	}
 
 	@Override
 	public String toString() {

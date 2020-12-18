@@ -15,12 +15,6 @@ public class TypeEther implements IChamps {
 	}
 
 
-
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 2) return true;
-		return false;
-	}
 	
 	private void setType() {
 		int n0 = Integer.parseInt(valHex.get(0),16);

@@ -13,13 +13,6 @@ public class TotalLength implements IChamps {
 		this.longueur = Integer.parseInt( valHex.get(0)+valHex.get(1),16);
 	}
 
-
-
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 2) return true;
-		return false;
-	}
 	
 	@Override 
 	public String toString() {

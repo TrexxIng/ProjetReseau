@@ -19,11 +19,6 @@ public class Protocol implements IChamps {
 			
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
-	}
 	
 	
 	@Override

@@ -11,12 +11,6 @@ public class TOS implements IChamps {
 		this.valHex = valHex;
 	}
 
-
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
-	}
 	
 	@Override
 	public String toString() {

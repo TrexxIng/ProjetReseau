@@ -9,11 +9,6 @@ public class Vide implements IChamps {
 	}
 
 	@Override
-	public boolean checkSize() {
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return message;
 	}

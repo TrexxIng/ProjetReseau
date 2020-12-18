@@ -16,11 +16,6 @@ public class TypeICMP implements IChamps {
 		this.setType(this.value); 
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
-	}
 	
 	private void setType(int i) {
 		if(i == 1) {

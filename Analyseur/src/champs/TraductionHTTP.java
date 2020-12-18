@@ -18,11 +18,7 @@ public class TraductionHTTP implements IChamps {
 		message = builder.toString();
 	}
 
-	@Override
-	public boolean checkSize() {
-		return true;
-	}
-	
+
 	@Override
 	public String toString() {
 		return message;

@@ -16,11 +16,6 @@ public class Length1Bytes implements IChamps {
 		this.longueur = Integer.parseInt(valHex.get(0), 16);
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size() == 1) return true;
-		return false;
-	}
 	
 	@Override
 	public String toString() {

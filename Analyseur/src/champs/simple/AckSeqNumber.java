@@ -7,6 +7,7 @@ import champs.IChamps;
 public class AckSeqNumber implements IChamps {
 	private List<String> valHex;
 	private boolean ackseq;
+	private long value;
 	
 	/**
 	 * Acknowlegment Number ou Sequence Number
@@ -17,13 +18,14 @@ public class AckSeqNumber implements IChamps {
 		this.valHex = valHex;
 		this.ackseq = ackseq;
 		
+		String s= "";
+		for(int i = 0; i<valHex.size(); i++) {
+			s += valHex.get(i);
+		}
+		this.value = Long.parseLong(s,16);
+		
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(valHex.size()%2 == 0) return true;
-		return false;
-	}
 	
 	@Override 
 	public String toString() {
@@ -31,12 +33,12 @@ public class AckSeqNumber implements IChamps {
 		if(ackseq)
 			s = "Acknowlegment";
 		
-		s = s+" Number: 0x";
+		s = s+" Number: "+value+" (0x";
 				
 		for(int i = 0; i<valHex.size(); i++) {
 			s += valHex.get(i);
 		}
-		return  s;
+		return  s+")";
 	}
 
 	@Override
@@ -48,6 +50,31 @@ public class AckSeqNumber implements IChamps {
 			}
 		}
 		return s+this.toString();
+	}
+	
+	private int valueNumber() {
+		String s = "";
+		int pwr;
+		int calc = 0;
+		if(valHex.size() < 5) {		
+			for(int i = 0; i<valHex.size(); i++) {
+				s += valHex.get(i);
+			}
+			return Integer.parseInt(s,16);
+		}
+
+		pwr = valHex.size();
+		for(int i = 0; i<valHex.size(); i++) {
+			s += valHex.get(i);
+			pwr--;
+			if(pwr%4 == 0) {
+				calc += Integer.parseInt(s,16) * Math.pow(16, pwr);
+				s = "";
+			}
+		}
+		calc += Integer.parseInt(s,16) * Math.pow(16, pwr);
+		return calc;
+		
 	}
 
 }

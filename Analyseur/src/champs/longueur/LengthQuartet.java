@@ -23,11 +23,6 @@ public class LengthQuartet implements IChamps {
 		
 	}
 
-	@Override
-	public boolean checkSize() {
-		if(quartet.length() == 1) return true;
-		return false;
-	}
 
 	public int getTailleIP() {
 		return longueur;

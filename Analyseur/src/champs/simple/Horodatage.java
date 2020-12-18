@@ -21,10 +21,6 @@ public class Horodatage implements IChamps {
 		
 	}
 
-	@Override
-	public boolean checkSize() {
-		return valHex.size() == 4;	
-	}
 
 	@Override
 	public String toString() {
