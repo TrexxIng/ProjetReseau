@@ -96,7 +96,7 @@ public class Trame {
 					suite = "Rien";
 				}
 			}
-			
+			/** apres l'ajout de chaque trame, detecte des erreurs interrompant la suite */
 			detectMessageError();
 		}
 		
