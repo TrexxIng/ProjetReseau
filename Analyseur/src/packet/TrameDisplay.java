@@ -15,7 +15,7 @@ public class TrameDisplay {
 		try {
 			
 			/** determine la liste d'octets à partir du fichier */
-			data = TraitementFichier.readFile2Col("data/ExempleTCP2.txt");			
+			data = TraitementFichier.readFile2Col("data/ExempleHTTP2.txt");			
 			//data = TraitementFichier.readFile2Col("data/ErreurTaille.txt");
 			
 			Trame trame = new Trame(data);	
