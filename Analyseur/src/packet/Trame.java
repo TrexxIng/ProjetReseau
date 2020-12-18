@@ -73,8 +73,13 @@ public class Trame {
 			}
 			/** ajout de HTTP */
 			else if(suite == "HTTP") {
-				data = this.addHTTP(data);
-				suite =  this.getNextSegment();
+				if(data.size() > 0) {
+					data = this.addHTTP(data);
+					suite =  this.getNextSegment();
+				}
+				else {
+					suite = "Rien";
+				}
 			}			
 			/** ajout de ICMP */
 			else if(suite == "ICMP") {
