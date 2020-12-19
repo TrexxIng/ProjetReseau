@@ -19,7 +19,7 @@ all: compilation
 compilation:
 	$(JCC) $(FLAGS) $(CLASS)
 	@echo " "
-	@echo " Compilation reussi \n Execution:java -cp bin analyseur.Analyseur <filenameEntry> <multifile> <filenameExit>"
+	@echo " Compilation reussi \n Execution: java -cp bin analyseur.Analyseur <filenameEntry> <multifile> <filenameExit>"
 	@echo " information sur l'execution: make help"
 	@echo " "	
 clean:
