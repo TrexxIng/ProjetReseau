@@ -53,9 +53,27 @@ public class TypeOptions implements IChamps{
 			else if(i == 3) {
 				this.type = "Window scale factor";
 			}
+			else if(i == 6) {
+				this.type = "Echo";
+			}
+			else if(i == 7) {
+				this.type = "Echo reply";
+			}
 			else if(i == 8) {
 				this.type = "Timestamp";
 			}
+			else if(i == 14) {
+				this.type = "Alternate checksum request";
+			}
+			else if(i == 15) {
+				this.type = "Alternate checksum data";
+			}
+			else if(i == 26) {
+				this.type = "TCP Compression Filter";
+			}			
+			else if(i == 28) {
+				this.type = "User Timeout";
+			}			
 			else {
 				this.type = "option non listée";
 			}

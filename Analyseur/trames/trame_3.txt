@@ -44,8 +44,8 @@ Trame: 153 octets
 				Type: Pas d’opération (1)
 			Option: Pas d’opération (1 octets)
 				Type: Pas d’opération (1)
-			Option: option non listée (10 octets)
-				Type: option non listée (8)
+			Option: Timestamp (10 octets)
+				Type: Timestamp (8)
 				Longueur option: 10 octets (0x0a)
 				Data (8 octets): 0x0e0ee9c0f5204fd5
 	Hypertext Transfer Protocol
