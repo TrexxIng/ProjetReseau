@@ -8,9 +8,9 @@ import exceptions.ExceptionFormat;
 public class Analyseur {
 
 	public static void main(String[] args) throws IOException {
-		String message ="On demande 3 arguments\nArguments: <filenameEntry> <multi> <filenameExit>\n"
+		String message ="On demande 3 arguments\nArguments: <filenameEntry> <multifile> <filenameExit>\n"
 				+ "\t filenameEntry: nom du fichier d'entrée (chemin relatif)\n"
-				+ "\t multi: 0 si on ecrit toute le trame sur le même fichier, 1 si on ecrit une trame par fichier\n"
+				+ "\t multifile: 0 si on ecrit toute le trame sur le même fichier, 1 si on ecrit une trame par fichier\n"
 				+ "\t filenameExit: nom du fichier en sortie (sera ecrit dans le dossier trames)\n";
 	
 		try {
