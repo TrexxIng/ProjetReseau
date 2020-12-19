@@ -101,7 +101,7 @@ public class Ethernet implements ITrame {
 		if(nextSegment() != "Datagramme IP" 
 				&& nextSegment() != "ARP" 
 				&& nextSegment() != "RARP")
-			throw new ExceptionSupport("Ethertype (type de la trame Eternet) non supporté par l'analyseur, IPv4, ARP et RARP");
+			throw new ExceptionSupport("Ethertypes (type de la trame Eternet) supporté par l'analyseur sont IPv4, ARP et RARP");
 	}
 
 
