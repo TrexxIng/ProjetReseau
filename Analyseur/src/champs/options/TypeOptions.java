@@ -50,6 +50,12 @@ public class TypeOptions implements IChamps{
 			if(i == 4) {
 				this.type = "Maximum Segment Size";
 			}
+			else if(i == 3) {
+				this.type = "Window scale factor";
+			}
+			else if(i == 8) {
+				this.type = "Timestamp";
+			}
 			else {
 				this.type = "option non listée";
 			}
