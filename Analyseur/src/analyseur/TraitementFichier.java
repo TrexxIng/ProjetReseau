@@ -188,13 +188,17 @@ public class TraitementFichier {
 		
 		/** extension du fichier */
 		String extension = "";
+		if (fileName.charAt(fileName.length()-1)=='.' || fileName.charAt(fileName.length()-1)=='/'){
+			fileName = fileName.replace(fileName.substring(fileName.length()-1), "");
+		}
 		int f = fileName.lastIndexOf('.');
 		int p = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
-		if (f > p) {
+		if(extension.equals("")) {
+			extension = ".txt";
+		}
+		else if (f > p) {
 		    extension = "."+fileName.substring(f+1);
 		}
-		if(extension.contentEquals("."))
-			extension = ".txt";
 		
 		/** nom du fichier en sortie */
 		String fileNameExit;
@@ -202,7 +206,7 @@ public class TraitementFichier {
 		try {
 			/** tout ecrire en un seul fichier */
 			if(!multiple) {
-				fileNameExit = dossier+fileName;
+				fileNameExit = dossier+fileName+extension;
 				FileWriter exitFile = new FileWriter(fileNameExit); 
 				exitFile.write(separateur);
 				for(int i = 0; i<data.size();i++) {

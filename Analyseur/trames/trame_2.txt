@@ -1,0 +1,40 @@
+Problème d'incohérence dans les données: taille totale indiquée en données (124 octets) différente de la taille du datagramme IP(123 octets)
+Trame: 137 octets
+	Trame Ethernet: 14 octets
+		adresse MAC Destination: 08:00:20:0a:70:66
+		adresse MAC Source: 08:00:20:0a:ac:96
+		Type Ethernet: 0x0800 (Datagramme IP)
+	Datagramme Internet Protocol: 60 octets
+		Entête IP: 20 octets
+			Version: 4
+			Longueur de l'entête IP: 60 octets (15)
+			Type of Service: 0x00
+			Longueur totale: 0x007c (124 octets)
+			Identification: 0x3f86 (16262)
+			Flags: 0x0000 (0)
+				0... .... .... .... = Reserved
+				.0.. .... .... .... = Don't Fragment (DF): fragmentation autorisé
+				..0. .... .... .... = More Fragment (MF): non suivi d'un fragment
+				...0 0000 0000 0000 = Fragment Offset: 0
+			Time To Live (TTL): 251
+			Protocole: 0x01 (ICMP)
+			Checksum: 0x49af [valeur: non vérifié]
+			adresse IP Source: 192.33.159.6
+			adresse IP Destination: 132.227.61.5
+		Options: 40 octets
+			Option: Enregistrement de route (39 octets)
+				Type: Enregistrement de route (7)
+				Longueur option: 39 octets (0x27)
+				Pointeur: 40 (0x28)
+				adresse IP : 132.227.60.32
+				adresse IP : 192.44.65.18
+				adresse IP : 192.70.71.5
+				adresse IP : 192.33.159.2
+				adresse IP : 192.33.159.6
+				adresse IP : 192.70.71.6
+				adresse IP : 192.44.65.26
+				adresse IP : 132.227.60.30
+			Option: Fin d'options EOOL (1 octets)
+				Type: Fin d'options EOOL (0)
+	Données (non analysées): 63 octets
+		Data (63 octets): 0x0000aa562f00000029368c410003862b08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f30313233343536
