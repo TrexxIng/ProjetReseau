@@ -47,7 +47,12 @@ public class TypeOptions implements IChamps{
 			}
 		}
 		else {
-			this.type = "option non listée";
+			if(i == 4) {
+				this.type = "Maximum Segment Size";
+			}
+			else {
+				this.type = "option non listée";
+			}
 		}
 		
 	}

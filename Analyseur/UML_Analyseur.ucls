@@ -3,7 +3,7 @@
   realizations="true" associations="false" dependencies="false" nesting-relationships="false" router="FAN">  
   <class id="1" language="java" name="analyseur.Analyseur" project="Analyseur" 
     file="/Analyseur/src/analyseur/Analyseur.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="447" y="95"/>    
+    <position height="-1" width="-1" x="471" y="93"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="analyseur.TraitementFichier" project="Analyseur" 
     file="/Analyseur/src/analyseur/TraitementFichier.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="294" y="96"/>    
+    <position height="-1" width="-1" x="293" y="86"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="analyseur.Trame" project="Analyseur" file="/Analyseur/src/analyseur/Trame.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="294" y="186"/>    
+    <position height="-1" width="-1" x="291" y="176"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -145,75 +145,111 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <dependency id="17">    
+  <class id="17" language="java" name="exceptions.ExceptionFormat" project="Analyseur" 
+    file="/Analyseur/src/exceptions/ExceptionFormat.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="704" y="206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="exceptions.ExceptionIncoherence" project="Analyseur" 
+    file="/Analyseur/src/exceptions/ExceptionIncoherence.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="702" y="266"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="exceptions.ExceptionSupport" project="Analyseur" 
+    file="/Analyseur/src/exceptions/ExceptionSupport.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="51" width="126" x="645" y="120"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="exceptions.ExceptionTaille" project="Analyseur" 
+    file="/Analyseur/src/exceptions/ExceptionTaille.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="707" y="85"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
+  <dependency id="21">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="18">    
+  <dependency id="22">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
-  <dependency id="19">    
+  <dependency id="23">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="12"/>  
   </dependency>  
-  <dependency id="20">    
+  <dependency id="24">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="21">    
+  <dependency id="25">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <dependency id="22">    
+  <dependency id="26">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="14"/>  
   </dependency>  
-  <dependency id="23">    
+  <dependency id="27">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="9"/>  
   </dependency>  
-  <association id="24">    
+  <association id="28">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="25" name="listOption"/>      
-      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
+      <attribute id="29" name="listOption"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="27">    
+  <dependency id="31">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="11"/>  
   </dependency>  
-  <dependency id="28">    
+  <dependency id="32">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="5"/>  
   </dependency>  
-  <dependency id="29">    
+  <dependency id="33">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="16"/>  
   </dependency>  
-  <dependency id="30">    
+  <dependency id="34">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <dependency id="31">    
+  <dependency id="35">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="32">    
+  <dependency id="36">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="9"/>  
   </dependency>  
-  <dependency id="33">    
+  <dependency id="37">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
-  <dependency id="34">    
+  <dependency id="38">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
-  <dependency id="35">    
+  <dependency id="39">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
