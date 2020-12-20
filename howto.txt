@@ -1,0 +1,49 @@
+HowTo: Comment faire fonctionner le programme ?
+
+
+
+  0) Arguments: 
+
+L'executable demandera 3 arguments:
+   Arguments: <filenameEntry> <multifile> <filenameExit>
+	   filenameEntry: nom du fichier d'entrée (chemin relatif)
+	   multifile: 0 si on ecrit toute le trame sur le même fichier, 1 si on ecrit une trame par fichier
+	   filenameExit: nom du fichier en sortie (sera ecrit dans le dossier trames)
+
+
+
+  1) avec eclipse:
+
+Importer le dossier sur eclipse
+
+clique droit sur le fichier Analyseur/src/analyseur/Analyseur.java -> Run As-> Run Configurations
+Une fenêtre s'ouvre:
+   - dans l'onglet 'Main' : Project = Analyseur ; Main class = analyseur.Analyseur
+   - dans l'onglet 'Arguments' : Program Arguments = [ trois arguments séparés d'un espace] 
+ -> Apply -> Run
+   
+Si le fichier d'entrée ou le nombre d'arguments est mauvais, il affichera un message sur le terminal
+
+Si les fichiers n'apparaissent pas dans le dossier trames/
+  -> clique droit sur le dossier -> Refresh
+  
+  
+  
+  2) avec le terminal (fonctionne sur Linux, pas testé sur Windows/Mac)
+  
+pour compiler, se placer dans le dossier Analyseur où se trouve le Makefile:
+ 
+   commande: make 
+   -> pour compiler (les fichiers seront dans le bin/)
+   
+   commande: make clean
+   -> pour effacer les fichiers compilés (vide le bin/)
+   commande: make help
+   
+   -> si vous ne vous rappelez plus comment lancer le programme
+   
+pour executer:
+  commande: java -cp bin analyseur.Analyseur <filenameEntry> <multifile> <filenameExit>
+  
+notes:
+NE PAS MODIFIER LE MAKEFILE (même si on ajoute des classes)
