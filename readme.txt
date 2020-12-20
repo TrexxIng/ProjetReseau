@@ -112,10 +112,10 @@ segment/
           -- TCP.java et InternetProtocol.java seront composés une classe Header_ et une classe AllOptions
     - DataDump.java permet de compresser les octets en un seul String pour l'affichage, on utilisera ceci lorsque le segment suivant est inconnu
     
-    Parmi les fonctions communes, les plus importantes sont:
-      - nextSegment() qui nous donne un String correspondant au segment suivant, il donnera "Rien" s'il n'y a rien et "Data" s'il est inconnu
-      - formatDisplay(int tab) pour l'affichage avec tabulation
-      - errorDetect() pour la detection d'erreur interrompant la traduction de la trame
+  Parmi les fonctions communes, les plus importantes sont:
+    - nextSegment() qui nous donne un String correspondant au segment suivant, il donnera "Rien" s'il n'y a rien et "Data" s'il est inconnu
+    - formatDisplay(int tab) pour l'affichage avec tabulation
+    - errorDetect() pour la detection d'erreur interrompant la traduction de la trame
       
     
 _____________________________________________________________________
@@ -272,7 +272,7 @@ _____________________________________________________________________
 	      		type = "[nouveau segment]";
               	}
         
-  Par la suite, modifier trame en suivant le modèle des autres segments afin d'inclure le nouveau segment:
+  Par la suite, modifier Trame.java en suivant le modèle des autres segments afin d'inclure le nouveau segment:
   	
 	/** ajout de [nouveau segement] */
 	else if(suite == "[nom du segment]") {
