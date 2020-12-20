@@ -257,17 +257,19 @@ _____________________________________________________________________
 
   7) Ajouter un nouveau segment
   
-  Si on désire ajouter de nouvelles options:
-    - déterminer le segment de la couche la plus externe
+  Si on désire ajouter un nouveau segment:
+    - déterminer sur quelle couche ce segment est, determiner le segment de la couche supérieur et les segments de sa couche interne
     - ajouter le segment dans le dossier segment/ , le segment utilisera l'interface ITrame
     - determiner ses champs
     - s'ils n'existent pas déjà, ajouter les manquants dans le dossier champs utilisant l'interface IChamps
     - s'il y a des flags, utiliser la classe Flags.java, la modifier suivant le modèle de IP, TCP et DNS et ajouter les flags 
         manquant dans le dossier flags/ en utilisant l'interface IFlags
         
-  Cherche ensuite la couche supérieure: il faut regarder la fonction getNextSegment() et aller dans le champs donnant la valeur
-  afin qu'il prennent en compte le nouveau segment. Par exemple si on ajoute un nouveau type ethernet 0x0110:
-      dans Ethernet, getNextSegment() = ethernet.typeEthernet -> aller dans la classe TypeEther -> ajouter:
+  Regarder ensuite la couche supérieure: 
+    - il faut retrouver la fonction getNextSegment() du segment de la couche supérieure
+    - aller dans le champs determinant le segment suivant afin qu'il prennent en compte ce nouveau segment
+  Par exemple si on ajoute un nouveau type ethernet 0x0110:
+      Ethernet -> getNextSegment() = 'ethernet.typeEthernet' -> aller dans la classe TypeEther -> ajouter:
       		else if(n0 == 1 && n1 == 16) {
 	      		type = "[nouveau segment]";
               	}
@@ -291,18 +293,18 @@ _____________________________________________________________________
 _____________________________________________________________________
     
     
-    8) Format du fichier d'entrée
+  8) Format du fichier d'entrée
     
-    Sur wireshark, deux possibilités d'exportation de la trame:
-      - click droit sur les octets -> Copy Bytes as Hex + ASCII Dump -> coller sur un fichier texte
-      - click droit sur les octets -> Copy Bytes as Hex Dump -> coller sur un fichier texte
-      
-    Important:
-      - les Offset et les octets seront normalement séparé par 3 espaces 
-      - les octets et le ASCII Dump (s'il est là) seront normalement séparé par 3 espaces 
-      - on peut coller plusieurs trames ensembles, elles doivent être séparé par l'offset 000
-      
-    Exemple avec 2 trames et les 2 export différent de wireshark:
+  Sur wireshark, deux possibilités d'exportation de la trame:
+    - click droit sur les octets -> Copy Bytes as Hex + ASCII Dump -> coller sur un fichier texte
+    - click droit sur les octets -> Copy Bytes as Hex Dump -> coller sur un fichier texte
+    
+  Important:
+    - les Offset et les octets seront normalement séparé par 3 espaces 
+    - les octets et le ASCII Dump (s'il est là) seront normalement séparé par 3 espaces 
+    - on peut coller plusieurs trames ensembles, elles doivent être séparé par l'offset 000
+    
+  Exemple avec 2 trames et les 2 export différent de wireshark:
     
 0000   3c 98 72 90 46 b8 bc 85 56 7b c7 b3 08 00 45 00   <.r.F...V{....E.
 0010   00 8b 8f c6 40 00 40 06 6f fb c0 a8 01 20 23 de   ....@.@.o.... #.
