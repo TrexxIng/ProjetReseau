@@ -12,7 +12,6 @@ public class OtherDNS implements IChamps {
 	private List<String> listData;
 	private List<IChamps> champs;
 	private String type;
-	private String data;
 	private int size;
 	
 	public OtherDNS(List<String> valHex,int nbrequete, String type) {

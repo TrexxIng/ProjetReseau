@@ -5,7 +5,6 @@ import java.util.List;
 
 import champs.Flags;
 import champs.IChamps;
-import champs.informations.Hardware;
 import champs.informations.Identification;
 import champs.nbQuestRep.NbAdditional;
 import champs.nbQuestRep.NbAuthority;
