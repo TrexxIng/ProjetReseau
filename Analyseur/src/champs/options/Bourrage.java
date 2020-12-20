@@ -8,12 +8,14 @@ public class Bourrage implements IChamps {
 
 	private List<String> valHex;
 	private String value ="";
+	private long valuePad;
 	
 	public Bourrage(List<String> valHex) {
 		this.valHex = valHex;
 		for(int i = 0; i<this.valHex.size();i++) {
 			this.value += valHex.get(i);
 		}
+		this.valuePad = Long.parseLong(value, 16);
 	}
 
 	
@@ -31,6 +33,10 @@ public class Bourrage implements IChamps {
 			}
 		}
 		return s+this.toString();
+	}
+	
+	public boolean paddingEqualsZero() {
+		return valuePad == 0;
 	}
 
 }

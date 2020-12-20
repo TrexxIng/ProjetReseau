@@ -14,6 +14,7 @@ public class Padding implements ITrame {
 	private List<IChamps> listBourrage;
 	private List<String> listData;
 	private int sizeBourrage = 0;
+	private boolean padZero = true;
 	
 	public Padding(List<String> listOctets, int size) {
 		this.listData = listOctets;
@@ -25,7 +26,8 @@ public class Padding implements ITrame {
 			listData.remove(0);
 		}
 		sizeBourrage += list.size();
-		listBourrage.add(new Bourrage(list));	
+		listBourrage.add(new Bourrage(list));
+		this.padZero = ((Bourrage)listBourrage.get(0)).paddingEqualsZero();
 	}
 
 	@Override
@@ -67,6 +69,10 @@ public class Padding implements ITrame {
 	public String nextSegment() {
 		return null;
 		
+	}
+	
+	public boolean padAtZero() {
+		return padZero;
 	}
 
 	@Override

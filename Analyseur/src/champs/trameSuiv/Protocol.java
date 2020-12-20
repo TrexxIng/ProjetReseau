@@ -37,7 +37,7 @@ public class Protocol implements IChamps {
 		} else if(val  == 17) {
 			protocol = "UDP";
 		}  else {
-			protocol = "protocole non inconnu";;
+			protocol = "protocole non listé";;
 		}
 	}
 	

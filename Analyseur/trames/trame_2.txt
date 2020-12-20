@@ -1,5 +1,6 @@
 Problème d'incohérence dans les données: taille totale indiquée en données (124 octets) différente de la taille du datagramme IP(123 octets)
 
+
 Trame: 137 octets
 
 	Trame Ethernet: 14 octets
@@ -42,3 +43,9 @@ Trame: 137 octets
 
 	Données (non analysées): 63 octets
 		Data (63 octets): 0x0000aa562f00000029368c410003862b08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f30313233343536
+
+
+
+ Verification de la trame requise	
+	
+	

@@ -15,6 +15,7 @@ public class TCP implements ITrame {
 	private List<String> listData;
 	private int sizeTCP;
 	private String port;
+	private boolean zeroPad= true;
 	
 	public TCP(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeTCP = 0;
@@ -40,6 +41,7 @@ public class TCP implements ITrame {
 		if(padding > 0) {
 			Padding pad = new Padding(listData, padding);
 			listTCP.add(pad);
+			zeroPad = pad.padAtZero();
 			sizeTCP += pad.getSize();
 			listData = pad.getData();
 		}
@@ -92,12 +94,20 @@ public class TCP implements ITrame {
 	@Override
 	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
 		for(int i =0; i<listTCP.size(); i++)
-			listTCP.get(i).errorDetect();	
+			listTCP.get(i).errorDetect();
 	}
 	
 	@Override
 	public String messageVerification() {
-		return listTCP.get(0).messageVerification();
+		String message = listTCP.get(0).messageVerification();
+		if(!zeroPad) {
+			if(!message.equals("")) {
+				message += ", ";
+			}
+			message += "Padding TCP: le bourrage de la trame IP n'est pas à zero";
+		}
+		return message;
+		
 	}
 
 }

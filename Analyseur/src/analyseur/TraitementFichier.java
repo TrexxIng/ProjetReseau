@@ -63,15 +63,15 @@ public class TraitementFichier {
 	
 
 	/**
-	 * lit le fichier contenant trois colonnes et retourne les octets
+	 * lit le fichier contenant deux ou trois colonnes et retourne les octets
 	 * - première colonne pour l'Offset
 	 * - deuxieme colonne pour les octets
-	 * - troisieme pour les octets en ascii
+	 * - troisieme pour les octets en ascii 
 	 * @param file: nom du fichier
 	 * @return liste de String, chacun correspondant à un octet ou Offset
 	 * @throws IOException fichier non trouvé
 	 */
-	private static List<String> readFile3Col(String file) throws IOException{
+	private static List<String> readFileparCol(String file) throws IOException{
 		List<String> hex = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(file)); 
 		String line; 
@@ -121,9 +121,18 @@ public class TraitementFichier {
 		return hex;
 	}
 	
+	
+	/**
+	 * lit le fichier et extrait les octets en regardant s'il n'y a pas d'erreur
+	 * d'Offset
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 * @throws ExceptionFormat
+	 */
 	public static List<List<String>> ReadFile(String file) throws IOException, ExceptionFormat{
 		/** octets et offset */
-		List<String> hex = readFile3Col(file);	
+		List<String> hex = readFileparCol(file);	
 		/** liste de trames */
 		List<List<String>> listData = new ArrayList<>();
 		/** une trame (liste d'octets) */
@@ -160,7 +169,7 @@ public class TraitementFichier {
 					ligne++;
 				} 
 				else {
-					throw new ExceptionFormat("erreur dans la numérotation des Offset",file,ligne);
+					throw new ExceptionFormat("erreur dans la numérotation des Offset",file,ligne+1);
 				}
 			}
 			if(mot.length() == 2) {

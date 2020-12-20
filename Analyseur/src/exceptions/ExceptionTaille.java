@@ -4,7 +4,7 @@ package exceptions;
 public class ExceptionTaille extends Exception{
 
 	public ExceptionTaille(String s) {
-		super("Probleme de taille: "+s+"\n");
+		super("Probleme de taille: "+s+"\n\n");
 	}
 	
 	@Override

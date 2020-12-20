@@ -4,7 +4,7 @@ package exceptions;
 public class ExceptionFormat extends Exception{
 
 	public ExceptionFormat(String s, String filename, int num) {
-		super("Erreur dans le fichier '"+filename+"' (ligne "+num+"): "+s+"\n");
+		super("Erreur dans le fichier '"+filename+"' (ligne "+num+"): "+s+"\n\n");
 	}
 	
 	@Override

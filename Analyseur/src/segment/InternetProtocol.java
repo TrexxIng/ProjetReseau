@@ -15,6 +15,7 @@ public class InternetProtocol implements ITrame {
 	private List<String> listData;
 	private int sizeIP;
 	private String protocol;
+	private boolean zeroPad = true;
 	
 	public InternetProtocol(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeIP = 0;
@@ -39,6 +40,7 @@ public class InternetProtocol implements ITrame {
 		/** Padding */
 		if(padding > 0) {
 			Padding pad = new Padding(listData, padding);
+			zeroPad = pad.padAtZero();
 			listIP.add(pad);
 			sizeIP += pad.getSize();
 			listData = pad.getData();
@@ -99,7 +101,14 @@ public class InternetProtocol implements ITrame {
 
 	@Override
 	public String messageVerification() {
-		return listIP.get(0).messageVerification();
+		String message = listIP.get(0).messageVerification();
+		if(!zeroPad) {
+			if(!message.equals("")) {
+				message += "\n";
+			}
+			message += "Padding IP: le bourrage de la trame IP n'est pas à zero";
+		}
+		return message;
 	}
 	
 

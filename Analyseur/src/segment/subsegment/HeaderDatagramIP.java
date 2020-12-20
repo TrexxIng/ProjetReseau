@@ -203,6 +203,8 @@ public class HeaderDatagramIP implements ITrame {
 		if(tailleCoherente != taillePaquet)
 			throw new  ExceptionIncoherence("taille totale indiquée en données ("+tailleCoherente+" octets) différente de la taille du datagramme IP("+
 			taillePaquet+" octets)");
+		if(getProtocol().equals("protocole non listé"))
+			throw new ExceptionSupport("protocole trouvé dans le datagramme IP ne permet pas de continuer l'analyser");
 	}
 
 
@@ -212,6 +214,7 @@ public class HeaderDatagramIP implements ITrame {
 	public String messageVerification() {
 		if(reserved != 0)
 			return "Datagramme IP: le bit réservé des flags n'est pas à zéro";
+		
 		return "";
 	}
 

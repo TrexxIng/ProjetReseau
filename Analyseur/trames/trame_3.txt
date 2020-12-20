@@ -60,3 +60,10 @@ Trame: 153 octets
 		Connection: close
 		
 		
+
+
+
+ Verification de la trame requise	
+	
+	
+	

@@ -4,7 +4,7 @@ package exceptions;
 public class ExceptionSupport extends Exception{
 
 	public ExceptionSupport(String s) {
-		super("Non supporté par l'analyseur: "+s+"\n");
+		super("Non supporté par l'analyseur: "+s+"\n\n");
 	}
 	
 	@Override
