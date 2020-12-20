@@ -245,7 +245,7 @@ exceptions/
   
    On utilise 4 exceptions afin de connaitre les erreurs dans le programme:
       - ExceptionFormat permet de detecter les erreurs dans le fichiers d'entrée
-      - s futurExceptionIncohérence affichera les erreurs des octets (par exemple si IHL est égal à 4 alors qu'il doit être au minimum à 5)
+      - ExceptionIncohérence affichera les erreurs des octets (par exemple si IHL est égal à 4 alors qu'il doit être au minimum à 5)
       - ExceptionSupport permet d'afficher un message indiquant que l'analyseur ne connait pas le segment suivant (par exemple si
           le type Ethernet n'est ni ARP, RARP ou Datagramme IP)
       - ExceptionTaille permet de detecter si le nombre d'octets est suffisant pour traduire un segment (par exemple le Datagramme IP doit
@@ -268,24 +268,24 @@ _____________________________________________________________________
   Cherche ensuite la couche supérieure: il faut regarder la fonction getNextSegment() et aller dans le champs donnant la valeur
   afin qu'il prennent en compte le nouveau segment. Par exemple si on ajoute un nouveau type ethernet 0x0110:
       dans Ethernet, getNextSegment() = ethernet.typeEthernet -> aller dans la classe TypeEther -> ajouter:
-              else if(n0 == 1 && n1 == 16) {
-			          type = "[nouveau segment]";
-              }
+      		else if(n0 == 1 && n1 == 16) {
+	      		type = "[nouveau segment]";
+              	}
         
   Par la suite, modifier trame en suivant le modèle des autres segments afin d'inclure le nouveau segment:
-  
-     /** ajout de [nouveau segement] */
-			else if(suite == "[nom du segment]") {
-				data = this.add[nom du segment](data);
-				suite =  this.getNextSegment();
-			}
+  	
+	/** ajout de [nouveau segement] */
+	else if(suite == "[nom du segment]") {
+		data = this.add[nom du segment](data);
+		suite =  this.getNextSegment();
+	}
     
-      /** fonction d'ajout */
-     private List<String> add[nom du segement](List<String> data) throws [Exceptions necessaires]{
-		    [Nom] a = new [Nom](data);
-		    listTrame.add(a);
-		    return a.getData();
-	  }	
+      	/** fonction d'ajout */
+     	private List<String> add[nom du segement](List<String> data) throws [Exceptions necessaires]{
+     		[Nom] a = new [Nom](data);
+		listTrame.add(a);
+		return a.getData();
+	}	
     
     
 _____________________________________________________________________
