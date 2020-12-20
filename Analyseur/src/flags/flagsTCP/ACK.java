@@ -1,6 +1,8 @@
-package flags;
+package flags.flagsTCP;
 
 import java.util.List;
+
+import flags.IFlags;
 
 public class ACK implements IFlags {
 	

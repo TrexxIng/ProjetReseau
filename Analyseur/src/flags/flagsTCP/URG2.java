@@ -1,13 +1,15 @@
-package flags;
+package flags.flagsTCP;
 
 import java.util.List;
 
-public class FIN implements IFlags {
+import flags.IFlags;
 
+public class URG2 implements IFlags {
+	
 	private int value;
 
-	public FIN(List<String> valbits) {
-		this.value =  Integer.parseInt(valbits.get(15));
+	public URG2(List<String> valbits) {
+		this.value =  Integer.parseInt(valbits.get(10));
 	}
 
 	@Override
@@ -24,12 +26,11 @@ public class FIN implements IFlags {
 	
 	@Override
 	public String toString() {
-		String s = ".... .... ..."+value+" = FIN: ";
+		String s = ".... .."+value+". .... = Urgent (Pointeur): ";
 		if(value == 1)
-			return s+"fermeture de connexion";
-		return s+"pas de fermeture de connexion";
+			return s+"oui";
+		return s+"non";
 	}
-	
 	
 	@Override
 	public int getValue() {
@@ -38,7 +39,7 @@ public class FIN implements IFlags {
 	
 	@Override
 	public String getType() {
-		return "FIN";
+		return "URG";
 	}
 
 }

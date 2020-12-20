@@ -495,8 +495,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="58" language="java" name="flags.ACK" project="Analyseur" file="/Analyseur/src/flags/ACK.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="58" language="java" name="flags.flagsTCP.ACK" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsTCP/ACK.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="352" y="645"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -504,8 +504,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="59" language="java" name="flags.DF" project="Analyseur" file="/Analyseur/src/flags/DF.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="59" language="java" name="flags.flagsIP.DF" project="Analyseur" file="/Analyseur/src/flags/flagsIP/DF.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="456" y="646"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -513,8 +513,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="60" language="java" name="flags.FIN" project="Analyseur" file="/Analyseur/src/flags/FIN.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="60" language="java" name="flags.flagsTCP.FIN" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsTCP/FIN.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="663" y="649"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -522,8 +522,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="61" language="java" name="flags.FragOffset" project="Analyseur" file="/Analyseur/src/flags/FragOffset.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="61" language="java" name="flags.flagsIP.FragOffset" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsIP/FragOffset.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="563" y="643"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -540,8 +540,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </interface>  
-  <class id="63" language="java" name="flags.MF" project="Analyseur" file="/Analyseur/src/flags/MF.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="63" language="java" name="flags.flagsIP.MF" project="Analyseur" file="/Analyseur/src/flags/flagsIP/MF.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="351" y="707"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -549,8 +549,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="64" language="java" name="flags.PSH" project="Analyseur" file="/Analyseur/src/flags/PSH.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="64" language="java" name="flags.flagsTCP.PSH" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsTCP/PSH.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="457" y="707"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -567,8 +567,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="66" language="java" name="flags.RST" project="Analyseur" file="/Analyseur/src/flags/RST.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="66" language="java" name="flags.flagsTCP.RST" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsTCP/RST.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="663" y="710"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -576,8 +576,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="67" language="java" name="flags.SYN" project="Analyseur" file="/Analyseur/src/flags/SYN.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="67" language="java" name="flags.flagsTCP.SYN" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsTCP/SYN.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="353" y="772"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -585,8 +585,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="68" language="java" name="flags.URG" project="Analyseur" file="/Analyseur/src/flags/URG.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
+  <class id="68" language="java" name="flags.flagsTCP.URG" project="Analyseur" 
+    file="/Analyseur/src/flags/flagsTCP/URG.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="454" y="770"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

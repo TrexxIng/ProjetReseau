@@ -1,6 +1,8 @@
-package flags;
+package flags.flagsIP;
 
 import java.util.List;
+
+import flags.IFlags;
 
 public class FragOffset implements IFlags {
 	

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import flags.*;
+import flags.flagsIP.*;
+import flags.flagsTCP.*;
+import flags.flagsDNS.*;
 
 public class Flags implements IChamps {
 	private String hex;
@@ -17,26 +20,32 @@ public class Flags implements IChamps {
 	public Flags(List<String> valHex, String type) {
 		this.type = type;
 		List<String> valbits;
+		flags = new ArrayList<>();
 		if(this.type == "IP") {
+			
+			/** 16 bits */
 			hex= valHex.get(0)+valHex.get(1);
 			valDec = Integer.parseInt(hex, 16);
-		
-			/** ajout d'une liste de flags 
-			 * (reserved, DF, MF, fragments offset) */
 			valbits = decToBinary(valDec,16);
-			flags = new ArrayList<>();
+			
+			/** ajout d'une liste de flags  */
 			flags.add(new Reserved(valbits,this.type));
 			flags.add(new DF(valbits));
 			flags.add(new MF(valbits));
 			flags.add(new FragOffset(valbits));
+			
+			/** pour verifier si les bits reservés sont à 0 */
+			this.reserved = flags.get(0).getValue();
+			
 		}
-		else {
-			/** ajout d'une liste de flags 
-			 * (reserved, DF, MF, fragments offset) */	
+		else if(this.type == "TCP"){
+			
+			/**12 bits */
 			hex = valHex.get(0).charAt(1)+valHex.get(1);
 			valDec = Integer.parseInt(hex, 16);
 			valbits = decToBinary(valDec,16);
-			flags = new ArrayList<>();
+			
+			/** ajout d'une liste de flags  */	
 			flags.add(new Reserved(valbits,this.type));
 			flags.add(new URG(valbits));
 			flags.add(new ACK(valbits));
@@ -53,9 +62,40 @@ public class Flags implements IChamps {
 					this.typeFlags += flags.get(i).getType();
 				}
 			}
+			
+			/** pour verifier si les bits reservés sont à 0 */
+			this.reserved = flags.get(0).getValue();
+			
 		}
-		/** pour verifier si les bits reservés sont à 0 */
-		this.reserved = flags.get(0).getValue();
+		else if(this.type == "DNS") {
+			
+			/** 16 bits */
+			hex= valHex.get(0)+valHex.get(1);
+			valDec = Integer.parseInt(hex, 16);
+			valbits = decToBinary(valDec,16);
+			
+			/** ajout d'une liste de flags  */	
+			flags.add(new QR(valbits));
+			flags.add(new Opcode(valbits));
+			flags.add(new AA(valbits));
+			flags.add(new TC(valbits));
+			flags.add(new RD(valbits));		
+			flags.add(new RA(valbits));	
+			flags.add(new Reserved(valbits,"DNS"));
+			flags.add(new ReponseAuthent(valbits));
+			flags.add(new Check(valbits));
+			flags.add(new RCode(valbits));
+			
+			/** type pour affichage */
+			this.typeFlags += flags.get(1).getType();
+			this.typeFlags += ", "+flags.get(9).getType();
+			
+			/** pour verifier si les bits reservés sont à 0 */
+			this.reserved = flags.get(6).getValue();
+			
+		}
+		
+
 	}
 
 	

@@ -168,6 +168,7 @@ public class HeaderTCP implements ITrame {
 	
 	private String PortNumToString() {
 		if(portDest == 80 || portSrc == 80) return "HTTP";
+		if(portDest == 53 || portSrc == 53) return "DNS";
 		return "Ports non listé";
 	}
 	

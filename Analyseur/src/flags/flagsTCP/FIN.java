@@ -1,13 +1,15 @@
-package flags;
+package flags.flagsTCP;
 
 import java.util.List;
 
-public class SYN implements IFlags {
+import flags.IFlags;
+
+public class FIN implements IFlags {
 
 	private int value;
-	
-	public SYN(List<String> valbits) {
-		this.value =  Integer.parseInt(valbits.get(14));
+
+	public FIN(List<String> valbits) {
+		this.value =  Integer.parseInt(valbits.get(15));
 	}
 
 	@Override
@@ -24,11 +26,12 @@ public class SYN implements IFlags {
 	
 	@Override
 	public String toString() {
-		String s = ".... .... .."+value+". = SYN: ";
+		String s = ".... .... ..."+value+" = FIN: ";
 		if(value == 1)
-			return s+"ouverture de connexion";
-		return s+"pas d'ouverture de connexion";
+			return s+"fermeture de connexion";
+		return s+"pas de fermeture de connexion";
 	}
+	
 	
 	@Override
 	public int getValue() {
@@ -37,7 +40,7 @@ public class SYN implements IFlags {
 	
 	@Override
 	public String getType() {
-		return "SYN";
+		return "FIN";
 	}
 
 }

@@ -1,25 +1,25 @@
-package flags;
+package flags.flagsDNS;
 
 import java.util.List;
 
-public class DF implements IFlags {
-	
-	
+import flags.IFlags;
+
+public class AA implements IFlags {
 	private List<String> valbits;
 	private int value;
 	
-	public DF(List<String> valbits) {
+	public AA(List<String> valbits) {
 		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(1));
+		this.value =  Integer.parseInt(valbits.get(5));
 	}
 	
 	@Override
 	public String toString() {
-		String s = "."+valbits.get(1)+".. .... .... .... = Don't Fragment (DF): ";
+		String s = ".... ."+valbits.get(5)+".. .... .... = Authoritarive Answer: ";
 		if(value == 1)
-			return s +"fragmentation interdite";
+			return s +"oui";
 		else
-			return s +"fragmentation autorisé";
+			return s +"non";
 	}
 
 	@Override
@@ -41,7 +41,12 @@ public class DF implements IFlags {
 	
 	@Override
 	public String getType() {
-		return "DF";
+		if(value == 1)
+			return "Aa";
+		else
+			return "non";
 	}
 
 }
+
+

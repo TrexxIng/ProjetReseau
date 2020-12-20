@@ -1,24 +1,26 @@
-package flags;
+package flags.flagsDNS;
 
 import java.util.List;
 
-public class MF implements IFlags {
-	
+import flags.IFlags;
+
+public class TC implements IFlags {
+
 	private List<String> valbits;
 	private int value;
-		
-	public MF(List<String> valbits) {
+	
+	public TC(List<String> valbits) {
 		this.valbits = valbits;
-		this.value =  Integer.parseInt(valbits.get(2));
+		this.value =  Integer.parseInt(valbits.get(6));
 	}
 	
 	@Override
 	public String toString() {
-		String s = ".."+valbits.get(2)+". .... .... .... = More Fragment (MF): ";
+		String s = ".... .."+valbits.get(6)+". .... .... = TC: ";
 		if(value == 1)
-			return s +"suivi d'un fragment";
+			return s +"troncé";
 		else
-			return s +"non suivi d'un fragment";
+			return s +"non troncé";
 	}
 
 	@Override
@@ -40,7 +42,10 @@ public class MF implements IFlags {
 	
 	@Override
 	public String getType() {
-		return "MF";
+		if(value == 1)
+			return "troncé";
+		else
+			return "non troncé";
 	}
 
 }

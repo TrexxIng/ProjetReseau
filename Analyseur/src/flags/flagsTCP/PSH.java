@@ -1,13 +1,15 @@
-package flags;
+package flags.flagsTCP;
 
 import java.util.List;
 
-public class RST implements IFlags {
+import flags.IFlags;
+
+public class PSH implements IFlags {
 	
 	private int value;
 
-	public RST(List<String> valbits) {
-		this.value =  Integer.parseInt(valbits.get(13));
+	public PSH(List<String> valbits) {
+		this.value =  Integer.parseInt(valbits.get(12));
 	}
 
 	@Override
@@ -24,10 +26,10 @@ public class RST implements IFlags {
 	
 	@Override
 	public String toString() {
-		String s = ".... .... ."+value+".. = RST: ";
+		String s = ".... .... "+value+"... = PSH: ";
 		if(value == 1)
-			return s+"reinitialisation de la connexion";
-		return s+"pas de reinitialisation de la connexion";
+			return s+"données à lire d'urgence par l'application";
+		return s+"pas de données à lire d'urgence par l'application";
 	}
 	
 	@Override
@@ -37,6 +39,7 @@ public class RST implements IFlags {
 	
 	@Override
 	public String getType() {
-		return "RST";
+		return "PSH";
 	}
+
 }

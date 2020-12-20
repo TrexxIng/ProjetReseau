@@ -16,7 +16,8 @@ public class UDP implements ITrame {
 	private int sizeUDP;
 	private int tailleUDP;
 	private int longueurUDP;
-	
+	private int portSrc;
+	private int portDest;
 	
 	public UDP(List<String> listOctet) throws ExceptionTaille, ExceptionIncoherence {
 		this.sizeUDP = 0;
@@ -35,6 +36,7 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		this.sizeUDP += list.size();
 		listUDP.add(new Port(list,true));
+		this.portSrc = ((Port)listUDP.get(0)).getPortNumber();
 		
 		/** ajout du port destination */
 		list= new ArrayList<>(); 
@@ -44,7 +46,7 @@ public class UDP implements ITrame {
 		listData.remove(0);
 		this.sizeUDP += list.size();
 		listUDP.add(new Port(list,false));
-		
+		this.portDest = ((Port)listUDP.get(1)).getPortNumber();
 		
 		/** ajout de la longueur UDP */
 		list= new ArrayList<>(); 
@@ -109,6 +111,7 @@ public class UDP implements ITrame {
 
 	@Override
 	public String nextSegment() {
+		if(portSrc == 53 || portDest == 53) return "DNS";
 		return "Data";
 	}
 
