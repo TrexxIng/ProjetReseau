@@ -1,5 +1,3 @@
-Problème d'incohérence dans les données: Taille de l'entête TCP indiquée en données (0) inférieur à 20 octets
-
 
 Trame: 722 octets
 
@@ -8,10 +6,10 @@ Trame: 722 octets
 		adresse MAC Source: 3c:98:72:90:46:b8
 		Type Ethernet: 0x0800 (Datagramme IP)
 
-	Datagramme Internet Protocol: 24 octets
+	Datagramme Internet Protocol: 20 octets
 		Entête IP: 20 octets
 			Version: 4
-			Longueur de l'entête IP: 24 octets (6)
+			Longueur de l'entête IP: 20 octets (5)
 			Type of Service: 0x00
 			Longueur totale: 0x02c4 (708 octets)
 			Identification: 0x96ee (38638)
@@ -25,17 +23,48 @@ Trame: 722 octets
 			Checksum: 0xf135 [valeur: non vérifié]
 			adresse IP Source: 132.227.118.100
 			adresse IP Destination: 192.168.1.32
-		Options: 1 octets
-			Option: Fin d'options EOOL (1 octets)
-				Type: Fin d'options EOOL (0)
-		Padding: 3 octets
-			Bourrage: 0x28f70b
+		Options: 0 octets
 
-	Données (non analysées): 661 octets
-		Data (661 octets): 0x653c2f74683e0a202020202020203c74682077696474683d27323525273e4578616d656e2073657373696f6e20313c2f74683e0a202020202020203c74682077696474683d27323525273e4578616d656e2073657373696f6e20323c2f74683e0a20202020203c2f74723e0a0a20202020203c74723e0a20202020203c74642076616c69676e3d27746f7027207374796c653d27626f726465723a307078273e0a202020203c2f74643e3c74642076616c69676e3d27746f7027207374796c653d27626f726465723a307078273e3c2f74643e3c74642076616c69676e3d27746f7027207374796c653d27626f726465723a307078273e3c2f74643e3c2f74723e0a20202020203c212d2d3c74723e0a202020202020203c74642077696474683d2732352527207374796c653d27626f726465723a307078273e52266561637574653b706172746974696f6e3c2f74643e0a202020202020203c74642077696474683d2732352527207374796c653d27626f726465723a307078273e52266561637574653b706172746974696f6e3c2f74643e0a202020202020203c74642077696474683d2732352527207374796c653d27626f726465723a307078273e52266561637574653b706172746974696f6e3c2f74643e0a20202020203c2f74723e2d2d3e0a0a20202020203c74723e0a20202020203c74642076616c69676e3d27746f7027207374796c653d27626f726465723a307078273e0a202020203c2f74643e3c74642076616c69676e3d27746f7027207374796c653d27626f726465723a307078273e3c2f74643e3c74642076616c69676e3d27746f7027207374796c653d27626f726465723a307078273e3c2f74643e3c2f74723e3c2f7461626c653e3c2f6669656c647365743e0a0a0d0a300d0a0d0a
+	Transmission Control Protocol: 20 octets
+		Entête TCP: 20 octets
+			Port Source: 80 (0x0050)
+			Port Destination: 47760 (0xba90)
+			Sequence Number: 687278850 (0x28f70b02)
+			Acknowlegment Number: 2479216613 (0x93c5d7e5)
+			Longueur de l'entête TCP: 20 octets (5)
+			Flags: 0x018 (ACK,PSH)
+				0000 00.. .... = Reserved
+				.... ..0. .... = Urgent (Pointeur): non
+				.... ...1 .... = ACK: numéro d'acquitement valide
+				.... .... 1... = PSH: données à lire d'urgence par l'application
+				.... .... .0.. = RST: pas de reinitialisation de la connexion
+				.... .... ..0. = SYN: pas d'ouverture de connexion
+				.... .... ...0 = FIN: pas de fermeture de connexion
+			Windows: 0x0036 (54)
+			Checksum: 0xf2de [valeur: non vérifié]
+			Pointeur d'urgence (position): 0x0000 (0)
+		Options: 0 octets
 
-
-
- Verification de la trame requise	
-	Padding IP: le bourrage de la trame IP n'est pas à zero
-	
+	Hypertext Transfer Protocol
+		ur table</th>
+		       <th width='25%'>Examen session 1</th>
+		       <th width='25%'>Examen session 2</th>
+		     </tr>
+		
+		     <tr>
+		     <td valign='top' style='border:0px'>
+		    </td><td valign='top' style='border:0px'></td><td valign='top' style='border:0px'></td></tr>
+		     <!--<tr>
+		       <td width='25%' style='border:0px'>R&eacute;partition</td>
+		       <td width='25%' style='border:0px'>R&eacute;partition</td>
+		       <td width='25%' style='border:0px'>R&eacute;partition</td>
+		     </tr>-->
+		
+		     <tr>
+		     <td valign='top' style='border:0px'>
+		    </td><td valign='top' style='border:0px'></td><td valign='top' style='border:0px'></td></tr></table></fieldset>
+		
+		
+		0
+		
+		

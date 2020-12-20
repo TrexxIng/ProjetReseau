@@ -38,8 +38,8 @@ public class Analyseur {
 					TraitementFichier.writeFile(args[2], data, true);
 				}
 				else {
-					data = TraitementFichier.ReadFile(args[1]);
-					System.out.println(message+"\nErreur: valeur <mult> incorrecte (valeurs acceptées: 0|1|vrai|faux|true|false|Vrai|Faux|True|False|V|F|T");			
+					data = TraitementFichier.ReadFile(args[0]);
+					System.out.println(message+"\nErreur: valeur <mult> incorrecte (valeurs acceptées: 0|1|vrai|faux|true|false|Vrai|Faux|True|False|V|F|T)");			
 				}
 			}
 		} catch (IOException e) {

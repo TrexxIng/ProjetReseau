@@ -16,8 +16,3 @@ Trame: 42 octets
 		adresse IP Emetteur: 10.0.0.2
 		adresse MAC Destinataire: 00:00:00:00:00:00
 		adresse IP Destinataire: 10.0.0.3
-
-
-
- Verification de la trame requise	
-	

@@ -275,12 +275,12 @@ public class Trame {
 		String s = "";
 		String message;
 		for(int i = 0; i<listTrame.size();i++) {
-			message = "\t"+listTrame.get(i).messageVerification();
+			message = listTrame.get(i).messageVerification();
 			if(!message.equals(""))
-				s += message+"\n";
+				s += "\t"+message+"\n";
 		}
 		if(!s.equals(""))
-			return "\n\n\n Verification de la trame requise"+s;
+			return "\nVerification de la trame requise:"+s;
 		return s;
 	}
 	

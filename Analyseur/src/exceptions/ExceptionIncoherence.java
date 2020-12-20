@@ -4,7 +4,7 @@ package exceptions;
 public class ExceptionIncoherence extends Exception{
 
 	public ExceptionIncoherence(String s) {
-		super("Problème d'incohérence dans les données: "+s+"\n\n");
+		super("Problème d'incohérence dans les données:\n\t "+s+"\n\n");
 	}
 	
 	@Override

@@ -254,8 +254,8 @@ public class TraitementFichier {
 						exitFile .write(e.toString());			
 					} finally {				
 						/** ecriture */
-						exitFile .write(trame.formatDisplay(0));
 						exitFile .write(trame.messageVerification());
+						exitFile .write(trame.formatDisplay(0));
 					}
 					exitFile.close();
 					System.out.println("Ecriture d'une trame dans le fichier '"+fileNameExit+"'");
