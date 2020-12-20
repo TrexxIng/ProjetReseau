@@ -16,7 +16,7 @@ L'executable demandera 3 arguments:
 
 Importer le dossier sur eclipse
 
-clique droit sur le fichier Analyseur/src/analyseur/Analyseur.java -> Run As-> Run Configurations
+clique droit sur le fichier analyseur/src/analyseur/Analyseur.java -> Run As-> Run Configurations
 Une fenêtre s'ouvre:
    - dans l'onglet 'Main' : Project = Analyseur ; Main class = analyseur.Analyseur
    - dans l'onglet 'Arguments' : Program Arguments = [ trois arguments séparés d'un espace] 
