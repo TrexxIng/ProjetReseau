@@ -1,9 +1,12 @@
 Problème d'incohérence dans les données: taille totale indiquée en données (124 octets) différente de la taille du datagramme IP(123 octets)
+
 Trame: 137 octets
+
 	Trame Ethernet: 14 octets
 		adresse MAC Destination: 08:00:20:0a:70:66
 		adresse MAC Source: 08:00:20:0a:ac:96
 		Type Ethernet: 0x0800 (Datagramme IP)
+
 	Datagramme Internet Protocol: 60 octets
 		Entête IP: 20 octets
 			Version: 4
@@ -36,5 +39,6 @@ Trame: 137 octets
 				adresse IP : 132.227.60.30
 			Option: Fin d'options EOOL (1 octets)
 				Type: Fin d'options EOOL (0)
+
 	Données (non analysées): 63 octets
 		Data (63 octets): 0x0000aa562f00000029368c410003862b08090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f30313233343536

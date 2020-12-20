@@ -1,8 +1,11 @@
+
 Trame: 42 octets
+
 	Trame Ethernet: 14 octets
 		adresse MAC Destination: ff:ff:ff:ff:ff:ff
 		adresse MAC Source: 00:00:00:00:20:00
 		Type Ethernet: 0x0806 (ARP)
+
 	Address Resolution Protocole: 28 octets
 		Hardware: Ethernet (1)
 		Protocole: 0x0800 (IPv4)

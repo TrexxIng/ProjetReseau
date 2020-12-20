@@ -263,9 +263,9 @@ public class Trame {
 				stab += "\t";
 			}
 		}
-		String s =stab+ "Trame: "+this.tailleTrame+" octets";
+		String s =stab+ "\nTrame: "+this.tailleTrame+" octets\n";
 		for(int i = 0; i< listTrame.size(); i++) {
-			s = s + "\n" + listTrame.get(i).formatDisplay(tab+1);
+			s = s + "\n" + listTrame.get(i).formatDisplay(tab+1)+"\n";
 		}
 		return s;
 	}
