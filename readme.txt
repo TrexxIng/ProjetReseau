@@ -261,7 +261,7 @@ _____________________________________________________________________
     - déterminer sur quelle couche ce segment est, determiner le segment de la couche supérieur et les segments de sa couche interne
     - ajouter le segment dans le dossier segment/ , le segment utilisera l'interface ITrame
     - determiner ses champs
-    - s'ils n'existent pas déjà, ajouter les manquants dans le dossier champs utilisant l'interface IChamps
+    - s'ils n'existent pas déjà, ajouter les champs manquants dans le dossier champs utilisant l'interface IChamps
     - s'il y a des flags, utiliser la classe Flags.java, la modifier suivant le modèle de IP, TCP et DNS et ajouter les flags 
         manquant dans le dossier flags/ en utilisant l'interface IFlags
         
