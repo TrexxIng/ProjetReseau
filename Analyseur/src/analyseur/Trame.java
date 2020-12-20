@@ -8,6 +8,7 @@ import exceptions.ExceptionIncoherence;
 import exceptions.ExceptionSupport;
 import exceptions.ExceptionTaille;
 import segment.ARP;
+import segment.DNS;
 import segment.DataDump;
 import segment.Ethernet;
 import segment.HTTP;
@@ -61,11 +62,13 @@ public class Trame {
 				data = this.addIP(data);
 				suite = this.getNextSegment();
 			}
+			
 			/** ajout de UDP */
 			else if(suite == "UDP") {
 				data = this.addUDP(data);
 				suite = this.getNextSegment();
-			}			
+			}	
+			
 			/** ajout de TCP */
 			else if(suite == "TCP") {
 				data = this.addTCP(data);
@@ -80,7 +83,17 @@ public class Trame {
 				else {
 					suite = "Rien";
 				}
-			}			
+			}	
+			/** ajout de DNS */
+			else if(suite == "DNS") {
+				if(data.size() > 0) {
+					data = this.addDNS(data);
+					suite =  this.getNextSegment();
+				}
+				else {
+					suite = "Rien";
+				}
+			}
 			/** ajout de ICMP */
 			else if(suite == "ICMP") {
 				data = this.addICMP(data);
@@ -211,6 +224,18 @@ public class Trame {
 		return http.getData();
 	}
 	
+	
+	/**
+	 * ajoute les données
+	 * @param data: liste d'octets représentant les données
+	 * @return liste vide
+	 * @throws ExceptionTaille: erreur de taille sur le nombre d'octets
+	 */
+	private List<String> addDNS(List<String> data) throws ExceptionTaille{
+		DNS dns = new DNS(data);
+		listTrame.add(dns);
+		return dns.getData();
+	}	
 	
 	
 	/**

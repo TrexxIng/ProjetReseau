@@ -28,7 +28,7 @@ public class Reserved implements IFlags {
 		if(type == "IP")
 			return valbits.get(0)+"... .... .... .... = Reserved";
 		if(type == "DNS")
-			return ".... .... ."+valbits.get(9)+".. ....= Reserved";
+			return ".... .... ."+valbits.get(9)+".. .... = Reserved";
 		//else pour TCP
 		StringBuilder sb = new StringBuilder();
 		for(int i = 4; i<8;i++) {

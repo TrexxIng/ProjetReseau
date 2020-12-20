@@ -599,6 +599,15 @@
     <position height="-1" width="-1" x="261" y="39"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
+  <class id="70" language="java" name="segment.DNS" project="Analyseur" file="/Analyseur/src/segment/DNS.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="25" y="161"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="false" package="false" protected="false" private="false" static="false"/>    

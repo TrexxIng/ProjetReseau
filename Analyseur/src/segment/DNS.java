@@ -11,6 +11,8 @@ import champs.nbQuestRep.NbAdditional;
 import champs.nbQuestRep.NbAuthority;
 import champs.nbQuestRep.NbQuestions;
 import champs.nbQuestRep.NbReponsesRR;
+import champs.sectionDNS.AllRequeteDNS;
+import champs.sectionDNS.OtherDNS;
 import exceptions.ExceptionIncoherence;
 import exceptions.ExceptionSupport;
 import exceptions.ExceptionTaille;
@@ -20,7 +22,7 @@ public class DNS implements ITrame {
 	private List<IChamps> listDNS;
 	private List<String> listData;
 	private int sizeDNS;
-	private int questions;
+	private int requetes;
 	private int reponses;
 	private int additional;
 	private int authority;
@@ -52,7 +54,7 @@ public class DNS implements ITrame {
 		this.sizeDNS += list.size();
 		listDNS.add(new Flags(list, "DNS"));
 		
-		/** nombre de questions */
+		/** nombre de requetes */
 		list= new ArrayList<>();
 		list.add(listData.get(0));
 		listData.remove(0);
@@ -60,7 +62,7 @@ public class DNS implements ITrame {
 		listData.remove(0);
 		this.sizeDNS += list.size();
 		listDNS.add(new NbQuestions(list));
-		this.questions = ((NbQuestions)listDNS.get(2)).getNb();
+		this.requetes = ((NbQuestions)listDNS.get(2)).getNb();
 		
 		/** nombre de reponses */
 		list= new ArrayList<>();
@@ -92,22 +94,37 @@ public class DNS implements ITrame {
 		listDNS.add(new NbAdditional(list));
 		this.additional = ((NbAdditional)listDNS.get(5)).getNb();
 		
-		/** flags */
-		list= new ArrayList<>();
-		list.add(listData.get(0));
-		listData.remove(0);
-		list.add(listData.get(0));
-		listData.remove(0);
-		this.sizeDNS += list.size();
-		listDNS.add(new Flags(list,"DNS"));
+		/** requetes */
+		if(requetes > 0) {
+			AllRequeteDNS req = new AllRequeteDNS(listData,requetes);
+			listData = req.getData();
+			this.sizeDNS += req.getSize();
+			listDNS.add(req);
+		}
 		
+		/** reponses */
+		if(reponses > 0) {
+			OtherDNS resp = new OtherDNS(listData,reponses,"Reponse");
+			listData = resp.getData();
+			listDNS.add(resp);
+			this.sizeDNS += resp.getSize();
+		}
+		
+		/** authorité et additional */
+		if(authority > 0 || additional > 0) {
+			OtherDNS aa = new OtherDNS(listData,additional,"other");
+			listData = aa.getData();
+			listDNS.add(aa);
+			this.sizeDNS += aa.getSize();
+		}	
+
 		
 		
 	}
 
 	@Override
 	public List<String> getData() {
-		return listData;
+		return new ArrayList<>();
 	}
 
 	@Override
@@ -149,13 +166,12 @@ public class DNS implements ITrame {
 	@Override
 	public void errorDetect() throws ExceptionSupport, ExceptionIncoherence {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public String messageVerification() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "";
 	}
 
 }

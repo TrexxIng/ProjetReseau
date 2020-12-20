@@ -20,7 +20,7 @@ public class RCode implements IFlags {
 	@Override
 	public String toString() {
 		String s = ".... .... .... "+valbits.get(11)+valbits.get(12)+
-				valbits.get(13)+" "+valbits.get(14)+" = code de retour: ";
+				valbits.get(13)+valbits.get(14)+" = code de retour: ";
 
 		return s + code +" ("+value+")";
 	}
