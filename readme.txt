@@ -50,6 +50,37 @@ analyseur/
 
 
 
-  3) 
+  3) segments
+  
+  segment/
+├── ARP.java
+├── DataDump.java
+├── DNS.java
+├── Ethernet.java
+├── HTTP.java
+├── ICMP.java
+├── InternetProtocol.java
+├── ITrame.java
+├── subsegment
+│   ├── AllOptions.java
+│   ├── HeaderDatagramIP.java
+│   ├── HeaderTCP.java
+│   ├── Options.java
+│   └── Padding.java
+├── TCP.java
+└── UDP.java
+
+  Dans segment, se trouve toutes les couches de la trame Ethernet:
+    - toutes les classes de ce dossier utilise l'interface ITrame
+    - la plupart des segments se decomposent de la manière suivante: 
+          --en entrée, on a une liste d'octets qui comprend le segment + ses données (les segments suivant ou les data) 
+          --une liste de champs (IChamps) est calculé grace à la liste d'octets, on dépile les octets permettant le calcul des champs
+            et à la fin, on a une liste d'octets correspond aux données
+          --un des IChamps permet de determiner le segment suivant
+          --en sortie, on renvoie la liste d'octets de données et le paramètre déterminant le segment suivant
+    - le dossier subsegment/ est particulier, on peut diviser IP et TCP en deux: une entête de longueur fixe et des options de longueur variables 
+         ainsi TCP.java et InternetProtocol.java fonctionneront de manière différente des autres, elles ont une liste de
+
+  
 
     
