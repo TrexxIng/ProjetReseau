@@ -304,7 +304,7 @@ _____________________________________________________________________
     - les octets et le ASCII Dump (s'il est là) seront normalement séparé par 3 espaces 
     - on peut coller plusieurs trames ensembles, elles doivent être séparé par l'offset 000
     
-  Exemple avec 2 trames et les 2 export différent de wireshark:
+  Exemple avec 2 trames et les 2 exports différents de wireshark:
     
 0000   3c 98 72 90 46 b8 bc 85 56 7b c7 b3 08 00 45 00   <.r.F...V{....E.
 0010   00 8b 8f c6 40 00 40 06 6f fb c0 a8 01 20 23 de   ....@.@.o.... #.
