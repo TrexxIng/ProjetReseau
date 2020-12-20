@@ -5,7 +5,7 @@ Sorbonne Université
 Réalisé par 
   Boris Chan Yip Hon, 3706553
   Ingrid Theret, 3201608
-Groupe 5.6
+Groupe 5
 
 
 _____________________________________________________________________
