@@ -305,7 +305,7 @@ public class Trame {
 				s += "\t"+message+"\n";
 		}
 		if(!s.equals(""))
-			return "\nVerification de la trame requise:"+s;
+			return "\nVerification de la trame requise:\n"+s;
 		return s;
 	}
 	
