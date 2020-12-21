@@ -211,6 +211,8 @@ public class TraitementFichier {
 		
 		/** nom du fichier en sortie */
 		String fileNameExit;
+		if(data.size() == 1)
+			multiple = false;
 				
 		try {
 			/** tout ecrire en un seul fichier */
@@ -263,7 +265,7 @@ public class TraitementFichier {
 			}
 			
 		} catch (IOException e) {
-			System.out.println("Erreur lors de l'écriture du fichier '"+fileName+"'");
+			System.out.println("Erreur lors de l'écriture du fichier '"+fileName+"': vérifier que le dossier trames existe");
 		}
 		
 	}
