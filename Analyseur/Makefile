@@ -39,5 +39,4 @@ help:
 	@echo "          Si [nom].txt alors en sortie, on aura trames/[nom].txt"
 	@echo "          Si le fichier n'a pas d'extension, il mettra '.txt' par défaut"
 	@echo "          Si on crée plusieurs fichiers en sortie, alors ils seront numérotés selon l'ordre des trames du fichier d'entrée" 
-	@echo " "	
-
+	@echo " "
