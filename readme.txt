@@ -397,6 +397,7 @@ _____________________________________________________________________
       - NE PAS MODIFIER le Makefile
       - NE PAS MODIFIER les classes Analyseur.java, TraitementFichier.java
       - toujours placer les nouvelles classes dans le dossier src/
+      - à chaque ajout, mettre à jour le readme.txt
       
      
      
