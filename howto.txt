@@ -45,5 +45,7 @@ pour compiler, se placer dans le dossier Analyseur où se trouve le Makefile:
 pour executer:
   commande: java -cp bin analyseur.Analyseur <filenameEntry> <multifile> <filenameExit>
   
-notes:
-NE PAS MODIFIER LE MAKEFILE (même si on ajoute des classes)
+ 3) notes:
+    - NE PAS MODIFIER LE MAKEFILE (même lors de l'ajout de classes à moins que le nombre d'arguments demandé change)
+    - Après avoir fait un 'make clean', si vous voulez ensuite utiliser eclipse, réalisez un 'make' avant de lancer le 
+        programme (sinon eclipse ne trouvera pas les executables dans bin
