@@ -1,0 +1,36 @@
+Problème d'incohérence dans les données:
+	 longueur indiquée en données de l'option de IP (56) supérieure au nombre d'octets restants en option (4)
+
+
+Trame: 455 octets
+
+	Trame Ethernet: 14 octets
+		adresse MAC Destination: 54:a0:50:d8:25:40
+		adresse MAC Source: 18:5e:0f:be:05:d2
+		Type Ethernet: 0x0800 (Datagramme IP)
+
+	Datagramme Internet Protocol: 76 octets
+		Entête IP: 20 octets
+			Version: 4
+			Longueur de l'entête IP: 24 octets (6)
+			Type of Service: 0x00
+			Longueur totale: 0x01b9 (441 octets)
+			Identification: 0x59f4 (23028)
+			Flags: 0x4000 (16384)
+				0... .... .... .... = Reserved
+				.1.. .... .... .... = Don't Fragment (DF): fragmentation interdite
+				..0. .... .... .... = More Fragment (MF): non suivi d'un fragment
+				...0 0000 0000 0000 = Fragment Offset: 0
+			Time To Live (TTL): 64
+			Protocole: 0x06 (TCP)
+			Checksum: 0xe45b [valeur: non vérifié]
+			adresse IP Source: 192.168.0.113
+			adresse IP Destination: 93.184.220.29
+		Options: 56 octets
+			Option: option non listée (56 octets)
+				Type: option non listée (203)
+				Longueur option: 56 octets (0x38)
+				Data (0 octets): 0x0050
+
+	Données (non analysées): 417 octets
+		Data (417 octets): 0x4669d2edfcf21f0a801801f6332e00000101080af1470bb140eb6169474554202f4d464577547a424e4d4573775354414a4267557244674d43476755414242524a394c324b474c393242706a46336b4174614474786175546d6867515550644e51706461677265377a536d414b5a644d6831506a343167384345415a4248426525324654706f527a6d5a32472532424d5556386b25334420485454502f312e310d0a486f73743a206f6373702e64696769636572742e636f6d0d0a436f6e6e656374696f6e3a206b6565702d616c6976650d0a557365722d4167656e743a204d6f7a696c6c612f352e3020285831313b204c696e7578207838365f363429204170706c655765624b69742f3533372e333620284b48544d4c2c206c696b65204765636b6f29204368726f6d652f38372e302e343238302e3838205361666172692f3533372e33360d0a4163636570742d456e636f64696e673a20677a69702c206465666c6174650d0a4163636570742d4c616e67756167653a2066722d46522c66723b713d302e392c656e2d55533b713d302e382c656e3b713d302e370d0a0d0a

@@ -1,0 +1,21 @@
+
+Trame: 60 octets
+
+	Trame Ethernet: 14 octets
+		adresse MAC Destination: ff:ff:ff:ff:ff:ff
+		adresse MAC Source: d4:3a:65:07:a7:81
+		Type Ethernet: 0x0806 (ARP)
+
+	Address Resolution Protocole: 28 octets
+		Hardware: Ethernet (1)
+		Protocole: 0x0800 (IPv4)
+		Longueur Hardware: 6 octets (0x06)
+		Longueur Protocole: 4 octets (0x04)
+		Operation: requete ARP (0x0001)
+		adresse MAC Emetteur: d4:3a:65:07:a7:81
+		adresse IP Emetteur: 192.168.0.10
+		adresse MAC Destinataire: 00:00:00:00:00:00
+		adresse IP Destinataire: 192.168.0.1
+
+	Données: 18 octets
+		Data (18 octets): 0x000000000000000000000000000000000000
