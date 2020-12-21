@@ -11,18 +11,19 @@ L'executable demandera 3 arguments:
 	   filenameExit: nom du fichier en sortie (sera ecrit dans le dossier trames)
 
 
-
   1) avec eclipse:
 
-Importer le dossier sur eclipse
+Importer le dossier analyseur sur eclipse
 
-clique droit sur le fichier analyseur/src/analyseur/Analyseur.java -> Run As-> Run Configurations
+clique droit sur le fichier analyseur/src/analyseur/Analyseur.java -> Run As -> Run Configurations
 Une fenêtre s'ouvre:
    - dans l'onglet 'Main' : Project = Analyseur ; Main class = analyseur.Analyseur
    - dans l'onglet 'Arguments' : Program Arguments = [ trois arguments séparés d'un espace] 
+   	par exemple: 'ExempleHTTP.txt 1 sortie'
  -> Apply -> Run
    
-Si le fichier d'entrée ou le nombre d'arguments est mauvais, il affichera un message sur le terminal
+Si le fichier d'entrée, si le nombre d'arguments est mauvais ou si le dossier trames n'existe pas,
+il affichera un message sur le terminal expliquant l'erreur
 
 Si les fichiers n'apparaissent pas dans le dossier trames/
   -> clique droit sur le dossier -> Refresh
